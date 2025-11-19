@@ -1,0 +1,66 @@
+import { ScrollView } from 'react-native';
+import Deposit from '../deposit-withdraw/Deposit';
+import { useUser } from '../../hooks/useUser';
+import { IPlayerDetails } from '../../types/player';
+import QuitModal from './components/QuitModal';
+import { useGameDisplay } from '../../store/useUIStore';
+import { useNavigation } from '@react-navigation/native';
+import { GameNav } from '../../types/nav';
+
+const InGameDepositScreen = () => {
+  const { isAuthenticated } = useUser();
+  const navigation = useNavigation<GameNav>();
+  const { invalidate, isRefetching, isLoading, user } = useUser();
+  const setDepositGateway = useGameDisplay(state => state.setDepositGateway);
+
+  const handleDepositGateway = (url: string) => {
+    setDepositGateway(url);
+    navigation.navigate('payment-gateway');
+  };
+
+  const payment_channels_group = user?.payment_channels_group;
+  const bankTransfer = payment_channels_group?.bankTransfer || [];
+  const bankTransferUpi = payment_channels_group?.bankTransfer_upi || [];
+  const onlinePay = payment_channels_group?.onlinePay || [];
+  const crypto = payment_channels_group?.crypto || [];
+  const playerInfo = user?.player_info || {};
+
+  // Filter onlinePay by display_name: "Mega" for FAST PAY, "DY" for E-WALLET
+  const fastPay = onlinePay.filter(
+    (channel) => channel.display_name === 'Mega'
+  );
+  const eWallet = onlinePay.filter(
+    (channel) => channel.display_name === 'DY'
+  );
+
+  const details = {
+    eWallet: eWallet,
+    fastPay: fastPay,
+    easyPay: bankTransferUpi,
+    crypto: crypto,
+    bankTransfer: bankTransfer,
+    playerInfo: playerInfo as IPlayerDetails,
+  };
+
+  return (
+    <ScrollView
+      contentContainerStyle={{
+        flexDirection: 'column',
+        gap: 8,
+        padding: 15,
+      }}
+    >
+      <Deposit
+        details={details}
+        isLoading={isLoading.panelInfo}
+        refetch={() => invalidate('panel-info')}
+        isRefetching={isRefetching.panelInfo}
+        isAuthenticated={isAuthenticated}
+        openInIframe={handleDepositGateway}
+      />
+      <QuitModal />
+    </ScrollView>
+  );
+};
+
+export default InGameDepositScreen;

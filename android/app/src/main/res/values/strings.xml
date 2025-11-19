@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">11ic Game</string>
+    <string moduleConfig="true" name="CodePushServerUrl">https://api.revopush.org</string>
+    <string moduleConfig="true" name="CodePushDeploymentKey">ciyVryTVNuWOq52vU0wR-0rYcdxWV1vwjp_5zx</string>
+</resources>

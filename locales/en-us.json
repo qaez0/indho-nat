@@ -1,0 +1,1202 @@
+{
+  "common-terms": {
+    "home": "Home",
+    "slots": "Slots",
+    "deposit": "Deposit",
+    "cricket": "Cricket",
+    "withdraw": "Withdraw",
+    "casino": "Casino",
+    "sports": "Sports",
+    "earn": "Earn",
+    "promotions": "Promotions",
+    "affiliate": "Affiliate",
+    "bonus": "Bonus",
+    "wheel": "Wheel",
+    "lottery": "Lottery",
+    "login": "Login",
+    "register": "Register",
+    "username": "Username",
+    "balance": "Balance",
+    "terms-and-conditions": "Terms and Conditions",
+    "loading": "Loading...",
+    "all": "All",
+    "step": "STEP",
+    "no-data-available": "No data available",
+    "logging-out": "Logging out",
+    "please-wait": "Please wait...",
+    "logging-out-game": "Logging out game...",
+    "logging-in": "Logging you in...",
+    "win-oppo": "Win Oppo",
+    "free-1000-bonus": "Free 1000 Bonus",
+    "refer-earn": "Refer & Earn",
+    "something-went-wrong": "Something went wrong",
+    "fetching-balance": "Fetching your balance. Please wait...",
+    "transferring": "Transferring...",
+    "game-loading": "Game loading...",
+    "session-expired": "Session Expired",
+    "please-login-again": "Please login again",
+    "add-cash": "Add Cash",
+    "quit-game-confirm": "Are you sure you want to quit the game?",
+    "transaction-done-confirm": "Are you sure your done with this transaction?",
+    "quit": "Quit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "add-new-account": "Add New Account",
+    "vip": "VIP"
+  },
+  "validation": {
+    "errors": {
+      "amount-must-be-number": "Amount must be a number",
+      "amount-required": "Amount is required",
+      "amount-min": "Amount must be at least {{min}}",
+      "amount-max": "Amount must be at most {{max}}",
+      "insufficient-balance": "Insufficient balance",
+      "turnover-not-completed": "Turnover not yet completed",
+      "password-required": "Password is required",
+      "password-no-spaces": "Password cannot contain spaces",
+      "old-password-required": "Old password is required",
+      "new-password-required": "New password is required",
+      "confirm-password-required": "Confirm password is required",
+      "withdraw-password-required": "Withdraw password is required",
+      "password-letters-numbers": "Must contain both letters and numbers",
+      "password-8-characters": "Up to 8 characters",
+      "phone-required": "Phone number is required",
+      "phone-10-digits": "Mobile number must be 10 digits",
+      "phone-invalid-format": "Invalid Mobile Number Format",
+      "email-required": "Email address is required",
+      "email-invalid": "Invalid email address",
+      "email-no-spaces": "Email cannot contain spaces",
+      "username-required": "Username is required",
+      "username-no-spaces": "Username cannot contain spaces",
+      "username-too-short": "Username too short",
+      "otp-required": "OTP is required",
+      "otp-6-digits": "OTP must be 6 digits",
+      "otp-no-spaces": "OTP cannot contain spaces",
+      "real-name-required": "Real name is required",
+      "gender-required": "Gender is required",
+      "birthday-required": "Birthday is required",
+      "e-wallet-name-required": "E-Wallet Name is required",
+      "e-wallet-account-required": "E-Wallet Account Number is required",
+      "e-wallet-account-no-spaces": "E-Wallet Account Number cannot contain spaces",
+      "bank-name-required": "Bank Name is required",
+      "bank-account-required": "Bank Account Number is required",
+      "bank-account-no-spaces": "Bank Account Number cannot contain spaces",
+      "only-digits": "Must be only digits",
+      "account-min-digits": "Account number must be at least {{min}} digits",
+      "account-max-digits": "Account number must be at most {{max}} digits",
+      "account-exact-digits": "Account number must be exactly {{digits}} digits",
+      "wallet-name-required": "Wallet Name is required",
+      "usdt-address-required": "USDT Address is required",
+      "no-special-characters": "No special characters allowed",
+      "wallet-address-exact-length": "Wallet Address must be exactly {{length}} characters",
+      "wallet-address-start-t": "Wallet Address must start with 'T'",
+      "wallet-address-no-spaces": "Wallet Address cannot contain spaces",
+      "proof-required": "Proof of transaction is required",
+      "file-too-large": "File size is too large (max 1MB)",
+      "file-format-unsupported": "Unsupported file format (only PNG or JPG)",
+      "kyc-image-required": "KYC image is required",
+      "file-too-large-5mb": "File size should not exceed 5MB",
+      "file-format-jpg-png": "Only JPG, JPEG and PNG files are allowed",
+      "agreement-required": "You must agree to the terms and conditions"
+    }
+  },
+  "language": {
+    "select-language": "Select Language",
+    "english": "English",
+    "pakistan": "Pakistan",
+    "cancel": "Cancel",
+    "logout": "Logout"
+  },
+  "content-title": {
+    "hot-games": "Hot Games",
+    "crash-game": "Crash Game",
+    "bonuses": "Bonuses",
+    "app-download": "App Download",
+    "social-networks": "Social Networks",
+    "live-sports": "Live Sports",
+    "live-casino": "Live Casino",
+    "others": "Others",
+    "most-played": "Most Played",
+    "most-visited": "Most Visited",
+    "all-games": "All Games",
+    "live": "Live",
+    "slots": "Slots",
+    "online-betting-blog": "Online Betting Blog",
+    "mini-games": "Mini Games",
+    "search-for-games": "Search for games"
+  },
+  "most-visited-items": {
+    "exchange": "EXCHANGE",
+    "aviator": "AVIATOR",
+    "casino": "CASINO",
+    "affiliate": "AFFILIATE",
+    "rewards": "REWARDS",
+    "fishing": "FISHING"
+  },
+  "feature-banners": {
+    "invite-friends": "Invite Friends",
+    "get-rebates": "Get Rebates",
+    "unlock-free-rs": "Unlock Free Rs 1,000 Today!"
+  },
+  "side-bar-menu": {
+    "account-details": {
+      "title": "Account Details",
+      "my-profile": "My Profile",
+      "wallet-management": "Wallet Management",
+      "vip-level": "VIP Level",
+      "kyc-verification": "KYC verification"
+    },
+    "other-records": {
+      "title": "Other Records",
+      "transaction-record": "Transaction Record",
+      "betting-record": "Betting Record",
+      "locked-details": "Locked Details",
+      "message-center": "Message Center"
+    },
+    "invite": "Invite",
+    "all-games": {
+      "title": "All Games",
+      "live-casino": "Live Casino"
+    },
+    "join-11ic-partner": "Join 11ic Partner",
+    "lucky-spin": "Lucky Spin",
+    "lucky-envelope": "Lucky Envelope",
+    "clear-cache": "Clear Cache",
+    "chat-support": "Chat Support",
+    "app-download": "App Download",
+    "get-it-on": "Get it on",
+    "download-on-the": "Download on the",
+    "logout": "Logout",
+    "11ic-sponsor": "11ic Sponsor",
+    "lottery": "Lottery"
+  },
+  "auth-modal": {
+    "attention": "Attention",
+    "login-or-register-message": "To enter here, you need to login or register"
+  },
+  "login": {
+    "no-account": "Don't have an account?",
+    "forgot-password": "Forgot Password",
+    "register-account": "Register Account"
+  },
+  "register": {
+    "registration": "Registration",
+    "welcome-bonus": "100% Welcome Bonus On First Deposit",
+    "agreement": {
+      "first-phrase": "I have confirm that",
+      "second-phrase": "mobile number is correct",
+      "third-phrase": "and accept Terms and Conditions agreement"
+    },
+    "have-account": "Have an account?"
+  },
+  "profile": {
+    "male": "Male",
+    "female": "Female",
+    "select-gender": "Select a gender",
+    "name": "Name",
+    "real-name": "Real Name",
+    "real-name-placeholder": "Real Name",
+    "gender": "Gender",
+    "gender-placeholder": "Select Gender",
+    "birthday": "Date of Birth",
+    "birthday-placeholder": "DD/MM/YYYY",
+    "mobile-number": "Mobile Number",
+    "mobile-number-placeholder": "Phone Number",
+    "email": "Email Address",
+    "email-placeholder": "Email",
+    "account-password": "Account Password",
+    "wallet-password": "Wallet Password",
+    "change-password": "Change Password",
+    "set-wallet-pass": "Set Wallet Password",
+    "verify": "Verify",
+    "verified": "Verified",
+    "verification-code": "Verification Code",
+    "save": "Save",
+    "saving": "Saving...",
+    "change-pass-dialog": {
+      "title": "Change Password",
+      "submit-btn": "Save",
+      "old-pass": "Old Password",
+      "old-pass-placeholder": "Enter password"
+    },
+    "set-wallet-pass-dialog": {
+      "title": "Set Wallet Password",
+      "submit-btn": "Save"
+    },
+    "verify-mobile": {
+      "title": "Verify Mobile Number",
+      "submit-btn": "Verify"
+    },
+    "verify-email": {
+      "title": "Verify Email Address",
+      "submit-btn": "Verify"
+    },
+    "confirm-pass": "Confirm Password",
+    "confirm-pass-placeholder": "Re-enter password",
+    "enter-new-pass": "Enter new password",
+    "enter-new-pass-placeholder": "Enter new password"
+  },
+  "wallet-management": {
+    "add-e-wallet": "Add E-Wallet",
+    "add-bank-card": "Add Bank Card",
+    "add-usdt-address": "Add USDT Address",
+    "bank-name": "Bank Name",
+    "select-bank": "Select Bank",
+    "bank-account-number": "Bank Account Number",
+    "enter-bank-account-number": "Enter Bank Account Number",
+    "ifsc-code": "IFSC Code",
+    "enter-ifsc-code": "Enter IFSC Code",
+    "add-button": "Add",
+    "wallet-protocol": "Wallet Protocol",
+    "wallet-name": "Wallet Name",
+    "enter-wallet-name": "Enter Wallet Name",
+    "usdt-address": "USDT Address",
+    "enter-usdt-address": "Enter USDT Address",
+    "e-wallet-dialog": {
+      "submit-btn": "Add",
+      "e-wallet-name": "E-Wallet Name",
+      "e-wallet-name-placeholder": "Select E-Wallet",
+      "e-wallet-account-number": "E-Wallet Account Number",
+      "e-wallet-account-number-placeholder": "Enter E-Wallet Account Number"
+    },
+    "bank-card-dialog": {
+      "submit-btn": "Add",
+      "bank-name": "Bank Name",
+      "bank-name-placeholder": "Select Bank",
+      "bank-account-number": "Bank Account Number",
+      "bank-account-number-placeholder": "Enter Bank Account Number"
+    },
+    "usdt-dialog": {
+      "submit-btn": "Add",
+      "wallet-protocol": "Wallet Protocol",
+      "wallet-name": "Wallet Name",
+      "wallet-name-placeholder": "Enter Wallet Name",
+      "usdt-address": "USDT Address",
+      "usdt-address-placeholder": "Enter USDT Address"
+    }
+  },
+  "vip": {
+    "vip-levels": "VIP Levels",
+    "weekly-cashback-bonus": "Weekly Cashback Bonus",
+    "extra-deposit-bonus": "Extra Deposit Bonus",
+    "level-and-rewards": "Level and Rewards",
+    "level-details": "Different VIP levels will offer corresponding rewards and benefits, and the platform will host events based on these levels from time to time. Naturally, higher VIP levels will grant access to more rewarding activities. The rewards for each level are as follows:",
+    "deposit-to-qualify": "Deposit to qualify for VIP {{level}}:",
+    "highest-level-reached": "You have reached the highest level",
+    "congratulations": "Congratulations",
+    "not-available": "N/A",
+    "terms": {
+      "eligibility": {
+        "title": "Eligibility:",
+        "description": "Participation is open to all registered users of 11ic who qualify for VIP status. Different VIP levels offer varying rewards and benefits. Benefits include exclusive discounts, priority access to events, and other services."
+      },
+      "weekly-lossback-bonus-games": {
+        "title": "Weekly Lossback Bonus Games:",
+        "description": "The bonus applies to the following game providers:",
+        "providers": {
+          "sports": "Sports: SABA, LUCKY",
+          "live-casino": "Live Casino: EVOLUTION, SEXY, EZUGI, ICONIC21",
+          "slots": "Slots: PG, CQ9, JILI, SPRIBE"
+        }
+      },
+      "events-access": {
+        "title": "Event Access:",
+        "description": "VIP members will have opportunities to participate in exclusive events based on their level. Higher VIP levels may receive priority or enhanced benefits during events."
+      },
+      "modification-rights": {
+        "title": "Modification Rights:",
+        "description": "11ic reserves the right to modify, suspend, or terminate the promotion at any time without prior notice."
+      },
+      "general-terms": {
+        "title": "General Terms:",
+        "description": "By participating, users agree to abide by the platform's terms of service and any additional conditions specific to the promotion. By becoming a member, you accept the service-related terms and policies of '11ic' (hereinafter referred to as the company) and the specifications of this event. In the event of a violation of these terms and policies, event guidelines, or any malicious use of programs or other means that interfere with the fairness of the event, the company reserves the right to disqualify participants from entry or prize eligibility. The company may also pursue legal action for acts that disrupt this activity and seek compensation for all resulting losses."
+      },
+      "for-more-inq": "For more inquiries regarding this promotion, please contact Customer Support."
+    }
+  },
+  "kyc": {
+    "pending": {
+      "title": "KYC Processing",
+      "descpription": "Thank you for submitting your documents! Your KYC verification is currently being processed. Feel free to enjoy playing on 11ic while we complete the process. Good luck and have fun!"
+    },
+    "approve": {
+      "title": "KYC Approved",
+      "description": "Thank you for submitting your documents! KYC has been successfully verified. Enjoy seamless gaming and betting with 11ic! \n \n \n Have fun and Goodluck!"
+    },
+    "upload-id-title": {
+      "decline": "ID Card not approved. Please re-upload and submit",
+      "approve": "ID Card approved successfully",
+      "pending": "File Uploaded, Waiting for Approval.",
+      "default": "The ID card must cleary show the Name, ID Number, and Date of Birth"
+    },
+    "upload-bank-title": {
+      "decline": "Bank Card not approved. Please re-upload and submit",
+      "approve": "Bank Card approved successfully",
+      "pending": "File Uploaded, Waiting for Approval.",
+      "default": "The Bank card must clearly show the account holder's name and account number."
+    },
+    "button-text": {
+      "pending": "Submitted",
+      "decline": "Resubmit",
+      "approve": "Approved",
+      "default": "Submit"
+    },
+    "dialog-helper-id": "ID UPLOAD SAMPLE",
+    "dialog-helper-bank": "BANK UPLOAD SAMPLE",
+    "back-to-home": "Back to Home",
+    "upload-id": "Upload National Identity Card",
+    "upload-bank": "Upload Bank Account Passbook or ATM receipt",
+    "please-complete-kyc": "Please Complete KYC",
+    "full-name": "Full Name",
+    "enter-your-real-name": "Enter your real name",
+    "note": {
+      "header": {
+        "title": "Take Note:",
+        "description": "Follow these guidelines when uploading your ID and bank card for faster KYC verification."
+      },
+      "items": [
+        {
+          "title": "1. Why is KYC Verification Required?",
+          "description": [
+            "a. Transparency: Verifies that all transaction are legitimate and associated with the correct account holder.",
+            "b. Security: Ensures your account is protected from unauthorized access."
+          ]
+        },
+        {
+          "title": "2. How to Upload Your Documents Correctly:",
+          "description": [
+            "a. Upload only valid documents such as the National Identity Card for the ID Section, and a bank account passbook or ATM receipt for the bank card section.",
+            "b. Screenshots of cards are not allowed; you must upload a clear photo of the physical copy.",
+            "c. The ID must clearly display the name, ID number, and date of birth, while the bank document must show the account holder's name and account number."
+          ]
+        }
+      ],
+      "footer": "By follow these stepsm your KYC verification will be processed quickly, ensuring uninterrupted access to all features."
+    }
+  },
+  "transaction-record": {
+    "title": "Transaction Record",
+    "description": "Transaction Record",
+    "no-records-found": "No records found for this period.",
+    "retry": "Retry",
+    "deposit": "Deposit",
+    "withdrawal": "Withdrawal",
+    "promo": "Promo",
+    "loading-deposit-records": "Loading deposit records...",
+    "failed-to-load-deposit-records": "Failed to load deposit records",
+    "no-deposit-records-found": "No deposit records found",
+    "loading-withdrawal-records": "Loading withdrawal records...",
+    "failed-to-load-withdrawal-records": "Failed to load withdrawal records",
+    "no-withdrawal-records-found": "No withdrawal records found",
+    "loading-bonus-records": "Loading bonus records...",
+    "failed-to-load-bonus-records": "Failed to load bonus records",
+    "no-bonus-records-found": "No bonus records found",
+    "total-deposit-amount": "Total Deposited Amount:",
+    "total-withdrawal-amount": "Total Withdrawn Amount:",
+    "total-promo-amount": "Total Promo Amount:",
+    "total-amount": "Total Amount:",
+    "record": {
+      "order-id": "Order ID",
+      "platform": "Platform",
+      "amount": "Amount",
+      "currency": "Currency",
+      "status": "Status",
+      "time": "Time",
+      "method": "Method",
+      "transfer-amount": "Transfer Amount",
+      "bank-name": "Bank Name",
+      "account-name": "Account Name",
+      "account-no": "Account No.",
+      "bonus-id": "Bonus ID",
+      "remarks": "Remarks",
+      "reward": "Reward",
+      "required-bet": "Required Bet"
+    }
+  },
+  "betting-record": {
+    "title": "Betting Records",
+    "description": "Betting Record",
+    "no-records-found": "No records found for this period.",
+    "retry": "Retry",
+    "deposit": "Deposit",
+    "all": "All",
+    "live-casino": "Live Casino",
+    "slot": "Slot",
+    "sports": "Sports",
+    "lottery": "Lottery",
+    "total-bet": "Total Bet",
+    "loading-betting-records": "Loading betting records...",
+    "failed-to-load-betting-records": "Failed to load betting records",
+    "no-betting-records-found": "No betting records found for this period.",
+    "record": {
+      "bet-serial": "Bet Serial",
+      "game-type": "Game Type",
+      "game-id-platform": "Game ID/Platform",
+      "bet-time": "Bet Time",
+      "win-loss": "Win/Loss",
+      "status": "Status"
+    }
+  },
+  "locked-details": {
+    "title": "Locked Details",
+    "deposit": "Deposit",
+    "promo": "Promo",
+    "no-records-found": "No records found for this period.",
+    "no-records-found-simple": "No records found",
+    "retry": "Retry",
+    "load-more": "Load More",
+    "status-label": "Status:",
+    "order-number-label": "Order Number:",
+    "status-filter": {
+      "all": "All",
+      "incomplete": "Incomplete",
+      "completed": "Completed"
+    },
+    "deposit-record": {
+      "order-number": "Order ID",
+      "locked-amount": "Locked Amount",
+      "turnover-target": "Turnover Target"
+    },
+    "promo-record": {
+      "order-number": "Order ID",
+      "locked-amount": "Locked Amount",
+      "turnover-target": "Turnover Target"
+    }
+  },
+  "message-center": {
+    "notifications": "Notifications",
+    "see-all-notifications": "See All Notifications",
+    "no-new-notifications": "No new notifications yet",
+    "title": "Message Center",
+    "unread-messages": "Unread Messages",
+    "message-history": "Message History",
+    "loading": "Loading",
+    "mark-all-as-read": "Mark all as read",
+    "loading-messages": "Loading messages...",
+    "failed-to-load-messages": "Failed to load messages. Please try again.",
+    "no-unread-messages": "No Unread Messages",
+    "no-message-history": "No Message History",
+    "no-messages-found": "No Messages Found",
+    "loading-more-messages": "Loading more messages...",
+    "delete-confirm-dialog": {
+      "title": "Are you sure you want to delete this message?",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "delete": "Delete",
+      "close": "Close"
+    }
+  },
+  "promotions": {
+    "title-1": "Weekly 5000 Bonus",
+    "description-1": "Get up to 5000 bonus weekly",
+    "title-2": "100% Deposit Bonus",
+    "description-2": "Double your first deposit",
+    "title-3": "Cashback Bonus",
+    "description-3": "Get cashback on your losses",
+    "title-4": "Welcome Bonus",
+    "description-4": "Special bonus for new members",
+    "title-5": "Affiliate Program",
+    "description-5": "Earn by referring friends",
+    "check-details": "Check Details"
+  },
+  "bonus": {
+    "limited-bonus": "Limited Bonus",
+    "reward": "REWARD",
+    "days": "DAYS",
+    "hours": "HRS",
+    "minutes": "MIN",
+    "seconds": "SEC",
+    "claim": "Claim",
+    "details": "Details",
+    "bonus-details": "Bonus Details",
+    "betting-goal": "Betting Goal",
+    "deposit-goal": "Deposit Goal",
+    "reward-amount": "Reward Amount",
+    "claim-remaining": "Claim Remaining",
+    "claim-description": "Claim your {{title}} by meeting the deposit and betting goals. As long as you achieve these targets, you can enjoy this bonus every day! Don't miss out on the chance to boost your play and maximize your winnings."
+  },
+
+  "invite": {
+    "title": "Invite",
+    "invite-earn": "Invite & Earn",
+    "daily-invite-reward": "Daily Invite Reward",
+    "level": "Level",
+    "bet-amount": "Bet Amount",
+    "active-member": "Active Member",
+    "reward-rate": "Reward Rate %",
+    "daily-invite-reward-tab": {
+      "title": "Daily Invite Reward",
+      "about-tab": {
+        "title": "About",
+        "terms-title": "Terms and Conditions",
+        "terms-1": "An invited player qualifies as an active member only if they place bets of 2,000 PKR or more.",
+        "terms-2": "The earned \"Daily Invite Reward\" can be withdrawn or used for further betting and is automatically issued every day at 4:00 AM IST.",
+        "terms-3": "Share your invite link to level up your account and earn higher commissions.",
+        "terms-4": "Rebate Levels: Calculated based on the number of invited players and their total daily bet amounts across any games.",
+        "terms-5": "For any concerns or further information, please contact live chat customer service."
+      },
+      "invite-link-tab": {
+        "title": "Invite Link",
+        "invite-link": "Invite Link",
+        "copy": "Copy",
+        "copied": "Copied",
+        "how-to-start-earning": "HOW TO START EARNING?",
+        "share-invite-link-with-friend": "Share your invite link with a friend",
+        "encourage-friends-sign-up-and-deposit": "Encourage your friends to sign up and complete the deposit",
+        "invites-play-earn-rewards": "Invites will start playing, and you will earn daily rebate rewards based on the rebate table, up to 1.5%",
+        "more-invites-higher-rewards": "More Invites = Higher Rewards",
+        "total-rewards-received": "Total Rewards Received"
+      },
+      "reward-tab": {
+        "title": "Reward",
+        "date-picker-caption": "Please select a date range to view your performance (up to the past 7 days.)",
+        "user": "User",
+        "bet-amount": "Bet Amount",
+        "date": "Date",
+        "amount": "Amount",
+        "no-history-found": "No history found",
+        "earning-history": "Earning History",
+        "no-earning-history-found": "No earning history found",
+        "rebate-reward": "REBATE REWARD",
+        "reward-rate": "REWARD RATE",
+        "direct-total-bet": "DIRECT TOTAL BET",
+        "active-members": "ACTIVE MEMBERS"
+      }
+    },
+    "invite-earn-tab": {
+      "total-income": "Total Income",
+      "total-invites": "Total Invites",
+      "invitation-bonus": "Invitation Bonus",
+      "deposit-bonus": "Deposit Bonus",
+      "bet-bonus": "Bet Bonus",
+      "eligible-refers": "Eligible Refers",
+      "invite-link": "Invite Link",
+      "copy": "Copy",
+      "copied": "Copied",
+      "how-to-get-your-invitation-bonus": "How to Get Your Invitation Bonus",
+      "invite-friends-via-link": "Invite Friends via link",
+      "copy-and-share-your-invite-link": "Copy and share your invite link",
+      "ask-your-friends-to-register-an-account-using-your-link": "Ask your friends to register an account using your link",
+      "make-sure-they-complete-a-deposit-after-registering": "Make sure they complete a deposit after registering",
+      "invitation-rewards": "Invitation Rewards",
+      "rewards": "Invitation Rewards",
+      "level": "Level",
+      "valid-players": "Total number of valid invited players",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "all": "All",
+      "date": "Date",
+      "amount": "Amount",
+      "note": "Note:",
+      "deposit-commission": {
+        "title": "DEPOSIT COMMISSION",
+        "description": "Earn a reward when your invitee makes their first deposit",
+        "note-title": "Note",
+        "note-1": "The invitee's deposit must be at least 300 PKR.",
+        "note-2": "Both inviter and invitee must complete their profile details, including:",
+        "note-2-1": "Binding real name",
+        "note-2-2": "Verified email and phone number",
+        "note-2-3": "Adding a valid bank account",
+        "note-2-4": "The invitee must download and register through the agent’s unique download link. The referral code is embedded in the link and will automatically track the inviter.",
+        "note-3": "Reward Distribution Time: Rewards are automatically credited to your account right after completing the invite process.",
+        "note-4": "It is strictly prohibited for the same individual to use multiple accounts to exploit commissions. Violators will have their accounts frozen.",
+        "note-5": "Invites that do not register through the agent’s download link will not be counted for commission. Make sure the invite download the app using your unique referral link only."
+      }
+    }
+  },
+
+  "affiliate": {
+    "hero-section": {
+      "be-our-partner": "BE OUR PARTNER",
+      "sportsbook-casino": "Sportsbook & Casino",
+      "join-our-exclusive": "Join Our Exclusive",
+      "affiliate-program": "Affiliate Program",
+      "our-affiliate-system-gives-you-opportunity-to-earn-unlimited-money": "Our Affiliate System Gives You Opportunity to Earn Unlimited Money",
+      "being-a-partner-with-us-is-easy": "Being a partner with us is easy! We offer you the best terms around with higher commission rates and best lifetime value for the visitors you create."
+    },
+    "how-it-works": {
+      "title": "HOW IT WORKS?",
+      "register": "Register",
+      "create": "Create an affiliate account to become our affiliate partner",
+      "promote": "Promote & Gather Players",
+      "track": "Track your success on player referrals",
+      "high-commission": "High Commission",
+      "plan": "Commission plan where it meets clients needs"
+    },
+    "why-join": {
+      "title": "Why Become 11ic Affiliate?",
+      "desc": "The outstanding Sportsbook & casino affiliate program 11ic Affiliates is managed by a first-rate group of highly qualified experts. Our 11ic Managers will put you first and help you through every step of the process. Your success depends on achieving the best lifetime value and conversion rates for the traffic you send our way. Affiliate Managers will put you first and help you through every step of the process."
+    },
+    "commission": {
+      "title": "COMMISSION PLAN",
+      "note": "We have a Multi-Tier Commission Structure (per month basis). A minimum of 3 active players is required.",
+      "net-revenue": "Total Sports, Live Casino, Rummy, Lottery, Slot Net Revenue",
+      "rate": "Commission Rate",
+      "please-note": "Please note: Apart from the number of the active players mentioned in the above table that the affiliate must meet, you should also ensure that every player you have referred is a genuine active player in our website. Our website has set a series of standards to audit the quality of every player. If you fail in meeting the standards, your commission will not be paid out."
+    },
+    "dashboard": {
+      "title": "Personal Player Dashboard",
+      "desc": "Track commission and oversee your player performance dashboard anytime, anywhere"
+    },
+    "features": {
+      "title": "Features",
+      "numerous-sports-book-choices": "Numerous sports book choices",
+      "top-tier-casino-games": "Top tier casino games",
+      "best-revenue-and-commission-offers": "Best revenue and commission offers",
+      "quick-transactions": "Quick transactions",
+      "monthly-commissions": "Monthly commissions",
+      "its-all-about-you-with-us": "It's all about you with us"
+    },
+    "faq": {
+      "title": "FAQs",
+      "what-makes-us-different": "WHAT MAKES US DIFFERENT?",
+      "11ic-affiliates": "11ic Affiliates is a sportsbook and casino affiliate program that offers a high commission rate and a wide range of sports and casino games.",
+      "how-calc": "HOW IS IT CALCULATED?",
+      "calc-desc": "Gross Revenue of (Sportsbook + Casino + Slot + Rummy) - Player Bonuses - Admin Cost (15%) = Net Revenue 1. Net Revenue 1 x Commission Rate = Commission 1. A) Gather players to join the 11ic site. B) Get paid up to 60% commission from your players overall performance. Note: Commission will be based on all these factors. Minimum active 3 players.",
+      "when-paid": "WHEN DO I GET MY COMMISSION PAID?",
+      "when-desc": "Commission will be transferred to your 11ic account and you can choose to withdraw it from any bank account or you can choose to be paid to your e-wallet account. We pay out all affiliate commission by the 10th of the following month. For example, on 10th Sept, you will get your commission for the month of August.",
+      "where-banners": "WHERE CAN I GET BANNERS AND OTHER PROMO MATERIALS?",
+      "banners-desc": "The affiliate managers at 11ic will provide you all the tools you need, advise you on a program that converts effectively, and do everything else they can to make sure your efforts yield positive outcomes. The 11ic affiliate program offers complete assistance as well as all banners and promotional materials.",
+      "how-to-become-a-affiliate-agent": "HOW TO BECOME AN AFFILIATE AGENT?",
+      "step-1-register": "Step 1: Register an affiliate account. \n Step 2: Contact 11ic customer support and get your account activated. \n Step 3: Gather players to join the 11ic site. \n Step 4: Get paid up to 60% commission from your players overall performance."
+    },
+    "contact": {
+      "title": "CONTACT CUSTOMER SERVICE",
+      "terms": "Affiliate Terms & Condition"
+    }
+  },
+  "wheel": {
+    "title": "Wheel",
+    "description": "Wheel",
+    "no-records-found": "No records found for this period.",
+    "retry": "Retry",
+    "load-more": "Load More",
+    "notice": {
+      "title": "Notice",
+      "content": "Thank you for joining 11ic. Deposit min. 300 to get extra free spin and complete daily task for more chances of winning.",
+      "primaryButtonText": "Deposit Now",
+      "congratulations": "Congratulations!"
+    },
+    "check-in-dialog": {
+      "claimed-rewards": "CLAIMED REWARDS",
+      "log-in": "Log In",
+      "date-time": "Date & Time",
+      "rewards": "Rewards",
+      "no-rewards-record-found": "No rewards record found.",
+      "check-in-record": "CHECK-IN RECORD",
+      "take-note": "Take Note: Green: Indicates a successful login on that day. Gray: Indicates no login on that day. Gold: Represents today's date."
+    },
+    "daily-deposit": {
+      "title": "Daily Deposit 300",
+      "description": "to get extra free Lucky Spin"
+    },
+    "header-message": {
+      "title": "LUCKY 7 SPINS",
+      "description": "Daily Log in to unlock more free spin and get a chance for more exciting rewards",
+      "thank-you-for-joining": "THANK YOU FOR JOINING"
+    },
+    "roulette-wheel": {
+      "spin": "SPIN"
+    },
+    "free-spin-button": "Free Spin",
+    "rewards-button": "Rewards",
+    "winners": "WINNERS",
+    "please-wait": "Please wait...",
+    "rules": {
+      "lucky-spin-promotion-details": "Lucky Spin Promotion Details",
+      "promo-rules": "Promo Rules:",
+      "promo-period": "Promo Period: Unlimited.",
+      "settlement-cycle": "Settlement Cycle: Daily from 00:00 to 23:59.",
+      "eligibility": "Eligibility: All 11ic users are qualified participants.",
+      "lucky-extra-spin": "The Lucky Extra Spin is applicable only for users with a minimum deposit of 300 PKR per day.",
+      "cycle-restart": "The cycle will restart if login is not continuous and will reset back to Day 1 after the 7th day.",
+      "account-verification": "Account Verification: Users must not have multiple accounts. KYC verification will ensure account security for both parties.",
+      "prizes": "Prizes: Cash prizes will be automatically transferred to the main wallet account. If the winning prize is a mobile phone customer service will contact you.",
+      "turnover-requirement": "Turnover Requirement: Cash price winnings must meet a x1 turnover to process withdrawal.",
+      "account-monitoring": "Account Monitoring: 11ic reserves the right to freeze accounts with multiple users. Winning prices will be forfeited if users do not comply with the promo rules and conditions",
+      "contact-customer-service": "For more concerns or inquiries, please contact customer service for assistance.",
+      "day": "Day",
+      "minimum-deposit": "Minimum Deposit",
+      "lucky-extra-spin-header": "Lucky Extra Spin",
+      "day-1": "DAY 1",
+      "day-2": "DAY 2",
+      "day-3": "DAY 3",
+      "day-4": "DAY 4",
+      "day-5": "DAY 5",
+      "day-6": "DAY 6",
+      "day-7": "DAY 7",
+      "free-spin": "FREE SPIN",
+      "free-spin-plural": "FREE SPIN"
+    }
+  },
+  "deposit-withdraw": {
+    "tutorial": {
+      "fast-pay": {
+        "title": "FAST PAY Deposit Tutorial",
+        "instructions": [
+          "Choose FAST PAY as your deposit method.",
+          "Select a Easypaisa or Jazzcash.",
+          "Enter the deposit amount within the allowed limits.",
+          "Click \"Submit\" to proceed",
+          "A new payment window will open - follow the instructions to complete the payment.",
+          "Once payment is successful, your balance will be updated automatically."
+        ]
+      },
+      "e-wallet": {
+        "title": "E-WALLET Deposit Tutorial",
+        "instructions": [
+          "Choose E-WALLET as your deposit method.",
+          "Select a Easypaisa or Jazzcash.",
+          "Enter the deposit amount within the allowed limits.",
+          "Click \"Submit\" to proceed",
+          "A new payment window will open - follow the instructions to complete the payment.",
+          "Once payment is successful, your balance will be updated automatically."
+        ]
+      },
+      "bank": {
+        "title": "Bank-to-Bank Deposit Tutorial",
+        "instructions": [
+          "Choos a bank payment method  from the avialable options",
+          "Copt the bank details shown on the screen.",
+          "Open your bank app or portal and make the deposit for your desired amount.",
+          "Enter the reference number from your transaction.",
+          "Upload the successful deposit receipt as proof.",
+          "Click \"Submit\" to complete your deposit request."
+        ]
+      },
+      "crypto": {
+        "title": "USDT Deposit Tutorial",
+        "instructions": [
+          "Choose USDT as your payment method.",
+          "Copy the wallet address or scan the QR code provided.",
+          "Open your crypto wallet and send the desired amount to the copied address.",
+          "Enter the same USDT amount in the form.",
+          "Upload a screenshot of the transaction as proof.",
+          "Click \"Submit\" to complete your deposit request."
+        ]
+      },
+      "withdraw": {
+        "title": "Withdrawal Tutorial",
+        "instructions": [
+          "Choose the \"Withdraw\" option.",
+          "Select a saved bank account or add a new one.",
+          "Enter the withdrawal amount.",
+          "Click \"Submit\".",
+          "Enter your withdrawal password to confirm."
+        ]
+      },
+      "dont-save-or-reuse-payment-info": "Don’t save or reuse payment info — it may change anytime."
+    },
+    "upload-input": {
+      "suggested-image-size": "Suggested image size is 1 MB; supported formats are JPG and PNG.",
+      "upload-image": "Upload Image"
+    },
+    "withdrawal-amount": {
+      "label": "Withdrawal Amount",
+      "placeholder": "Withdrawal Amount (500.00 - 50,000.00)",
+      "insufficient-balance": "Insufficient balance",
+      "remaining-turnover": "Remaining Turnover",
+      "errors": {
+        "amount-must-be-number": "Amount must be a number",
+        "amount-required": "Amount is required",
+        "amount-min": "Amount must be at least {{min}}",
+        "amount-max": "Amount must be at most {{max}}",
+        "password-required": "Withdraw password is required",
+        "turnover-not-completed": "Turnover not yet completed"
+      }
+    },
+    "withdrawal-success": {
+      "title": "Withdrawal Successful",
+      "description": "Your withdrawal request has been submitted successfully. Please wait for the approval process.",
+      "primaryButtonText": "Back to Home"
+    },
+    "withdrawal-failed": {
+      "title": "Withdrawal Failed",
+      "description": "Your withdrawal request has been rejected. Please try again.",
+      "primaryButtonText": "Back to Home"
+    },
+    "withdrawal-password": {
+      "title": "Withdrawal Password",
+      "description": "Enter your withdrawal password to confirm.",
+      "placeholder": "Withdrawal Password"
+    },
+    "usdt-address-card": {
+      "usdt-address": "USDT Address"
+    },
+    "deposit": {
+      "amount-in-peso": "Deposit Amount in PKR",
+      "please-complete-kyc": "Please Complete KYC",
+      "e-wallet": "E-WALLET",
+      "easy-pay": "EASY PAY",
+      "fast-pay": "FAST PAY",
+      "bank": "BANK",
+      "bank-transfer": "BANK TRANSFER",
+      "deposit-amount": "Deposit Amount",
+      "select-amount": "Select Amount",
+      "deposit-limit": "Deposit Limit {{min}} - {{max}}",
+      "input-amount": "Input amount",
+      "amount-in-pkr": "Amount in PKR",
+      "please-enter-the-utr-reference-no": "Please Enter the UTR/Reference No.",
+      "reference-number": "Reference Number",
+      "proof-of-transaction": "Proof of Transaction",
+      "currency": "Currency",
+      "gcash-maya": "GCash/Maya",
+      "gcash-maya-deposit": "GCash/Maya Deposit",
+      "gcash-maya-withdrawal": "GCash/Maya Withdrawal",
+      "gcash-maya-deposit-amount": "GCash/Maya Deposit Amount",
+      "gcash-maya-withdrawal-amount": "GCash/Maya Withdrawal Amount",
+      "gcash-maya-deposit-amount-placeholder": "GCash/Maya Deposit Amount (100.00 - 50,000.00)",
+      "gcash-maya-withdrawal-amount-placeholder": "GCash/Maya Withdrawal Amount (100.00 - 50,000.00)",
+      "submit": "Submit",
+      "processing-deposit": "Please wait while we process your deposit...",
+      "pending-deposit-request": "You have a pending deposit request. Please wait for the previous request to be processed."
+    },
+    "balance-withdrawable": {
+      "cash-balance": "Cash Balance",
+      "withdrawable": "Withdrawable Amount"
+    },
+    "choose-account": {
+      "add-new-account": "Add New Account",
+      "account-name": "Account Name",
+      "account-number": "Account Number",
+      "bank-name": "Bank Name",
+      "branch-name": "Branch Name",
+      "ifsc-code": "IFSC Code",
+      "account-type": "Account Type",
+      "account-type-description": "Account Type Description",
+      "choose-account": "Choose Account"
+    },
+    "content": {
+      "please-wait": "Please Wait"
+    }
+  },
+  "lucky-spin": {
+    "rules": {
+      "title": "Active Rules",
+      "items": [
+        "When the accumulated amount reaches 1000 Rs, you can apply for a withdrawal (the reward will be directly added to your wallet).",
+        "When there are no available spins, referring a new player to register and deposit will earn you free spins.",
+        "The event lasts for 3 days. After the event ends, the accumulated rewards will be reset, and the event will restart.",
+        "Each user can enjoy one free spin per day, which will be added at 00:00 daily.",
+        "Once the application is approved, the bonus will be directly credited to your wallet.",
+        "The bonus must be rolled over once before it can be withdrawn.",
+        "The invitee must verify their phone number, register using the inviter's referral link, and must not have a duplicate IP address to qualify for the referral."
+      ]
+    }
+  },
+  "sponsor": {
+    "intro": "11ic is one of Pakistan’s leading online gaming and betting platforms, with a strong focus on Slot Machine games. Players can enjoy hundreds of top-rated slots, along with additional options such as Sportsbook, Live Casino, eSports, Bingo, Online Poker, Aviator, Teen Patti, and many more gaming products.",
+    "office-title": "24/7 Customer Service Office",
+    "office-description": "At 11ic, our commitment is to provide our members and partners with the finest gaming experience and cutting-edge security technology to ensure the confidentiality of their information. We also offer a secure and stable platform for current and future members, guaranteeing the ultimate gambling experience.",
+    "office-description-2": "We now boast millions of dedicated players worldwide and are steadily expanding, providing an ever-growing community with the finest betting experience.",
+    "game-development-department-office": "Game Development Department Office",
+    "game-development-department-description": "As the premier global sports entertainment company, 11ic signed a contract with Delhi Capitals in 2023, establishing itself as the official partner of the Women's Premier League.",
+    "sponsorship-title": "SPONSOR OF CRICKET TEAM",
+    "sponsorship-description": "As the premier global sports entertainment company, 11ic signed a contract with Delhi Capitals in 2023, establishing itself as the official partner of the Women's Premier League.",
+    "sponsorship-logo": "https://via.placeholder.com/150",
+    "sponsorship-title-2": "SPONSOR OF FOOTBALL FIELD",
+    "sponsorship-description-2": "As the premier global sports entertainment company, 11ic signed a contract with Kerala Blasters FC in 2022, establishing itself as the official partner in the Indian Super League."
+  },
+  "login-screen": {
+    "title": "Login",
+    "placeholder": {
+      "phone": "Phone Number",
+      "username": "Input Username",
+      "password": "Input Password"
+    },
+    "user-id": "Username",
+    "phone-number": "Phone No.",
+    "login": "Login",
+    "or-continue-with": "Or continue with",
+    "or-create-an-account": "Or create an account with",
+    "forgot-password": "Forgot Password",
+    "remember-me": "Remember me",
+    "dont-have-an-account": "Don't have an account?",
+    "register-account": "Register",
+    "logging-in": "Logging in..."
+  },
+  "auth": {
+    "mobile-number-is-correct": "Mobile number is correct",
+    "terms-and-conditions-agreement": "Terms and Conditions agreement",
+    "confirm-registration": "Confirm Registration",
+    "already-have-an-account": "Already have an account?",
+    "username-cannot-contain-spaces": "Username cannot contain spaces",
+    "username-too-short": "Username too short",
+    "password-cannot-contain-spaces": "Password cannot contain spaces",
+    "password-is-required": "Password is required",
+    "phone-number-is-required": "Phone number is required",
+    "phone-number-must-be-10-digits": "Phone number must be 10 digits",
+    "invalid-mobile-number-format": "Invalid Mobile Number Format",
+    "do-not-add-prefix": "Do not add 0, +92, or 92 at the start of the number.",
+    "username-is-required": "Username is required"
+  },
+  "register-screen": {
+    "title": "Create an Account",
+    "placeholder": {
+      "phone": "Input Phone Number",
+      "username": "Input Username",
+      "password": "Input Password",
+      "invitation-code": "Input Invitation Code"
+    },
+    "welcome-bonus": "100% Welcome Bonus On First Deposit",
+    "agreement": "I confirm that the mobile number entered is ",
+    "agreement-2": "correct ",
+    "agreement-3": "and agree to the ",
+    "agreement-4": "Terms & Conditions",
+    "agreement-5": " agreement.",
+    "confirm-registration": "Confirm Registration",
+    "registering": "Registering...",
+    "already-have-an-account": "Already have an account?",
+    "login": "Login"
+  },
+  "forgot-password-screen": {
+    "title": "Forgot Password",
+    "sms-recovery": "SMS Recovery",
+    "email-recovery": "Email Recovery",
+    "get-otp": "Get OTP",
+    "cancel": "Cancel",
+    "recover": "Recover",
+    "placeholder": {
+      "phone": "Phone Number",
+      "username": "Username",
+      "password": "Password",
+      "email": "Email Address",
+      "otp": "OTP",
+      "create-strong-password": "Create Strong Password",
+      "confirm-password": "Confirm Password"
+    }
+  },
+  "footer": {
+    "social-networks": "Social Networks",
+    "about-us": "About Us",
+    "faq": "FAQ",
+    "privacy-policy": "Privacy Policy",
+    "terms-and-conditions": "Terms & Conditions",
+    "affiliate-program": "Affiliate Program",
+    "copyright": "Copyright © 2025 11ic. All rights reserved."
+  },
+  "information": {
+    "tabs": {
+      "about": "About Us",
+      "privacy": "Privacy Policy",
+      "terms": "Terms & Conditions",
+      "faq": "FAQ",
+      "affiliate": "Affiliate Terms"
+    },
+    "about": {
+      "about-11ic": {
+        "title": "About 11ic",
+        "details": "11ic is an online gaming company with presence across Asia that offers a wide-range of high-end products from Sportsbook, Live Casino, eSports, Lottery, Online Poker, Slot Machines, and more exciting gaming products!\n\nOne of the first online casino developed by AG Group ( Asia Gaming ) in India, 11ic carried the mission to establish itself as a GOAT in the industry and social life of Indian and Bangladesh players, and as one of the most exclusive and sought after casino memberships. For over decades, AG Group owned Les Ambassadeurs, London and New World Hotel, had serves Royals & VIPs all around the world to their gaming floors.\n\n11ic works together with a variety of remarkable gaming platform which includes Cricket, Exchange, BTI Sport, 9wickets, SABA, Evolution, SSG, Ezugi, Rummy, Sexy Baccarat, Micro Gaming, Play Tech, SBO, Pragmatic Play, iSoftBet, AllBet, CQ9, etc., that will surely fulfill all your entertainment needs. We also offer thousands of other sports and casino games, with Cricket in the forefront.\n\nAt 11ic, we strive to offer our members not only with the best gaming experience but also with the most advanced security technology that will ensure to keep your information confidential."
+      },
+      "credibility": {
+        "title": "Credibility",
+        "details": "11ic is a fully registered gambling and entertainment company founded in August 2018.\n\nAt 11ic, we provide a safe and stable platform for our current and future members which ensures ultimate gambling experience.\n\nOur brand holds an offshore online gaming license from Curacao and a certification from Gaming Associates, which guarantees that 11ic conforms to the set standards and regulations in the internet gambling space.\n\n11ic provide a safe and stable platform for our current and future members which ensures ultimate gambling experience. Not only that, we have a team of professionally trained, enthusiastic and efficient staffs who are ready to assist you with your inquiries and difficulties 24/7."
+      }
+    },
+    "privacy": {
+      "privacy-policy": {
+        "title": "Privacy Policy",
+        "details": "We recognize and respect your right to privacy. Keeping your data safe is our paramount concern.\n\nWe will keep all of your personal data private and will not disclose this information to any third party unless required to do so by applicable laws and regulations or a court order; with the exception that we reserve the right to disclose and transfer your personal data to our respective payment settlement service providers and financial institutions to the extent necessary for the completion of payments for services provided through our website.\n\nAll personal information supplied by users is transmitted via Secure Socket (SSL 128 bit encryption Standard) and is stored in secure operating environments that are not accessible by the public. Internal access to all data is limited and strictly monitored.\n\n11ic and our partner may contact you via email about offers which may be of interest to you. It is 11ic's policy not to share any personal identifying material obtained through 11ic's websites with any third party.\n\nCollection of Information Through Call Centers:If you contact our hotline or we contact you using telephone, we may monitor or record the phone call for quality assurance, and security purposes. Please note that when you register on our website, you acknowledge and consent to us to collect your personal information during the phone conversation as well as to record the phone call."
+      },
+      "disclaimer-of-warranty": {
+        "title": "Disclaimer Of Warranty",
+        "details": "11ic does not accept liability for the content or accuracy of external websites. Fraud alert: Infringement of trademark 11ic prides itself as a reliable and responsible online gaming company. And for the past 5 years, it continues to uphold its main objective to protect customer rights, adhering to industry rules and regulations, and improving the quality of customer journey from registration to after sales.\n\nThe company undergoes tedious security checks to not only provide its customers an enjoyable experience but also a safe place to play and transact in.\n\nDue to the overwhelming support from customers, 11ic continues to grow in magnitude. However, since dissatisfied customers cannot be avoided in any business or industry, counterfeit trademarks in the market exist. This seriously damages 11ic's image, confusing and cheating valuable customers.\n\nPlease be careful and trust only 11ic's official website and channels. Should you encounter or in possession of any relevant information on the mentioned fraudulent company, feel free to contact 11ic Customer Service (link). Your report is highly appreciated.\n\nRest assured that 11ic strives to deliver the best quality products and services, with secured and fair transactions. With your help and consideration, we hope to stop fraudulent activities as soon as possible. Thank you.\n\nSincerely,\nTeam 11ic"
+      }
+    },
+    "terms": {
+      "intro": {
+        "paragraph-1": "11ic is fully licensed and regulated by Curacao to provide online sportsbook wagering and other gambling services. It should be noted that online gambling debts are enforceable by law in these jurisdictions.",
+        "paragraph-2": "These Terms and Conditions are effective as of 1st September 2018 and supersede any previous terms and conditions. If you do not agree to any of these Terms and Conditions, as may be amended from time to time, or any other rules in force, you should not use or access the Website(s) and the Services."
+      },
+      "definitions": {
+        "title": "Definitions",
+        "details": "The following provisions define the terms and conditions that govern your use of, access to and participation in any \"play for real\" services provided by, OG Global Access Limited (collectively referred to as \"11ic\", \"we\", \"our\" or \"us\" as the context requires) from time to time (the \"Service(s)\") on and/or through the website at www.11ic.com, and any other website operated by OG Global Access Limited (the \"Website(s)\"). These provisions are intended to be read in conjunction with the specific game play rules (collectively, the \"House Betting Rules\") where applicable, and any other terms and conditions governing the use of the Services, Software and access to the Website(s) and the Information comprised therein (collectively these \"Terms and Conditions\"). \"Betting\" or \"bet(s)\" for the purpose of these Terms and Conditions include, without limitation, wagering, gaming and gambling conducted in relation to any and/or all of the Service(s) offered on the Website(s); \"Device(s)\" mean any application access devices, including but not limited to personal computers, laptops, mobile phones, personal digital assistants, PDA phones, hand-held devices employed for the use of and access to the Website(s) and participation in the Services; \"Software\" means any computer program, data file or any other content (including any user information relating to the foregoing) that is required to be installed on your Device in order to enable you to use, access and participate in the Services for the purpose of using, accessing and participating in the foregoing on the Website through your Device; and \"Sports\" means the internet gaming system accessible and/or offered as part of the Website entitled \"Sports\", and all related services and online gaming activities there too."
+      },
+      "acceptance": {
+        "title": "Acceptance",
+        "details": "By clicking the box next to the \"I have read, printed and accepted the 11ic Terms and Conditions\" and by clicking on the relevant \"SAVE AND CONTINUE\" button during your registration, you acknowledge and accept that: you have read, fully understood and accepted these Terms and Conditions; and these Terms and Conditions constitute a legally binding agreement (\"Agreement\") between you and 11ic regarding the use of the Services. If you do not agree with any of the terms of these Terms and Conditions, please do not tick the box next to the \"I am over 18 years old and I have read, printed and accept the Terms and Conditions\", do not click the \"SAVE AND CONTINUE\" button, and do not attempt to use or continue using any of the Services or download and/or install the Software."
+      },
+      "modification": {
+        "title": "Modification",
+        "details": "We reserve the sole right to amend, update and modify these Terms and Conditions and the House Betting Rules (or any part thereof) from time to time and any such amendment, update or modification will be published on the Website(s). The amended, updated or modified Terms and Conditions and the House Betting Rules in operation at any particular time shall be effective upon publication on the Website(s). Continued use of, access to and participation in the Services on or through our Website(s) and Device(s) after such publication constitute your acceptance and understanding of the modified or updated Terms and Conditions and the House Betting Rules as published from time to time. You acknowledge and agree that it is your sole responsibility to check for any such amendments, updates and/or modifications. 11ic may, in our sole discretion, notify you of such updates and modifications. Such notification, as may be provided by 11ic in our sole discretion from time to time, shall not constitute an obligation upon 11ic to notify you of such amendments, updates or modifications."
+      },
+      "information-and-intellectual-property": {
+        "title": "Information and Intellectual Property",
+        "details": "The information, material and data provided or made available to you on or generated and/or collected by the Website(s), Services and/or through the Device(s) and/or in any other form including, without limitation, marketing programs and materials, results, statistics, sporting data and fixture lists, odds and betting figures, text, graphics, video and audio content (the \"Information\"), belong to India and/or our licensors and are for your personal and non-commercial use only. Save as expressly provided by these Terms and Conditions, you may not in any way or by any means adapt, copy, modify, reproduce, store, distribute, display, publicly perform, include in a cable programme, publish, transmit, sell, rent, lease or license or otherwise make the Information available to any other person, or on another website, online service or bulletin board, or on any other media and/or Device without our express prior written consent or in the case of third party material, without the prior written consent of the owner of the proprietary rights in such material. The Software, Services and the Information provided on the Website(s) and/or through Device(s) are protected by copyright, trademarks and other forms of intellectual and proprietary rights. All rights, title and interest in and to the Software, Services and Information on the Website(s) are owned by, licensed to and/or controlled by 11ic and/or our licensors. You acknowledge that you do not acquire any rights or interests, or any licenses to the Software, Services and the Information through your use of and access to the foregoing provided on the Website(s) and/ or through Device(s)."
+      },
+      "conditions-of-use": {
+        "title": "Conditions of Use",
+        "details": "As a condition of use of the Services, you warrant and undertake that you shall not use or access the Website(s), Services, Software and/or the Information for any purpose that is unlawful under any law that is applicable to you or that is prohibited by and/or in breach of these Terms and Conditions. In particular (and in addition to all other representations and warranties set out in these Terms and Conditions), you warrant and undertake as a condition of your use of the Services: that you are not a resident of the India,the United States of America, Singapore, Iran, North Korea, Switzerland, Turkey, France, Italy, the United Kingdom, Taiwan or any other jurisdiction we may determine from time to time; that you are acting on your own behalf and in your own personal capacity and not on behalf of another person; that you are not restricted by limited legal capacity; that you are not diagnosed or classified as a compulsive or problem gambler or consider yourself to be same; that you are of the age of (a) 18 or (b) any such other legal age or age or majority as determined by any laws applicable to you, whichever age is greater (\"Legal Age\"); that you are fully aware of the risk of losing money in the course of using the Services; that you are not depositing money which originates from criminal or other illegal or unauthorized activities; that you are not conducting criminal or otherwise unlawful or unauthorized activities and/or intending to use your account opened with us in connection with such activities and that you shall not use or allow other persons to use the Services and your betting account for any criminal or otherwise unlawful activities including, without limitation, money laundering, under any law applicable to you or us; to keep your username, account number and password secure, confidential and protected against authorized access or use and to ensure that you change your password immediately or notify us immediately if the confidentiality of your username, password or account number has been compromised in any way; to be solely responsible for any and all activities that occur under the access to and use of the Services on and through the Website(s) and/or Device(s) under your username, account number and password regardless of whether such access and/or use was authorized by or known to you or not and any losses suffered due to a third party using the account will not be refunded by us and further the customer shall have full responsibility for any third party using the customer's login details and shall hold us harmless in respect of any damages arising from same; not to use the Services, Website(s), Device(s), Software or the Information in any way which interferes or may interfere with the availability of the Services and the Website(s) to other users nor do anything that degrades or may degrade the operational performance of the Services and Website(s); not to solicit or in any manner seek to obtain any information relating to other users; not to upload or distribute any program, file or data that contain viruses, are corrupted or may affect the operational performance of the Device(s), Software, Services and/or Website(s); that your access to or use of the Services and Information on and through the Website(s) and/or the Device(s) is not illegal or prohibited by laws that are applicable to you or contractual obligations which apply to you personally or to persons in the country from which you are currently accessing the Website(s) or using the Device(s); not to use any device, robot, spider, software, routine or other method (or anything in the nature of the foregoing) to interfere or attempt to interfere with the normal proper functioning of the Services, Device(s), Software, Website(s), Information or any transactions offered at the Website(s) and/or through the Device(s) and in particular not to employ or make use of an artificial intelligence or other system (including machines, computers, software or other automated systems) designed specifically to defeat the system and not to collude or attempt to collude with other players in order to defraud India (or other players as the case may be); not to post or transmit to the Website(s) and/or to the Device(s) or to any other users, any unlawful, harassing, abusive, threatening, libellous, defamatory, obscene, indecent, inflammatory, racially or ethnically objectionable, pornographic or profane material, or any material that could constitute or encourage conduct that would be considered a criminal offence, give rise to civil liability, or otherwise violate any law; that you are not an officer, director, employee, consultant, affiliate or agent of 11ic or any company related to 11ic, or a relative or housemate of any of the foregoing; and not to interfere with other users' use of the Services, Website(s), Software, Devices and/or Information or initiate and/or engage in surveys, contests, chain letters or post/transmit \"junk mail\", \"spam\" or any unsolicited mass dissemination of email. not to deposit money through a credit or debit card which a customer is not authorized to use or knowingly receive money from such a card or in any other manner colluding with a third party to do so. To safeguard the fairness of game play, 11ic reserves the right to seek confirmation from individual gaming software providers.,It should not take longer than 120 days to obtain an investigation result. If you have breached the rules or regulations in respect of your gaming or gambling activity, we reserve the right to freeze and/or close your account and to claim as forfeit any account funds/winnings and/or close your account with or without the refund of any balance therein."
+      },
+      "registration-and-opening-your-betting-account-and-membership": {
+        "title": "Registration and Opening Your Betting Account and Membership",
+        "details": "In order to play and bet with 11ic and to use the Services, you must complete the application for account opening and membership in the manner set out on the Website(s) (the \"Membership Application\"). You represent and undertake that all information supplied by you when registering and completing the Membership Application is accurate, true and complete in all respects including, your name on the Membership Application (\"Name\"), sources of funds (including the relevant bank accounts and card numbers), any e-mail address or telephone number(s) you have provided and your residential address. We will take reasonable and appropriate measures to ensure that your personal information as disclosed to us shall remain confidential. We will not report or disclose your personal data or betting information unless compelled to do so by any applicable laws and regulations, Court order, or by the relevant gaming or law enforcement authorities or as otherwise provided for in these Terms and Conditions. It is your responsibility to keep your personal information confidential. We reserve the right to disclose and transfer your personal data to our respective payment settlement service providers and financial institutions to the extent necessary for the completion of payments for Services provided through the Website or if compelled to do so by applicable laws and regulations, to the relevant gaming or law enforcement authorities. It is your sole responsibility to ensure that the laws applicable to you do not prohibit you from using and accessing the Website(s) and the Information contained therein, downloading and installing the Software and/or using and participating in the Services. We may require further evidence of identification and age from you to verify your Membership Application (e.g. valid picture identification and debit/credit card). If there is any change to your information details as originally supplied by you, you shall notify us of the relevant change without delay. In order to confirm your Name and address, 11ic reserves the right, inter alias, to confirm your Name and address by post. 11ic may, at our discretion, undertake additional security checks against any information that you provide. By agreeing to these Terms and Conditions you agree and understand that 11ic may access, use, process and store the results of any identification verification or checks that may be made against you. We reserve the right to reject your Membership Application without reference to you or assigning any reason whatsoever. You are allowed to open only one betting account with 11ic. Should we discover that you have more than one account with 11ic, we reserve the right, at our sole discretion, to treat all accounts that you have with 11ic as a single joint account, terminate the additional account(s) and/or to terminate this Agreement with you."
+      },
+      "placement-of-bets-and-bet-acceptance-procedure": {
+        "title": "Placement of Bets and Bet Acceptance Procedure",
+        "details": "We accept bets for games, sporting and other events that are advertised on the Website(s) and/or through the Device(s) from time to time. All such bets are subject to the relevant House Betting Rules applicable to each event or game, and to these Terms and Conditions. If a manifest error or mistake occurs or an incorrect participant is quoted for any event, all bets placed on that event shall be void. In the event of any malfunction to the 11ic gaming system, failed transmission or other technical issues or suspected fraud 11ic reserves the right to void any and/or all bets placed. Notwithstanding any other provision in these Terms and Conditions, 11ic reserves the right, in our absolute discretion, to decline all, or part, of any bet placed without providing any reason whatsoever. We only accept bets made through the internet and/or Devices in compliance with these Terms and Conditions. Bets are not accepted in any other form (whether by post, email, fax or otherwise) and where received will be void regardless of the outcome. Subject to the other provisions herein, bets will be deemed to be validly placed by you if your username and password have been entered correctly, subject always to there being sufficient available funds in your account. You are responsible and liable for all activities and transactions that take place through the use of any of the following (or any combination there of): your name; your account number; your username and password; regardless of whether the use of the foregoing was authorized by you or not. It is your sole responsibility to ensure that the details of your bets are correct and that you understand the terms of the bet registration including any rules applicable to the bet before you confirm placing of the bet and in this regard you may wish to review your bet for mistakes before it is transmitted to us. Subject to the other provisions herein, once your bets have been placed and their acceptance confirmed by us, they may not be canceled, revoked or changed by you and shall be deemed to be conclusive evidence in respect of the bets that you have placed. It should be noted that all bets are logged and recorded in the transaction log database. 11ic's transaction logs shall be conclusive evidence of all transactions and times at which the transactions are placed. Subject to the requirement for payment to be received by us prior to a bet being deemed to be placed (and if this is not received then we reserve the right to void the bet) and the other provisions herein, bets will be deemed valid and accepted by 11ic when a transaction ID is displayed on your screen and duly reflected in your transaction history. No betting is permitted after any deadline set by us, the commencement of an event and/or where the outcome of an event is known at the time of placement of your bet. If any event is erroneously left open for betting after the commencement of the event and/or where the outcome of an event is known, 11ic reserves the right to decline or void such bets placed without reference to you. Acceptance of any bet or any part thereof shall be at the sole discretion of 11ic. For the avoidance of doubt, this clause does not prohibit \"in play\" or \"half time\" bets where allowed by 11ic. Advertised start times of the events displayed on the Website(s) are for information purposes only. If for any reason a bet is inadvertently accepted by India after an event or match has commenced other than \"in play\" or \"half time\" bets where accepted by 11ic, 11ic reserves the right to cancel and void such bet. Unless stated otherwise within the rules for each sport or event, the result of a match or event will be determined on the day of its conclusion for betting purposes. Any subsequent enquiry that may result in an overturned decision will not be recognized by 11ic, and original settlement of bets will stand. If the venue for a sporting event is changed, all bets placed based on the original venue shall at the sole discretion of 11ic be voidable by us. The winner of an event or game will be determined on the date of the event's conclusion according to the House Betting Rules. 11ic does not recognize suspended games, protests or overturned decisions for betting purposes. Should you include a non-runner or void selection in a multiple bet, the bet will be settled on the remaining valid selections only. You acknowledge that any and all odds, lines and handicaps are subject to fluctuation without notice, and the foregoing will become fixed only at the time of acceptance of the bet by us. Where a manifest error, mistake or system failure deriving from 11ic results in an incorrect odd, line or handicap taken in a bet, the bet, or that part of the bet if it is a multiple bet/parlay sought to be placed with 11ic will be void. Provided the error, mistake or failure is rectified in time, 11ic may in our absolute discretion (but shall not be obliged to) make reasonable efforts to contact you to allow the choice of placing another bet at the correct odds, lines and handicaps. We will not accept any simultaneously placed bets on one event from you. In respect of any bet and the associated transactions therewith, the decision of 11ic is final and conclusive. When the player wishes to place a bet using Indonesian Rupiah, the player shall place his bet by eliminating the last three (3) zeros from his desired stake. All bets shall be in multiples of one thousand. For easy reference, please see the following examples: Once the player types the amount in accordance with the above mentioned rules, the system automatically recognizes that three (3) zeros shall be added to the amount of stake in order to determine the true amount of stake desired by the player. Customers must register their bet request as individuals. Repeated requests containing the same selections from the same or different customers may be subsequently deemed where we believe the customers are acting in collusion or as part of a syndicate and/or identical or similar bet requests are registered within a short time of each other and dealt with us accordingly."
+      },
+      "software-license": {
+        "title": "Software License",
+        "details": "You hereby acknowledge and agree that the Software that is made accessible to you (by download or otherwise) for your remote use on the Website through your Device is part of the Services and is the property of 11ic and/or our licensor, and that you do not gain any rights to such Software whatsoever. You may not in any way or by any means adapt, copy, modify, reproduce, store, distribute, display, publicly perform, broadcast, include in a cable programme, publish, transmit, sell, rent, lease or license or otherwise communicate or make available such Software to any other person, or on another website, online service or bulletin board, or on any other media and/or device. 11ic hereby grants to you a personal, non-exclusive, non-transferable and revocable licence to install and use the Software on your Device(s) (the \"Licence\") PROVIDED THAT such installation and use is made through a Device of which you are the primary user. The Software is licensed and distributed by 11ic solely for the purpose of enabling end users of the Software to fully access and utilize the Services. You are not allowed to: install or load the Software onto a server of other networked device or take other steps to make the Software available via any form or bulletin board, online service or remote dial-in, or network to any other person; distribute, rent, lease, sub-licence, copy, transfer, assign or otherwise make available the Software and/or the License to use the Software to any other person; allow any other person to use the Software; create or provide any means (including, without limitation, via emulators) through which the Software may be used by others; translate, reverse engineer, decompile, disassemble, modify, discover, create derivative works based on the whole or part of the Software and/or the source code of the Software; or copy, modify, translate or create any derivative works based on the whole or any part of the user documentation concerning the Software. You acknowledge and agree that the Software and the Software user documentation provided on the Website(s) and/or through Device(s) or otherwise, are owned by 11ic and/or our censors and are protected by copyrights, trademark rights and other forms of intellectual and proprietary rights. You hereby acknowledge that the structure, organization and source code of the Software are the valuable trade secrets of 11ic and our licensors. You acknowledge that save for the rights granted to you in accordance with the Licence, you do not acquire any rights or interests whatsoever in the Software and/or the Software user documentation. Upon the termination of this Agreement for whatever reason, the Licence issued under this Agreement is automatically revoked and you shall stop using the Software and you shall uninstall the Software from your Device."
+      },
+      "settlement-of-transactions": {
+        "title": "Settlement of Transactions",
+        "details": "When using a credit or debit card or effecting a bank transfer, the card holder's or account holder's name as appropriate must be the same as the Name. 11ic reserves the right not to settle a transaction in the event of discrepancies between the card holder's or account holder's name and the Name. You are fully responsible for paying all monies owed to 11ic and or other players (as the case may be). In respect of any payment made by you, you agree that you will not make or procure the making of any charge-backs and/or deny or reverse any such payment, and that you will reimburse 11ic for any charge-backs, denials or reversal of payments as well as any and all losses suffered and expenses incurred by 11ic as a consequence thereof. 11ic may, at our sole and absolute discretion, cease to provide services or payment to certain users or to users paying with certain credit or debit cards or by bank transfers from certain banks. The maximum winnings payable by 11ic to any member on any valid accepted Sportsbook bet placed with 11ic shall be limited to GBP£100,000 (or equivalent) per bet or the maximum payout by the individual bet types whichever is lower. The maximum amount of each bet varies according to the specific bet type offered on the mini bet list offered from time to time on the Service and is subject to change without prior notice but in any event will not exceed the available funds in your account. Your possible winnings may be quoted exclusive of bet amount and this should be considered when placing your bet. All your winnings will be credited to your account. 11ic shall not in any way be responsible or liable to you for any funds/winnings credited to an account in error, and 11ic reserves the right to void any transactions involving such funds, either at the time or retrospectively. Should funds be credited to your account in error it is your responsibility to inform 11ic without delay and such funds are not to be used by you and we reserve the right to withdraw such funds and void any transactions placed using them. Funds deposited in one account will not be transferred to another account. Payment of any taxes, fees, charges or levies that may apply to your winnings under any applicable laws shall be your sole responsibility."
+      },
+      "collection-of-winnings": {
+        "title": "Collection of Winnings",
+        "details": "Your winnings from settled bets are credited to your account and shall be withdrawn in accordance with our withdrawal policy including where applicable but not limited to provision of a copy of valid photographic identification, satisfactory verification of address and/or credit/debit card or bank account to our satisfaction. Where your card issuer allows, your winnings may be credited to the credit or debit card account which was used for the original placement of the deposit. A cheque or bank wire will only be issued in the Name, and where a deposit has been made by credit or debit card this must also be the same as the name of the registered cardholder. We reserve the right to limit the number of cards or bank accounts used by you. A turnover of at least 1 time on the value of deposit needs to be reached before a withdrawal can be requested. 11ic reserves the right to make a charge to your account to cover all reasonable costs relating to both the deposit and withdrawal. All bank charges that 11ic incurs arising from or in connection with any of your betting transactions shall be borne and reimbursed by you and 11ic is entitled to deduct and offset the foregoing from the winnings payable to you or from your account, as the case may be. 11ic does not undertake to advise you that you have an outstanding balance to collect. If you do not access your account by logging onto the Website(s) and using the services offered for any consecutive period of 6 months and above your account will be deemed inactive. We shall be entitled to charge you periodic administrative fees during the period that your account remains inactive and set off such charges against funds in the account up to the extent of your account balance. If an inactive account is identified, we may attempt to contact the account holder via telephone, email or written communications, using the contact details registered with the account. If this fails we may use other methods at our disposal to seek to contact the account holder. If such efforts prove unsuccessful and contact with the customer cannot be established within twelve months of the date from which the account was identified as 'dormant', any outstanding bankroll in such account may be set aside and we shall reserve the power to close the account and designate at our discretion that the outstanding bankroll may be taken by us and pooled towards applicable gambling duty or allocated along with other dormant funds to a gambling charity."
+      },
+      "promotions-and-bonuses": {
+        "title": "Promotions and Bonuses",
+        "details": "All promotions, bonuses or special offers are subject to these Terms and Conditions and any promotion-specific terms and conditions that 11ic may introduce from time to time in conjunction therewith. 11ic reserves the right, to suspend, withdraw or modify such bonuses or promotions and/or the specific terms and conditions governing the same at any time. In the event that 11ic believes a user is abusing or attempting to abuse a bonus or other promotion, or is likely to benefit through such abuse, then 11ic may, at our sole discretion, block, deny, suspend, withhold or withdraw any user from any bonus or promotion in such manner we deem fit."
+      },
+      "indemnity": {
+        "title": "Indemnity",
+        "details": "You agree to fully indemnify 11ic, our shareholders, employees, officers, directors, licensees, distributors, affiliates, subsidiaries, agents for any loss, damage or claim (including reasonable legal fees) that may be incurred as a result, or in consequence of, your access to the Website(s), downloading or installation of the Software, betting and/or other use of the Services, Software and/or Information, and/or by reason of any breach of any of these Terms and Conditions and/or the House Betting Rules."
+      },
+      "disclaimers-and-specific-warnings": {
+        "title": "Disclaimers and Specific Warnings",
+        "details": "Betting is entirely at your sole option, judgement, discretion and risk. By doing so, you acknowledge that you do not find the Services, Website(s) and Information to be offensive, objectionable, unfair or indecent. Some jurisdictions have not addressed the legality of online and/or offshore online gambling while others have specifically made online (within the jurisdiction and/or offshore) gambling illegal. We do not intend that anyone should use and access the Website(s), Information and/or the Services where such use or access is illegal. The availability of the Services, Information and the Website(s) should not be construed as an offer, solicitation or invitation by us to use or access the foregoing in any country in which such use or access is illegal. Compliance with any laws applicable to you is entirely your own responsibility and 11ic makes no representation whatsoever that the Services, Software, Website(s) or the Information therein comply with any laws applicable to you. The Services, Software, Website(s) or the Information are provided on an \"as is\" basis. Save as expressly provided in these Terms and Conditions, 11ic makes no representation or warranty of any kind in respect of the Services, Website(s), Software and the Information contained therein. To the maximum extent permitted by law, any representation or warranty, whether express or implied, statutory or otherwise in respect of the Services, Software, Website(s) and Information is hereby excluded. 11ic does not warrant that the Services, Software, Website(s) or the Information will be accurate, timely, secure, free of interruptions or errors or external interference of any nature, or that any identified defect will be corrected. 11ic does not warrant that the Services, Software, the Website(s), the Information or servers that make them available are free of computer viruses spyware, adware or other malicious, destructive or corrupting code, program, data or macro or any other features that may affect any Device(s) and/or data contained within. You undertake to take your own precautions (at your own expense) to ensure that the processes, measures and/or Device(s) which you employ for using or accessing the Services, installation of the Software and using the Website(s) do not expose you to the risk of computer viruses, spy ware, adware or other malicious, destructive or corrupting computer code or other forms of interference or damage to your Device or data contained within. In the event of system or communication errors relating to account settlement or any other elements of the Services, 11ic will not be liable to you as a result of any such error and 11ic reserves the right to void all bets affected by such error and take any action to correct such error. 11ic shall in no event be responsible or liable for any damages, loss or expense, including any interference or damage to your Device(s) or data contained within, in connection with your access to, use of or participation in the Services, Website(s), Software and the Information. 11ic further fully disclaims any and all warranties, representations and responsibilities in respect of any aspect of the Services, Website(s), Software and the Information, which may be provided by third parties, including but not limited to broadband service providers and telecommunications service providers, and shall not on any account be liable for any default, breach or inaction of such third party partners. 11ic, our related corporations, affiliates, partners, officers, employees and agents shall in no event be responsible or liable for any damages, loss or expense, including without limitation direct, indirect, consequential or special damage or economic loss arising from or in connection with your access or use of the Services, Website(s), Software and the Information, or your loading, installation or use of the Software regardless of whether 11ic has been advised of such a possibility or not. In any event to the maximum extent permitted by law, 11ic's total liability to you, if any, for any loss or damage (whether on the basis of contract, tort, strict liability or otherwise) relating to, or arising from, any and all matters, events or circumstances directly pertaining to any bet placed by you with us, shall not exceed the amount of the respective bet placed by you. You acknowledge that part or all of the Information may be provisional in nature and may be subject to revision, change or modification, as provided in these Terms and Conditions. You therefore acknowledge that the Information is provided solely for reference and does not constitute advice or solicitation, and is not the subject of, and shall not constitute the basis of any binding representation, warranty, contractual obligation by 11ic, or reliance on your part thereon of any nature. You hereby acknowledge and agree that all disclaimers and exclusions of liability contained in these Terms and Conditions represent a fair and reasonable allocation of the risks and benefits of the agreement between you and 11ic, taking all relevant factors into consideration, including without limitation the value of the consideration provided by you to 11ic. You further agree that these disclaimers and limitations shall be enforceable to the fullest extent permitted by applicable law. If you have any dispute with regard to the result of any game or event, you must submit your written complaint to us at 1st Floor Bourne Concourse, Peel Street, Ramsey, Isle of Man IM8 1JJ or any address set out in the Contacts section of the Website(s) within fourteen (14) days from the date of the result of any game or event. In the unlikely event of a discrepancy between the result which appears on your Device and the results in the transaction logs in our system, you agree that the results in our system's transaction logs as certified by our Chief Technological Officer or such other appropriate person as we may designate from time to time shall be the final, conclusive and irrebuttable evidence of such results. 11ic recommends you keep a printed record of all transactions undertaken with us, such as bet confirmations and records of deposits and withdrawals. You should also be aware of our rules and any subsequent changes to these rules. If we cannot resolve a query to your satisfaction you can seek to refer the issue to gaming@gov.im. Bets may be deemed by us \"void where prohibited by law\"."
+      },
+      "termination-account-closure-or-service-suspension": {
+        "title": "Termination, Account Closure or Service Suspension",
+        "details": "In addition to other rights available to 11ic under this Agreement 11ic reserves the right, in our sole discretion, to void any winnings and forfeit any balance in your betting account, to terminate the Agreement and/or to suspend the provision of the Services/deactivate and/or close your account if 11ic has the reasonable grounds to believe or establishes any of the following: you have more than one active account with 11ic; the Name does not match the name on the credit or debit card(s) or other payment accounts including bank accounts used to make purchases and deposits with 11ic; you participate in a 11ic promotion and withdraw before fulfilling the requirements of that particular promotion; you provide incorrect or misleading registration information; you have failed or neglected to provide the requested identification information and/or continue to do so; you are not of Legal Age; you access and participate in the Services from a jurisdiction where participation in the Services is prohibited by law; you have \"charged back\" or procured a \"chargeback\" against us or denied any of the transactions or deposits that you made to your account; you are depositing money originating from criminal or other illegal or unauthorized activities; you are found to be cheating or attempting to cheat or to have cheated anyone or any party, or if it is determined by 11ic that you have employed or made use of an artificial intelligence or other system (including machines, computers, software or other automated systems) designed specifically to defeat the system or you are found to have colluded or attempted to collude with other players in order to defraud 11ic (or other players as the case may be); you have allowed or permitted (intentionally or unintentionally) someone else to use your account; you fail to comply with any of the terms and conditions of use set forth in this Agreement; or you fail to disclose that you are located in the India, the United States of America, Switzerland, Turkey, France, Italy, the United Kingdom, Singapore, Iran, North Korea, Taiwan or such other jurisdictions as we may determine from time to time. If the provision of the Services is suspended and/or your account is deactivated in accordance with clause 14.1 above, the provision of the Services will be only be reinstated and/or your account will be reactivated after the necessary rectification (if capable of being rectified) action has been taken by you and such rectification has been verified to our full satisfaction. 11ic reserves the right to close a customer's account and refund the balance of their account without further explanation. Subject to any provision of these Terms and Conditions to the contrary outstanding bets will ordinarily be honoured. Further we retain the right to suspend the whole or any part of the Service for any reason at our sole discretion and in such event we may but shall not be obliged to give you such notice as we deem practical."
+      },
+      "links-to-external-websites": {
+        "title": "Links to External Websites",
+        "details": "The Website(s) may contain links to external websites outside the Website(s) which are not maintained by 11ic. Links to external websites are provided for your convenience only, and 11ic is not responsible for and does not undertake to ensure that contents of such links are accurate, current or maintained. 11ic, is not responsible nor liable, has not provided or reviewed, does not approve or endorse, and makes no representations or warranties in respect of the contents or the privacy practices of the external websites, any products or services which may be advertised, sold or otherwise made available on such external websites. 11ic shall not be liable in contract, tort, negligence, or otherwise, for any loss or damage whatsoever arising from or in any way connected with your use of any link to external websites provided on the Website(s). Unless expressly provided 11ic shall under no circumstances be considered to be associated or affiliated with any statement, opinion, trade or service marks, logos, insignias or other devices appearing on external websites, or any products or services which may be advertised, sold or otherwise made available on external websites, or with the operators or owners of external websites or any person who may be related to any external websites in any manner whatsoever."
+      },
+      "links-to-the-websites-framing-of-the-websites": {
+        "title": "Links to the Website(s)/Framing of the Website(s)",
+        "details": "You may not link or create any deep or in-line links to any part of the Website(s), Services or frame the Information."
+      },
+      "adding-or-discontinuing-games": {
+        "title": "Adding or Discontinuing Games",
+        "details": "We reserve the right to, without liability to any party, in our sole discretion and without notice to you, to add new games or functions to the Website(s) or to commence, cease, discontinue, restrict access to or modify any game or function at any time."
+      },
+      "violations-of-these-terms-and-conditions": {
+        "title": "Violations of these Terms and Conditions",
+        "details": "11ic reserves the right to seek all remedies available at law and in equity in respect of any violation of these Terms and Conditions, including the right to deny or restrict access to the Services, Website(s) and Information to any particular person, or to block access from a particular Internet address or through any Device(s) to the Services, Website(s) and Information, at any time and at our sole and absolute discretion, without providing any reasons whatsoever."
+      },
+      "precedence": {
+        "title": "Precedence",
+        "details": "The House Betting Rules, where applicable, and any other terms and conditions governing the use of and access to the Services, Software, Information and the Website(s) shall form an integral part of these Terms and Conditions. In the event that there is any conflict between the provisions of the House Betting Rules and any other terms and conditions governing the use of and access to the Services, Software, Information and the Website(s) and these Terms and Conditions, unless expressly provided otherwise, these Terms and Conditions shall prevail. In the event of there being a discrepancy between the English language version of these Terms and Conditions and any other language version, the English language version will prevail and the rights and obligations of any party under the Terms and Conditions and the House Betting Rules shall be construed solely by reference to the English language version."
+      },
+      "force-majeure": {
+        "title": "Force Majeure",
+        "details": "If 11ic fails or is in delay with the performance of any obligation under these Terms and Conditions due to the occurrence of events of whatever nature which are beyond 11ic's control, including, but not limited to: an Act of God, changes in applicable laws or regulations, action or inaction of governmental, civil or military authority, court orders, act of terrorism, lightning or fire, strike, lockout or other labour dispute, flood, draught, war, riot, theft, transmission or system failures, failure or interruption in the provision of telecommunications or broadband services, failure or shortage of power supplies or equipment, inclement weather, earthquake and natural disasters, such failure or delay does not constitute a breach of these Terms and Conditions. You agree to take all necessary action to minimise the consequences of any such cause."
+      },
+      "waiver": {
+        "title": "Waiver",
+        "details": "Failure by 11ic to enforce at any time any of the provisions hereof shall not be construed or deemed to be a waiver of 11ic's rights hereunder or in any way affect the validity of the whole or any part of these Terms and Conditions, or prejudice 11ic's rights to take further action."
+      },
+      "severability": {
+        "title": "Severability",
+        "details": "In the event that any or any part of the terms, conditions and provisions shall be determined by a competent authority to be invalid, unlawful or unenforceable to any extent, such term, condition or provision shall to that extent be severed from the remaining terms, conditions and provisions which shall continue to be valid and enforceable to the fullest extent permitted by law."
+      },
+      "governing-law-and-jurisdiction": {
+        "title": "Governing Law and Jurisdiction",
+        "details": "You agree that your access to and use of the Services, Website(s), Software, the Information and the interpretation of these Terms and Conditions shall be governed by and construed in accordance with the laws of Philippine . if commenced by you, shall be referred to and finally resolved by the Courts of the Philippine in accordance with the Court of the Philippine rules for the time being in force which rules are deemed to be incorporated by reference to this clause. The language of the arbitration shall be the English language. if commenced by 11ic, shall be either, at the sole option of 11ic: referred to and finally resolved by the courts in your jurisdiction of residence and/or activity as may be specified by 11ic; or before the courts of Philippine to which you agree to submit, provided always that such submission shall not affect the right of 11ic to take legal action or proceedings in any other jurisdiction."
+      },
+      "responsible-gambling": {
+        "title": "Responsible Gambling",
+        "details": "11ic shall provide a facility to allow a member to self-exclude themselves from their account(s) for periods typically of 7 days or 90 days. Once this change has been made to an account for a set period, it will not be possible for the account to be re-opened for any reason until after the set period has expired provided that this shall not prevent the remittance by us of any balance in your 11ic account or any portion thereof to you. During the period of opt-out, we will do all we can to prevent new accounts from being opened. If you wish to use this facility or would like further information on this, please contact us@11ic. Members may also request that their account be permanently closed. 11ic will act on an email from a member's registered email address to @11ic."
+      },
+      "progressive-jackpot-disclaimer": {
+        "title": "Progressive Jackpot disclaimer",
+        "details": "Progressive Jackpot begins at seed value once a player wins the whole jackpot or when a new jackpot starts. Certain jackpot seed amounts are funded by licensees."
+      },
+      "marketing-opt-in": {
+        "title": "Marketing Opt-in",
+        "details": "Opt in to get access to latest offers and promotions. you can opt out from our communications at any time. By choosing this option that includes text(including WhatsApp & telegram) messaging and emails on the registered id. you agree to receive transactional and reminder texts & emails to your mobile phone number & email id listed above. You understand and agree that the text messages and emails are sent via an autodialer and that you are not required to agree to the receipt of texts or email in order to be a 11ic member. Opt-out at any time. Text STOP to opt-out; HELP for help. Standard message/data rates may apply. You can also contact our customer support to opt-out of the email service."
+      }
+    },
+    "faq": {
+      "what-are-the-products-of-11ic": {
+        "title": "What are the products of 11ic?",
+        "details": "To create an account with 11ic, simply click on the \"Register\" button on our homepage and fill out the required information. You'll need to provide a valid email address, phone number, and create a secure password. Once you've completed the registration form, you'll receive a verification email to activate your account."
+      },
+      "what-payment-methods-do-you-accept": {
+        "title": "What payment methods do you accept?",
+        "details": "We accept various payment methods including bank transfers, credit/debit cards, e-wallets, and cryptocurrency. Specific payment options may vary by region. Please check the deposit/withdrawal section of your account for available methods in your area."
+      },
+      "how-long-do-withdrawals-take": {
+        "title": "How long do withdrawals take?",
+        "details": "Withdrawal processing times vary depending on the payment method chosen:\n  - E-wallets: Usually processed within 1-4 hours\n  - Bank transfers: 1-3 business days\n  - Credit/debit cards: 3-5 business days\n  - Cryptocurrency: Usually within 1-2 hours\n  \n  Please note that additional verification may be required for first-time withdrawals."
+      },
+      "is-my-personal-information-secure": {
+        "title": "Is my personal information secure?",
+        "details": "Yes, we take your privacy and security very seriously. We use advanced SSL encryption technology to protect all data transmitted between your device and our servers. We also comply with strict data protection regulations and never share your personal information with third parties without your consent."
+      },
+      "what-should-i-do-if-i-forget-my-password": {
+        "title": "What should I do if I forget my password?",
+        "details": "If you forget your password, click on the \"Forgot Password\" link on the login page. Enter your registered email address, and we'll send you instructions to reset your password. Follow the link in the email to create a new password for your account."
+      },
+      "how-can-i-contact-customer-support": {
+        "title": "How can I contact customer support?",
+        "details": "Our customer support team is available 24/7 to assist you. You can reach us through:\n  - Live chat on our website\n  - Email: support@11ic.com\n  - WhatsApp: +919178888888\n  - Telegram: @11ic\n  \n  We strive to respond to all inquiries as quickly as possible."
+      },
+      "are-there-any-age-restrictions": {
+        "title": "Are there any age restrictions?",
+        "details": "Yes, you must be at least 18 years old to create an account and participate in any gaming activities on our platform. We may request identity verification to confirm your age and identity as part of our responsible gaming policies."
+      },
+      "what-is-responsible-gaming": {
+        "title": "What is responsible gaming?",
+        "details": "Responsible gaming means playing within your means and maintaining control over your gaming activities. We provide various tools to help you manage your gaming, including deposit limits, session time limits, and self-exclusion options. If you feel you may have a gambling problem, please contact us or seek help from professional organizations."
+      }
+    },
+    "affiliate": {
+      "no-data-available": "No affiliate information available at the moment.",
+      "as-an-affiliate": {
+        "details": "As an Affiliate: you are responsible for promoting 11ic by implementing the advertising, banners and tracking URLs on your websites, e-mails or other communications. You will agree to register and maintain correct and truthful contact information with 11ic. You will present only content and topics on your site which are pre-approved in writing by 11ic. Content that is deemed unsuitable in 11ic's sole discretion will result in the affiliate agreement being terminated immediately. You will be solely responsible for the development, operation, and maintenance of your site and for all materials that appear on your site and at your own cost. For example, you will be solely responsible for ensuring that materials posted on your site are not libelous or otherwise illegal or shall infringe the IP rights of third parties. Since we do not have control over your own site, we disclaim all liability for these matters. Further, you will indemnify and hold us harmless from all claims, damages, and expenses (including, without limitation, attorney's fees) relating to the development, operation, and contents of your site. This provision on indemnification is without prejudice to our separate action or claim against you under applicable laws."
+      },
+      "affiliation-guidelines": {
+        "details": "Affiliation Guidelines: Only approved and properly tagged creative materials, supplied by us from time to time, may be used to promote 11ic. Advertorials and personal endorsements are allowed but all materials not designed by 11ic need to be approved in writing; such approval shall not be unreasonably withheld. You may not modify or use for any other purpose any IP rights, banners or other creative material supplied by us without the written prior consent of 11ic. All copyright or IP rights notices on any material supplied or approved by 11ic must remain and not be modified or eliminated. By agreeing to participate in the 11ic Affiliate Program, you are agreeing to download banners, text or promotional material and place it on your site, utilize it within e-mail, direct marketing using your affiliate URL or print. These methods are the only approved methods by which you may advertise 11ic's products and services. Banners and links may not be placed within unsolicited e-mail, unauthorized newsgroup postings, or chat rooms or through the use of \"bots\". Traffic generated illegally will not be counted and may result in the termination of your affiliate account with us. We will terminate this Agreement immediately if there is any form of spamming on your behalf or if you discredit 11ic through false advertising, written or uttered words. You shall not make any claims, representations, or warranties in connection with 11ic and you shall have no authority to and shall not bind 11ic to any obligations. Without our prior written approval, you will only use our approved banners and links and will not alter their appearance nor refer to us in any promotional materials. The appearance and syntax of the hypertext transfer links are designed and designated by us and constitute the only authorized and permitted representation of 11ic. You will not knowingly benefit from known or suspected traffic not generated in good faith whether or not it actually causes 11ic damage. Should fraudulent activity arise through a person directed to a site via your link, we retain the right to retract the commissions paid to you at any time. Our decision in this regard will be final and no correspondence will be entered into. We reserve the right to retain all amounts due to you under this Agreement if we have reasonable cause to believe that such traffic has been caused with your knowledge. Even if you have not knowingly generated such traffic, we reserve the right to withhold affiliate commissions with respect to such. Affiliates are prohibited from playing at any of the sportsbooks promoted by 11ic through their own affiliate link or from the affiliate link of an associate who shares all or part of the commission with the affiliate or a third party. This shall include any individuals or playing groups from which, an Affiliate receives compensation or remuneration from of any kind. In the event of violation of this section, 11ic and the respective website that has been played with shall have the right to void all play and eliminate any earned commissions applicable from such play and eliminate the affiliate from our Affiliate Program terminating this Agreement and void any future play at 11ic. You are not allowed to concurrently maintain both affiliate and referral relationships with 11ic. Violation of this provision grants 11ic the right to unilaterally terminate either or both affiliate and/or referral relationships. A referral relationship refers to a relationship with 11ic pursuant to 11ic's Refer-A-Friend Program (as set out and available in the Website."
+      },
+      "affiliate-tagging": {
+        "details": "Affiliate Tagging: You are only responsible for directing customers to the 11ic website. Only properly tagged customers can be assigned to an affiliate. Should an affiliate tag be improperly inserted into the affiliate site or not properly received by the 11ic web server the resulting customer registration and purchases will not be assigned to the affiliate. Therefore, it is the responsibility of the affiliate to ensure that all links are properly tagged."
+      },
+      "revenue-sharing-payment": {
+        "details": "Revenue Sharing & Payment: 11ic will pay out a revenue share on the Commissionable Earnings generated by each customer, as defined by 11ic Affiliate Program commission structure, provided that you maintain in your account as an affiliate, at least six (6) Active Wagering Members in any given calendar month. However, 11ic will reserves the right to withhold an affiliate commission payout in any particular month whether in part or in full, regardless of the 6 qualified active members, if the affiliate is found not to make an effort to promote 11ic more than 2 months as reflected in no NEW wagering members brought in; lack of 11ic banners on the affiliate website; and or lack of any other online and offline promotional activities seen. The commission shall be withheld until there are new wagering members seen in the affiliate account where 11bet shall have the sole discretion to release either a full or a partial of the withheld commission to the affiliate. Any commission that has been withheld for a period exceeding 6 months may be voided at the discretion of 11ic. Active Wagering Members refers to customers that reach a minimum wagering turnover amount equivalent to 5,000 rupees (PKR 5,000.00) each in any given calendar month. Commissionable Earnings are calculated as 11ic profit, less charge-back, complimentary money, free money offers and other incentives offered to the customer, derived from at least six (6) Active Wagering Members in a calendar month. Charge-back: A credit card holder discovers irregular transactions made on his/her Credit/Debit Card, which was not authorized by him/her. The credit card holder then requests his/her bank to reverse these charges. Charge backs relate to fraudulent use by a third party of the credit card holder's card or card number. \"India Gross Win\" is the total of all amounts bet by at least six (6) Active Wagering Members under your affiliate account in a calendar month, minus all amounts won by or paid to your Active Wagering Members. \"Charge-backs\" are amounts deducted when a customer that is a credit card holder discovers irregular unauthorized charge-backs made on the customer's Credit/Debit Card, and the credit card holder requests the bank to reverse these charges. Charge-backs may relate to, but are not limited to, fraudulent use by a third party of the credit card holder's card or card number. Should the player process a charge back, the disputed or charged-back revenue will be forfeited and therefore deducted from the total balance due to you for the current month. Should this deduction of the accumulated revenue exceed your current amount due, your balance will then revert to a negative balance, and you will have to earn revenue to cover the charge-back before you can start earning revenue again. A charge back will stay due until the revenue generated by your other players has covered the amount due. You acknowledge that 11ic can only pay out a percentage of their actual profits, not fraudulent revenue. \"Bonuses\" include complimentary money, free money offers, credits, sign-up bonuses, promotional amounts and other incentives credited to the account of customers. As customers have not actually purchased these amounts, 11ic cannot pay commissions on the same. Should you fail to be entitled to the Commissionable Earnings in accordance with Clauses 4.1, 4.2, and 4.3 above for failure to maintain at least six (6) Active Wagering Members in a given month, you will not generate any commission in the month and the related member's lost will not be brought forward to the following months. Commissionable earnings will be subject to commissions as calculated using the 11ic Affiliate Program commission structure in force from time to time. Negative earnings are carried forward to the next month. Should the affiliate close the month with a positive balance, payment will be issued if it meets the minimum requirements and commissions will be paid on the positive balance. The Commissionable Earnings of the affiliate calculated based on commission structure will be earned on all transactions that the customer undertakes with the merchant, as long as the affiliate remains a member of this affiliate program. Affiliates will not earn any commission from a member's turnover or win/loss resulting from or connected with any horse racing and casino wagers using the 11ic website."
+      },
+      "policies-confidentiality": {
+        "details": "Policies & Confidentiality: 11ic assume ownership of the customer at point of first contact with the customer. You, as affiliate, act as a referring agent for 11ic. We reserve the right to refuse customers (or to close their accounts) if necessary, to comply with any requirements we may periodically establish. By opening an account with a customer, that person or entity will become our Customers and, accordingly, all Client rules, policies, and operating procedures will apply to them. During the term of this Agreement, you may be entrusted with confidential information relating to the business, operations, or underlying technology of our affiliate program (including, for example, referral fees earned by you under the program). You agree not to disclose or use the confidential information to third persons or outside parties unless you have our prior written consent and that you will use the confidential information only for purposes necessary to further the purposes of this Agreement. Your obligations with respect to confidential information shall survive the termination of this Agreement."
+      },
+      "limited-license": {
+        "details": "Limited License: We hereby grant to you a personal, non-exclusive, non-transferable limited license, during the term of this Agreement, to use our trademarks (licensed, in turn by us, from their owner) solely in connection with the display of the banners on your site. By this Agreement, we grant you the non-exclusive right to direct customers to our sites and services, in accordance with the terms and conditions of this Agreement. This Agreement does not grant you an exclusive right or privilege to assist us in the provision of services arising from your referrals, and we reserve the right to contract with and obtain the assistance from other parties at any time to perform services of the same or similar nature as yours. You shall have no claims to referral fees or other compensation on business secured by or through persons or entities other than you. This license cannot be sub-licensed, assigned or otherwise transferred by you. Your right to use the trademarks is limited to and arises only out of this license to use the banners. You shall not assert the invalidity, unenforceability, or contest the ownership of the trademarks in any action or proceeding of whatever kind or nature, and shall not take any action that may prejudice our or our licensor's rights in the trademarks, render the same generic, or otherwise weaken their validity or diminish their associated goodwill. We reserve the right to revoke this license at any time and it shall have been deemed revoked at the termination of this Agreement, for whatsoever reason."
+      },
+      "legal-responsibility": {
+        "details": "Legal Responsibility: Ownership and content of our sites remain our respective properties and shall not be deemed to have been transferred to the affiliate through any act or omission in respect of the affiliation Agreement. Ownership, content and liability for affiliate sites are the sole responsibility of the affiliate. You will be solely responsible for the development, operation, and maintenance of your site and for all materials that appear on your site and at your own cost. You will indemnify and hold us harmless from all claims, damages, and expenses (including, without limitation, attorneys' fees) relating to the development, operation, maintenance, and contents of your site. This provision on indemnification is without prejudice to our separate action or claim against you under applicable laws. It is the affiliates' responsibility to follow the correct linking and tagging procedure to ensure new customer tracking and payment. Presentation of our banners & content on affiliate's site is the responsibility of affiliate. The affiliate must ensure that our content is presented in accordance with our prescriptions. Affiliate must ensure that any material posted on their site is legal and does not infringe copyright or violate any rights. We may modify any of the terms and conditions contained in this Agreement, at any time and in our sole discretion, by posting a change notice or a new agreement on our site. Modifications may include, for example, changes in the scope of available referral fees, fee schedules, payment procedures, and referral program rules. IF ANY MODIFICATION IS UNACCEPTABLE TO YOU, YOUR ONLY RECOURSE IS TO TERMINATE THIS AGREEMENT. YOUR CONTINUED PARTICIPATION IN THE PROGRAM FOLLOWING OUR POSTING OF A CHANGE NOTICE OR NEW AGREEMENT ON OUR SITE WILL CONSTITUTE BINDING ACCEPTANCE OF THE CHANGE. Spam - We do not condone Spam. Any form of Spam will result in your account being placed under review and all funds due being withheld pending an investigation into your account. You need to be aware that our clients are liable to incur expenses in dealing with Spam generated mail and these same expenses will be deducted from your account should our client seek recourse. In this instance the amount determined by the relative client will be fair and deemed final and acceptable based on good faith and such amount will be collectable by law and deemed to have been accepted by yourself as fair and reasonable and as agreed to by registration as an affiliate of 11ic. Should these expenses not be covered by funds in your account we reserve the right to investigate other alternative means for obtaining payment for example: should your account have generated purchasing accounts we will hold payment of commission for these accounts until such a time as the account for damages has been cleared. Should your account not be active and be generating profit through commission payments we reserve the right to demand payment from the account holder. You and we are independent contractors, and nothing in this Agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, that reasonably would contradict anything in this paragraph."
+      },
+      "miscellaneous": {
+        "details": "Miscellaneous: Assign-ability and Inurement You may not assign this Agreement, by operation of law or otherwise, without our prior written consent. Subject to that restriction, this Agreement will be binding on, inure to the benefit of, and enforceable against you and us and our respective successors and assigns. Non-Waiver Our failure to enforce your strict performance of any provision of this Agreement will not constitute a waiver of our right to subsequently enforce such provision or any other provision of this Agreement. NO MODIFICATIONS, ADDITIONS, DELETIONS OR INTERLINEATIONS OF THIS AGREEMENT ARE PERMITTED OR WILL BE RECOGNIZED BY US. None of our employees, officers or agents may verbally alter, modify or waive any provision of this Agreement. Remedies Our rights and remedies hereunder shall not be mutually exclusive, i.e., the exercise of one or more of the provisions of this Agreement shall not preclude the exercise of any other provision. You acknowledge, confirm, and agree that damages may be inadequate for a breach or a threatened breach of this Agreement and, in the event of a breach or threatened breach of any provision of this Agreement, the respective rights and obligations of the parties may be enforceable by specific performance, injunction, or other equitable remedy. Nothing contained in this Agreement shall limit or affect any of our rights at law, or otherwise, for a breach or threatened breach of any provision of this Agreement, it being the intent of this provision to make clear that our respective rights and obligations shall be enforceable in equity as well as at law or otherwise. Severability / Waiver Whenever possible, each provision of this Agreement shall be interpreted in such a manner as to be effective and valid under applicable law but, if any provision of this Agreement is held to be invalid, illegal or unenforceable in any respect, such provision will be ineffective only to the extent of such invalidity, or unenforceability, without invalidating the remainder of this Agreement or any provision hereof. No waiver will be implied from conduct or failure to enforce any rights and must be in writing to be effective."
+      },
+      "term-termination": {
+        "details": "Term & Termination: The term of this Agreement will begin when you download linking code and link it to our site and will be continuous unless and until either party notifies the other in writing that it wishes to terminate the Agreement, in which case this Agreement may be terminated immediately. TERMINATION IS AT WILL, FOR ANY REASON, BY EITHER PARTY. For purposes of notification of termination, delivery via e-mail is considered a written and immediate form of notification. In the event of termination of this Agreement: You must remove 11ic's banner/s from your site and disable any links from your site to 11ic. All rights and licenses given to you in this Agreement shall immediately terminate. You will be entitled only to those unpaid referral fees if any earned by You on or prior to the date of termination, save where termination is as a result of Your breach of terms of this Agreement, as detailed at 9.2.d below. We may withhold your final payment for a reasonable time to ensure that the correct amount is paid. If you have failed to fulfill your obligations and responsibilities, we will not pay you the referral fees otherwise owing to you on termination. We may withhold your final payment for a reasonable time to ensure that the correct amount is paid. If we continue to permit activity (generation of revenue) from customers after termination, this will not constitute a continuation or renewal of this Agreement or a waiver of termination. You will return to us any confidential information and all copies of it in your possession, custody and control and will cease all uses of any trade names, trademarks, service marks, logos and other designations of the merchants. You and we will be released from all obligations and liabilities to each other occurring or arising after the date of such termination, except with respect to those obligations that by their nature are designed to survive termination, as set out in this Agreement. Termination will not relieve you from any liability arising from any breach of this Agreement, which occurred prior to termination. WE MAY TERMINATE THIS AGREEMENT IF WE DETERMINE (IN OUR SOLE DISCRETION) THAT YOUR SITE IS UNSUITABLE. Unsuitable sites may include those that: are aimed at children, promote sexually explicit materials, promote violence, promote discrimination based on race, sex, religion, nationality, disability, sexual orientation, or age, promote illegal activities, or violate intellectual property rights."
+      },
+      "relationship-of-parties": {
+        "details": "Relationship of Parties: You and we are independent contractors, and nothing in this agreement will create any partnership, joint venture, agency, franchise, sales representative, or employment relationship between the parties. You will have no authority to make or accept any offers or representations on our behalf. You will not make any statement, whether on your site or otherwise, to contradict anything in this paragraph or be reasonably deemed to contradict this paragraph."
+      },
+      "indemnity": {
+        "details": "Indemnity: You hereby agree to indemnify and hold harmless 11ic , the entities it represents and affiliates, and 11ic directors, officers, employees, agents, shareholders, partners, members and other owners, against any and all claims, actions, demands, liabilities, losses, damages, judgments, settlements, expenses (including reasonable attorneys' fees), and costs (any or all of the foregoing hereinafter referred to as \"Losses\") insofar as such Losses (or actions in respect thereof) arise out of or are based on (i) any claim that our use of the Affiliate Trademarks infringes on any trademark, trade name, service mark, copyright, license, intellectual property, or other proprietary right of any third party, (ii) any misrepresentation of a representation or warranty or breach of a covenant and agreement made by you herein, (iii) the development, operation, maintenance and content of Your Site and products and services offered from Your Site, or (iv) any claim related to Your Site, including, without limitation, content therein not attributable to us."
+      },
+      "disclaimers": {
+        "details": "Disclaimers: We make no express or implied warranties or representations with respect to the referral program or referral fee payment arrangements (including, without limitation, their functionality, warranties of fitness, merchantability, legality, non-infringement, or any implied warranties arising out of a course of performance, dealing, or trade usage). In addition, we make no representation that the operation of our site will be uninterrupted or error-free and will not be liable for the consequences of any interruptions or errors."
+      },
+      "limitation-of-liability": {
+        "details": "Limitation of Liability: We will not be liable for indirect, special, or consequential damages (or any loss of revenue, profits, or data) arising in connection with this Agreement or the referral program, even if we have been advised of the possibility of such damages. Further, our aggregate liability arising with respect to this Agreement and the Program will not exceed the total commissions paid or payable to you under this Agreement. Nothing in this Agreement shall be construed to provide any rights, remedies or benefits to any person or entity not a party to this Agreement. Our obligations under this Agreement do not constitute personal obligations of our directors, officers or shareholders. Any liability arising under this Agreement shall be satisfied solely from the referral fee generated and is limited to direct damages."
+      },
+      "independent-investigation": {
+        "details": "Independent Investigation: You acknowledge that you have read this agreement and agree to all its terms and conditions. You understand that we may at any time (directly or indirectly) solicit customer referrals on terms that may differ from those contained in this agreement or operate web sites that are similar to or compete with your web site. You have independently evaluated the desirability of participating in this affiliate program and are not relying on any representation, guarantee, or statement other than as set forth in this agreement."
+      },
+      "governing-law-and-arbitration": {
+        "details": "Governing Law and Arbitration: This Agreement shall be governed by and construed in accordance with English law. Any dispute, controversy or claim arising out of or in connection with this Agreement shall be referred to and determined by a tribunal comprised of one arbitrator to be appointed by the Arbitration Centre. The seat of arbitration will be London, United Kingdom, the location determined by the Arbitration Centre, the language of the arbitration will be English and the regulations established by the Arbitration Centre shall govern the process. The arbitration tribunal will have the right to issue injunctions and its decision will be compulsory, final and strictly mandatory to the Parties who in turn waive any other jurisdiction or venue that may apply and agree to be subject to the arbitrary decision waiving any appeals of any type."
+      },
+      "in-witness-whereof": {
+        "details": "IN WITNESS WHEREOF: By having read, the terms and conditions, and acknowledging such in the affiliate sign-up form you agree to all the terms and conditions contained herein. 11ic reserves the right to withhold payment from any affiliate that violates any of the terms and conditions contained herein."
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": ["es2018"],
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext",
+    "skipLibCheck": true,
+  },
+  "include": [
+    "src/**/*",
+    "src/App.tsx",
+    "index.js",
+    "svg.d.ts",
+    "env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
