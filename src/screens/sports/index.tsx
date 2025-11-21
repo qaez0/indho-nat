@@ -20,8 +20,6 @@ import SportsSvg from '../../assets/common/content-icons/sports.svg';
 import { useGameLogin } from '../../hooks/useGameLogin';
 import { TabsParamList } from '../../types/nav';
 import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
-import { useAuthModal, useCurrentRoute } from '../../store/useUIStore';
-import { useUser } from '../../hooks/useUser';
 import React from 'react';
 
 export default function SportsPage() {
@@ -31,22 +29,15 @@ export default function SportsPage() {
   const { t } = useTranslation();
   const { initializeGame } = useGameLogin();
   const route = useRoute<RouteProp<TabsParamList, 'sports'>>();
-  const currentRoute = useCurrentRoute(state => state.currentRoute);
   const from = route.params?.from;
-  const { isAuthenticated } = useUser();
-  const openAuthModal = useAuthModal(state => state.openDialog);
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      openAuthModal();
-      return;
-    }
     if (from === 'bottom-tab') {
       initializeGame({
         url: '/Login/GameLogin/ob/lobby',
       } as ISlot);
     }
-  }, [from, route]);
+  }, [from, route, initializeGame]);
 
   const {
     state,
@@ -86,7 +77,7 @@ export default function SportsPage() {
           setActiveSports('all');
         }
       };
-    }, [currentRoute]),
+    }, [state.game_id, dispatch]),
   );
 
   const gameList = sportsGames?.data?.data || [];

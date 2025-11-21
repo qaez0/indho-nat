@@ -39,6 +39,11 @@ const fixedPositionsConfig = [
   { position: 2, gameId: '', gameName: 'Aviator' }, // Position 10 - Aviator
   { position: 5, gameId: '', gameName: '9Wicket' }, // Position 11 - 9Wicket (uses mock data if not found)
   { position: 8, gameId: '', gameName: 'The Chicken House' }, // Position 12 - The Chicken House
+
+  { position: 3, gameId: "", gameName: "Wild Bounty Showdown" },
+  { position: 6, gameId: "", gameName: "Fortune Rabbit" },
+  { position: 9, gameId: "", gameName: "Treasures of Aztec" },
+  
 ];
 
 // Helper function to shuffle an array
@@ -145,7 +150,13 @@ export const useHome = () => {
   }, [blogs]);
 
   const liveCasino = useMemo(() => {
-    const filtered = all.filter(g => isInCategory(g, 'LIVE CASINO', true));
+    const filtered = all.filter(g => 
+      isInCategory(g, 'LIVE CASINO', true) 
+      // //hide ezugi games
+      // &&
+      // !g.game_id?.toUpperCase().includes("EZUGI")
+      // //end of hide ezugi games
+    );
     return shuffle(filtered);
   }, [all]);
 

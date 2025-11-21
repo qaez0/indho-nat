@@ -14,7 +14,6 @@ import { useQuery } from '@tanstack/react-query';
 import FadeScaleView from './animations/FadeScaleView';
 import { Text, Modal, useTheme } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
-import Header from '../../components/layout/Header';
 import { useCustomDrawer } from '../../store/useUIStore';
 import DrawerContent from '../../components/layout/DrawerContent';
 import { useNavigation } from '@react-navigation/native';
@@ -28,9 +27,6 @@ const LuckySpinScreen = () => {
   const navigation = useNavigation<RootStackNav>();
   const insets = useSafeAreaInsets();
   const slideAnim = React.useRef(new Animated.Value(-300)).current;
-  
-  // Calculate header height: safe area top + header container height (50px)
-  const headerHeight = insets.top + 50;
 
   const query = useQuery({
     queryKey: ['lucky-spin-event-details-initial-check'],
@@ -93,7 +89,6 @@ const LuckySpinScreen = () => {
 
   return (
     <>
-      <Header />
       <ImageBackground
         source={require('../../assets/lucky-spin/background.png')}
         resizeMode="cover"
@@ -132,7 +127,7 @@ const LuckySpinScreen = () => {
           animationType="none"
           shouldUseContainer={false}
         >
-          <View style={[styles.drawerWrapper, { marginTop: headerHeight }]}>
+          <View style={[styles.drawerWrapper, { marginTop: insets.top }]}>
             <Animated.View
               style={[
                 styles.drawerContainer,

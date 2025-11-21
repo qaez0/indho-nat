@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "141269365940",
+    "project_id": "ic-game-indhot",
+    "storage_bucket": "ic-game-indhot.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141269365940:android:e16d8beb5ebd354fd613e1",
+        "android_client_info": {
+          "package_name": "com.rayyojoy.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoK4zqPK-NUfHESgC9O3WnluzEgTsm87g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

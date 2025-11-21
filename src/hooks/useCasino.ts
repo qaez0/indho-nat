@@ -53,6 +53,10 @@ export const useCasino = () => {
     }
 
     games.forEach((game: ISlot) => {
+      // Filter out ezugi games
+      // if (game.game_id?.toUpperCase().includes("EZUGI")) {
+      //   return;
+      // }//end of hide ezugi games
       try {
         const categories = JSON.parse(game.category);
 
@@ -113,15 +117,15 @@ export const useCasino = () => {
       title: 'SEXY',
       image: require('../assets/common/game-provider-logo/sexy.png'),
     },
+    {
+      title: 'EZUGI',
+      id: 'EZUGI',
+      image: require('../assets/common/game-provider-logo/ezugi.png'),
+    },
     // {
     //   id: 'BL',
     //   title: 'ICONIC 21',
     //   image: require('../assets/common/game-provider-logo/bl.png'),
-    // },
-    // {
-    //   title: 'EZUGI',
-    //   id: 'EZUGI',
-    //   image: require('../assets/common/game-provider-logo/ezugi.png'),
     // },
   ];
 

@@ -7,33 +7,28 @@ import Sports from '../../assets/top-nav/sports.svg';
 import Casino from '../../assets/top-nav/casino.svg';
 import Slots from '../../assets/top-nav/slots.svg';
 import Promotions from '../../assets/top-nav/promotion.svg';
-import VIP from '../../assets/top-nav/vip.svg';
 import Affiliate from '../../assets/top-nav/affiliate.svg';
 import { useAuthModal, useCurrentRoute } from '../../store/useUIStore';
 import { useTranslation } from 'react-i18next';
 import { BottomTabHeaderProps } from '@react-navigation/bottom-tabs';
+import VIP from '../../assets/top-nav/vip.svg';
 import { useUser } from '../../hooks/useUser';
-
 const HeaderTabs = ({ navigation }: BottomTabHeaderProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
   const currentRouteName = useCurrentRoute(state => state.currentRoute);
   const { isAuthenticated } = useUser();
   const openAuthModal = useAuthModal(state => state.openDialog);
+  const authRequiredRoutes: Array<keyof TabsParamList> = ['vip'];
 
   // Hide HeaderTabs when on lucky-spin or wheel page
-  if (
-    currentRouteName === 'lucky-spin' ||
-    currentRouteName === 'wheel' ||
-    currentRouteName === 'sponsor'
-  ) {
+  if (currentRouteName === 'lucky-spin' || currentRouteName === 'wheel'|| currentRouteName === 'sponsor') {
     return null;
   }
 
   const navigateTo = (path: keyof TabsParamList) => {
-    if (path === 'vip' && !isAuthenticated) {
+    if (!isAuthenticated && authRequiredRoutes.includes(path)) {
       openAuthModal();
-
       return;
     }
     navigation.navigate(path);
@@ -49,12 +44,12 @@ const HeaderTabs = ({ navigation }: BottomTabHeaderProps) => {
         return <Casino color={color} />;
       case 'slots':
         return <Slots color={color} />;
+        case 'vip':
+        return <VIP color={color} />;
       case 'promotions':
         return <Promotions color={color} />;
       case 'affiliate':
         return <Affiliate color={color} />;
-      case 'vip':
-        return <VIP color={color} />;
       default:
         return <Home color={color} />;
     }

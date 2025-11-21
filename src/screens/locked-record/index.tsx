@@ -59,9 +59,13 @@ const LockedDetailsScreen = () => {
     refetch();
   }, [activeTab, refetch]);
 
-  const formatTimeWithoutYear = (dateString?: string) => {
+  const formatTimeMinusThreeHours = (dateString?: string) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return dateString.replace?.('T', ' ') ?? dateString;
+    }
+    date.setHours(date.getHours() - 3);
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
@@ -116,7 +120,7 @@ const LockedDetailsScreen = () => {
             </View>
           ),
         },
-        { label: 'Date & Time', value: formatTimeWithoutYear(record.lock_time) },
+        { label: 'Date & Time', value: formatTimeMinusThreeHours(record.lock_time) },
       ];
     } else if (activeTab === 'promo') {
       details = [
@@ -148,7 +152,7 @@ const LockedDetailsScreen = () => {
             </View>
           ),
         },
-        { label: 'Date & Time', value: formatTimeWithoutYear(record.lock_time) },
+        { label: 'Date & Time', value:  formatTimeMinusThreeHours(record.lock_time) },
       ];
     }
 

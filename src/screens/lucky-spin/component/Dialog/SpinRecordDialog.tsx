@@ -3,9 +3,15 @@ import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Modal, Text } from '@ui-kitten/components';
 import type { DialogProps } from '.';
 import type { IInviteRecord, ISpinRecord } from '../../../../types/envelope';
+import { useTranslation } from 'react-i18next';
 
-const formatDate = (dateString: string) => {
+const formatDate = (dateString?: string) => {
+  if (!dateString) return 'N/A';
   const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) {
+    return dateString.replace?.('T', ' ') ?? dateString;
+  }
+  date.setHours(date.getHours() - 3);
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   const hours = String(date.getHours()).padStart(2, '0');
@@ -23,6 +29,7 @@ const SpinRecordDialog = ({
   spinRecord: ISpinRecord[];
   inviteRecord: IInviteRecord[];
 }) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<'spin' | 'invitation'>(
     'invitation',
   );
@@ -49,7 +56,7 @@ const SpinRecordDialog = ({
                 activeTab !== 'invitation' && styles.tabInactive,
               ]}
             >
-              Invitation
+              {t('lucky-spin.spin-record.invitation')}
             </Text>
             <Text
               onPress={() => handleSwitchTab('spin')}
@@ -58,7 +65,7 @@ const SpinRecordDialog = ({
                 activeTab !== 'spin' && styles.tabInactive,
               ]}
             >
-              SpinRecord
+              {t('lucky-spin.spin-record.spin-record')}
             </Text>
           </View>
           <TouchableOpacity onPress={onClose}>
@@ -70,9 +77,13 @@ const SpinRecordDialog = ({
           {item.length > 0 ? (
             <Fragment>
               <View style={styles.headerCols}>
-                <Text style={styles.headerColText}>Date Time</Text>
                 <Text style={styles.headerColText}>
-                  {activeTab === 'spin' ? 'Amount' : 'Friends'}
+                  {t('lucky-spin.spin-record.date-time')}
+                </Text>
+                <Text style={styles.headerColText}>
+                  {activeTab === 'spin'
+                    ? t('lucky-spin.spin-record.amount')
+                    : t('lucky-spin.spin-record.friends')}
                 </Text>
               </View>
               <ScrollView>
@@ -95,7 +106,9 @@ const SpinRecordDialog = ({
               </ScrollView>
             </Fragment>
           ) : (
-            <Text style={styles.noRecords}>No Records</Text>
+            <Text style={styles.noRecords}>
+              {t('lucky-spin.spin-record.no-records')}
+            </Text>
           )}
         </View>
       </View>

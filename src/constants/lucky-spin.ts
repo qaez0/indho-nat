@@ -1,5 +1,41 @@
 import { imageHandler } from "../utils/image-url";
 
+export const getInvitationCards = (t: (key: string) => string) => {
+  return [
+    {
+      text: t("lucky-spin.invitation-cards.card1"),
+      src: imageHandler(
+        "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/c11bet-invitefriends-webp/210 "
+      ),
+    },
+    {
+      text: t("lucky-spin.invitation-cards.card2"),
+      src: imageHandler(
+        "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/c11bet-invitefriends1-webp/210 "
+      ),
+    },
+    {
+      text: t("lucky-spin.invitation-cards.card3"),
+      src: imageHandler(
+        "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/c11bet-invitefriends2-webp/210 "
+      ),
+    },
+    {
+      text: t("lucky-spin.invitation-cards.card4"),
+      src: imageHandler(
+        "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/c11bet-invitefriends3-webp/210 "
+      ),
+    },
+    {
+      text: t("lucky-spin.invitation-cards.card5"),
+      src: imageHandler(
+        "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/c11bet-invitefriends4-webp/210 "
+      ),
+    },
+  ];
+};
+
+// Keep the old export for backward compatibility (defaults to Urdu)
 export const invitationCard = [
   {
     text: "11ic میں شامل ہو اور 1000 روپے کا مفت بونس لو! بغیر ڈپازٹ کے! ایونٹ کھیلوں اور یہ 1000 روپے نکال بھی سکتے ہو! موقع مت گنواؤ!",

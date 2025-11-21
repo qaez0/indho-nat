@@ -1,5 +1,6 @@
 {
   "common-terms": {
+    "vip": "VIP",
     "home": "Home",
     "slots": "Slots",
     "deposit": "Deposit",
@@ -41,8 +42,7 @@
     "quit": "Quit",
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "add-new-account": "Add New Account",
-    "vip": "VIP"
+    "add-new-account": "Add New Account"
   },
   "validation": {
     "errors": {
@@ -871,6 +871,22 @@
     }
   },
   "lucky-spin": {
+    "please-wait": "Please Wait",
+    "current-total-amount": "Current Total Amount",
+    "cash-out": "CASH OUT",
+    "countdown": "Countdown",
+    "withdraw-money-over": "Withdraw money over PKR 1000",
+    "invite-to-earn-spin": "INVITE TO EARN SPIN",
+    "next-free-spin": "Next FREE SPIN",
+    "spin": "SPIN",
+    "spin-record": {
+      "invitation": "Invitation",
+      "spin-record": "Spin Record",
+      "date-time": "Date Time",
+      "amount": "Amount",
+      "friends": "Friends",
+      "no-records": "No Records"
+    },
     "rules": {
       "title": "Active Rules",
       "items": [
@@ -882,6 +898,13 @@
         "The bonus must be rolled over once before it can be withdrawn.",
         "The invitee must verify their phone number, register using the inviter's referral link, and must not have a duplicate IP address to qualify for the referral."
       ]
+    },
+    "invitation-cards": {
+      "card1": "Join 11ic and get 1000 rupees FREE bonus! No deposit required! Play games and you can withdraw this 1000 rupees too! Don't miss this opportunity!",
+      "card2": "Slots did amazing today! Got such a big win in one spin that I still can't believe it! Everyone's day is made on 11ic! Today could be yours!",
+      "card3": "I was just playing to pass time... and hit the jackpot on slots! 💰11ic really paid out! Now it's your turn to win!",
+      "card4": "Just click on this, register, and get the free 1000 bonus like me!",
+      "card5": "100% real money app, with 1000 rupees free bonus for limited time only, I've already got it, you get it too!"
     }
   },
   "sponsor": {

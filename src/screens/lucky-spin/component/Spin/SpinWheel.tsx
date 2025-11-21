@@ -14,6 +14,7 @@ import type { Reward } from '.';
 import { useCountdownFormattedHours } from '../../utils/time';
 import { useLuckySpin } from '../../useLuckySpin';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTranslation } from 'react-i18next';
 // import { toast } from "sonner"; // commented: web-only
 // import { imageHandler } from "../../../../utils/image-url"; // commented: web-only
 
@@ -48,6 +49,7 @@ const SpinWheel = ({
   totalSpinLeft,
   eventEndTime,
 }: SpinWheelProps) => {
+  const { t } = useTranslation();
   const remainingTime = useCountdownFormattedHours(eventEndTime);
 
   return (
@@ -59,7 +61,7 @@ const SpinWheel = ({
           resizeMode="cover"
         />
         <View style={styles.countdownPill}>
-          <Text style={styles.countdownText}>Countdown {remainingTime}</Text>
+          <Text style={styles.countdownText}>{t('lucky-spin.countdown')} {remainingTime}</Text>
         </View>
       </View>
 
@@ -90,13 +92,13 @@ const SpinWheel = ({
               //   textShadowOffset: { width: 3, height: 3 },
               // }}
             >
-              INVITE TO EARN SPIN
+              {t('lucky-spin.invite-to-earn-spin')}
             </Text>
           </LinearGradient>
         </TouchableOpacity>
         <View style={styles.nextFreeSpinWrapper}>
           <Text category="c2" style={styles.nextFreeSpinText}>
-            Next FREE SPIN {remainingTime}
+            {t('lucky-spin.next-free-spin')} {remainingTime}
           </Text>
         </View>
       </LinearGradient>
@@ -107,6 +109,7 @@ const SpinWheel = ({
 export default SpinWheel;
 
 const SpinWheelUI = ({ onWin, totalSpinLeft }: SpinWheelUIProps) => {
+  const { t } = useTranslation();
   const [isSpinning, setIsSpinning] = useState(false);
   const rotation = useRef(new Animated.Value(0)).current;
   const [rotationDegree, setRotationDegree] = useState(0);
@@ -242,7 +245,7 @@ const SpinWheelUI = ({ onWin, totalSpinLeft }: SpinWheelUIProps) => {
         />
         <View style={[styles.spinButtonLabelContainer, { top: labelTop }]}>
           <Text category="c2" style={styles.spinLabel}>
-            SPIN
+            {t('lucky-spin.spin')}
           </Text>
           <Text
             category="h6"

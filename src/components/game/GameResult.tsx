@@ -23,8 +23,6 @@ const GameResult = ({
   pageSize,
 }: IGameRes) => {
   const { width: screenWidth } = Dimensions.get('window');
-
-  console.log(data)
   const containerPadding = 15 * 2;
   const gap = 8;
   const minCardsPerRow = 3;
@@ -59,7 +57,7 @@ const GameResult = ({
         </View>
       );
     }
-    if (data?.length === 0) {
+    if (data.length === 0) {
       return (
         <View style={styles.emptyContainer}>
           <Text category="p1">No games found</Text>
@@ -70,12 +68,12 @@ const GameResult = ({
   };
   return (
     <View style={{ flex: 1 }} key={`pagination-${totalPage}-${currentPage}`}>
-      {data?.length === 0 ? (
+      {data.length === 0 ? (
         <SkeletonPlaceholderUI />
       ) : (
         <View style={styles.container}>
           <View style={[styles.gridContainer]}>
-            {data?.map((game, index) => (
+            {data.map((game, index) => (
               <GameCard
                 key={index}
                 {...game}

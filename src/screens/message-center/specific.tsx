@@ -62,7 +62,7 @@ const MessageCenterSpecificScreen = () => {
           {displayTitle}
         </Text>
         <Text category="c2" style={{ color: '#ffffff60' }}>
-          {detail?.create_time}
+          { detail?.create_time?.replace?.('T', ' ') ?? ''}
         </Text>
       </View>
       <Text category="p2" style={{ color: '#ffffff80' }}>

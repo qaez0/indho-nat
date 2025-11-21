@@ -37,8 +37,6 @@ const GameScreen = () => {
     return () => subscription?.remove();
   }, [setIsLandscape]);
 
-
-  console.log(gameUrl)
   const handlePopoverAction = (action: 'deposit' | 'quit') => {
     if (action === 'deposit') {
       navigation.navigate('in-game-deposit');

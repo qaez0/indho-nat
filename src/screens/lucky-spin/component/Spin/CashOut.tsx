@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Text } from '@ui-kitten/components';
+import { useTranslation } from 'react-i18next';
 
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
@@ -71,6 +72,7 @@ const CashOut = ({
   onRules,
   totalAmount,
 }: CashOutProps) => {
+  const { t } = useTranslation();
   const progressPercent = useMemo(() => {
     const percent = (totalAmount / 1000) * 100;
     return `${Math.min(Math.max(percent, 0), 100)}%`;
@@ -118,7 +120,7 @@ const CashOut = ({
             />
           </TouchableOpacity>
           <Text category="p1" style={styles.headerTitle}>
-            Current Total Amount
+            {t('lucky-spin.current-total-amount')}
           </Text>
           <TouchableOpacity onPress={onRules}>
             <Image
@@ -147,7 +149,7 @@ const CashOut = ({
             end={{ x: 0.5, y: 1 }}
             style={styles.cashoutGradient}
           >
-            <Text style={styles.cashoutLabel}>CASH OUT</Text>
+            <Text style={styles.cashoutLabel}>{t('lucky-spin.cash-out')}</Text>
           </LinearGradient>
         </TouchableOpacity>
 

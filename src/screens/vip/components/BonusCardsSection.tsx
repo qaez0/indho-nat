@@ -58,12 +58,12 @@ const BonusCardsSection: React.FC<BonusCardsSectionProps> = ({
       <View style={vipStyles.bonusCardsRow}>
         <BonusCard
           title={t('vip.weekly-cashback-bonus')}
-          percentage={`${weeklyCashback % 1 === 0 ? weeklyCashback : weeklyCashback?.toFixed(1)}%`}
+          percentage={`${weeklyCashback % 1 === 0 ? weeklyCashback : weeklyCashback.toFixed(1)}%`}
           background={vipBackground}
         />
         <BonusCard
           title={t('vip.extra-deposit-bonus')}
-          percentage={`${extraDepositBonus % 1 === 0 ? extraDepositBonus : extraDepositBonus?.toFixed(1)}%`}
+          percentage={`${extraDepositBonus % 1 === 0 ? extraDepositBonus : extraDepositBonus.toFixed(1)}%`}
           background={vipBackground}
         />
       </View>

@@ -33,8 +33,11 @@ export type TabsParamList = {
   sponsor: undefined;
   bonus: undefined;
   profile: undefined;
+  'lucky-spin': undefined;
+  'invite-friends': undefined;
   vip: undefined;
   kyc: undefined;
+  blog: undefined;
   'wallet-management': undefined;
   'locked-details': undefined;
    'betting-record': undefined;

@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import Logo from '../../assets/logo.svg';
 import { Fragment } from 'react/jsx-runtime';
-import { useMemo, useState, useCallback } from 'react';
-import { DrawerActions, useNavigation } from '@react-navigation/native';
+import { useMemo, useState, useCallback, useEffect } from 'react';
+import { DrawerActions, useNavigation, useNavigationState } from '@react-navigation/native';
 import { useUserStore } from '../../store/useUser';
 import Toast from 'react-native-toast-message';
 import HamburgerMenu from '../HamburgerMenu';
@@ -32,11 +32,31 @@ const Header = () => {
   const { isAuthenticated, balance, isLoading, invalidate, user } = useUser();
   const navigation = useNavigation<RootStackNav>();
   const theme = useTheme();
-  const currentRouteName = getTabLocation(navigation);
+  
+  // Get current route name reactively using navigation state
+  const navigationRouteName = useNavigationState(state => {
+    if (!state) return 'home';
+    return getTabLocation({ getState: () => state } as any);
+  });
+  
+  // Local state to track intended route for immediate UI update
+  const [intendedRoute, setIntendedRoute] = useState<string | null>(null);
+  
+  // Use navigation route name, but override with intended route if set
+  const currentRouteName = intendedRoute || navigationRouteName;
+  
+  // Reset intended route when navigation state catches up
   const currentRoute = useCurrentRoute(state => state.currentRoute);
   const openNotificationModal = useNotificationModal(s => s.openModal);
   const logout = useUserStore(state => state.logout);
   const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false);
+  
+  // Reset intended route when navigation state matches
+  useEffect(() => {
+    if (intendedRoute && intendedRoute === navigationRouteName) {
+      setIntendedRoute(null);
+    }
+  }, [intendedRoute, navigationRouteName]);
   const drawerState = useDrawerState(state => state.drawerState);
   const customDrawer = useCustomDrawer();
   const { t } = useTranslation();
@@ -96,44 +116,75 @@ const Header = () => {
     }, 3000);
   };
 
+  // Check if we're on any auth page
+  const isOnAuthPage = currentRouteName === 'login' || currentRouteName === 'register';
+
   const headerDetails = useMemo(
     () => [
       {
-        visibility: !isAuthenticated,
+        visibility: !isAuthenticated && currentRouteName !== 'login',
         content: (
-          <Fragment>
             <Button
               appearance="filled"
-              status={currentRouteName === 'login' ? 'success' : 'primary'}
-              onPress={() =>
+            status="primary"
+            style={[styles.authButton, isOnAuthPage ? styles.authButtonActive : null]}
+            onPress={() => {
+              // Hide button immediately
+              setIntendedRoute('login');
                 navigation.navigate('auth', {
                   screen: 'login',
-                })
-              }
+              });
+            }}
+          >
+            {(evaProps: any) => (
+              <Text
+                {...evaProps}
+                style={[evaProps?.style, isOnAuthPage ? styles.authButtonTextActive : null]}
             >
               {t('common-terms.login')}
+              </Text>
+            )}
             </Button>
+        ),
+      },
+      {
+        visibility: !isAuthenticated && currentRouteName !== 'register',
+        content: (
             <Button
               appearance="filled"
-              status={currentRouteName === 'register' ? 'success' : 'primary'}
-              onPress={() =>
+            status="primary"
+            style={[styles.authButton, isOnAuthPage ? styles.authButtonActive : null]}
+            onPress={() => {
+              // Hide button immediately
+              setIntendedRoute('register');
                 navigation.navigate('auth', {
                   screen: 'register',
                   params: { invite_code: undefined },
-                })
-              }
+              });
+            }}
+          >
+            {(evaProps: any) => (
+              <Text
+                {...evaProps}
+                style={[evaProps?.style, isOnAuthPage ? styles.authButtonTextActive : null]}
             >
               {t('common-terms.register')}
+              </Text>
+            )}
             </Button>
-          </Fragment>
         ),
       },
       {
         visibility: isAuthenticated,
         content: (
           <View style={styles.containerBalance}>
-            <TouchableOpacity onPress={() => invalidate('balance')}>
-              <SpinningIcon isLoading={isLoading.balance}>
+            <TouchableOpacity
+              onPress={() => {
+                invalidate('panel-info');
+                invalidate('balance');
+              }}
+            >
+              <SpinningIcon isLoading={isLoading.panelInfo || isLoading.balance}>
                 <Feather name="refresh-ccw" size={16} color={'gray'} />
               </SpinningIcon>
             </TouchableOpacity>
@@ -201,10 +252,13 @@ const Header = () => {
       isAuthenticated,
       navigation,
       currentRouteName,
+      isOnAuthPage,
       balance,
       invalidate,
       isLoading.balance,
       user?.unread_message_count,
+      isLoading.panelInfo,
+      isLoading.balance,
       openNotificationModal,
       handleLanguageDropdownToggle,
       t,
@@ -332,6 +386,15 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  authButton: {
+    // Base styles
+  },
+  authButtonActive: {
+    backgroundColor: '#F3B867',
+  },
+  authButtonTextActive: {
+    color: '#000',
   },
 });
 

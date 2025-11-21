@@ -62,7 +62,7 @@ const NotificationItem = ({
       </Text>
       {purpose === 'modal' && (
         <Text category="c2" style={{ color: '#FFFFFF40' }}>
-          {convertToPakistanTime(create_time)}
+          { create_time?.replace?.('T', ' ') ?? ''}
         </Text>
       )}
       {!is_seen && <View style={styles.isReadDot} />}

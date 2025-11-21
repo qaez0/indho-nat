@@ -10,6 +10,7 @@ import {
 import { Text } from '@ui-kitten/components';
 import FadeSlideInView from '../../animations/FadeSlideInView';
 import LinearGradient from 'react-native-linear-gradient';
+import { useTranslation } from 'react-i18next';
 
 interface CongratulationsProps {
   onClickWithdraw: () => void;
@@ -24,6 +25,7 @@ const Congratulations = ({
   // eventStartTime,
   eventEndTime,
 }: CongratulationsProps) => {
+  const { t } = useTranslation();
   const remainingTime = useCountdownFormattedHours(eventEndTime);
   const { width: windowWidth } = useWindowDimensions();
   return (
@@ -46,7 +48,7 @@ const Congratulations = ({
         >
           <View style={styles.countdownPill}>
             <Text category="c2" style={styles.countdownText}>
-              Countdown {remainingTime}
+              {t('lucky-spin.countdown')} {remainingTime}
             </Text>
           </View>
 
@@ -60,7 +62,7 @@ const Congratulations = ({
               </Text>
               <View style={styles.withdrawHintPill}>
                 <Text category="c2" style={styles.withdrawHintText}>
-                  Withdraw money over PKR 1000
+                  {t('lucky-spin.withdraw-money-over')}
                 </Text>
               </View>
             </LinearGradient>

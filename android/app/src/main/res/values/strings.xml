@@ -2,4 +2,8 @@
     <string name="app_name">11ic Game</string>
     <string moduleConfig="true" name="CodePushServerUrl">https://api.revopush.org</string>
     <string moduleConfig="true" name="CodePushDeploymentKey">ciyVryTVNuWOq52vU0wR-0rYcdxWV1vwjp_5zx</string>
+    <string name="msg_token_fmt">FCM Token: %s</string>
+    <string name="default_notification_channel_id">fcm_default_channel</string>
+    <string name="default_notification_channel_name">Default Channel</string>
+    <string name="default_notification_channel_description">Default notification channel for push notifications</string>
 </resources>

@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView } from 'react-native';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSlots } from '../../hooks/useSlots';
 import RecommendedGames from '../../components/game/RecommendedGames';
@@ -24,7 +24,6 @@ const SlotsView = () => {
   const navigation =
     useNavigation<BottomTabNavigationProp<TabsParamList, 'slots'>>();
   const gameIdFromParams = route.params?.game_id;
-  const gameIdMostPlayedRules = ['cq9', 'JILI', 'SPRIBE', 'PG'];
   const {
     data: recomendedGames,
     isLoading: isLoadingRecomendedGames,
@@ -65,7 +64,7 @@ const SlotsView = () => {
         // Read params from navigation state directly to get the most up-to-date values
         // This bypasses any potential caching issues with route.params
         const navState = navigation.getState();
-        let currentGameIdFromParams: string | undefined = undefined;
+        let currentGameIdFromParams: string | undefined;
 
         // Navigate through the navigation state to find the slots route params
         try {
@@ -116,16 +115,15 @@ const SlotsView = () => {
     }, [navigation, route.params?.game_id, dispatch]),
   );
 
-  const mostPlayedGames = useMemo(
-    () =>
-      recomendedGames?.data?.data?.filter((game: ISlot) =>
-        gameIdMostPlayedRules.includes(game.game_id),
-      ),
-    [recomendedGames],
-  );
+  const mostPlayedGames = useMemo(() => {
+    const gameIdMostPlayedRules = ['cq9', 'JILI', 'SPRIBE', 'PG'];
+    return recomendedGames?.data?.data?.filter((game: ISlot) =>
+      gameIdMostPlayedRules.includes(game.game_id),
+    );
+  }, [recomendedGames]);
 
   const filteredSlotGames =
-    slotGames?.data?.data?.filter((game: ISlot) => game.game_id !== 'PG') || []; // end of hide pg games
+    slotGames?.data?.data?.filter((game: ISlot) => game.game_id !== 'EFG') || []; // end of hide efg games
 
   return (
     <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
@@ -145,7 +143,7 @@ const SlotsView = () => {
         initialFilterState={initialFilterState}
       />
       <GameResult
-        data={slotGames?.data?.data as ISlot[]}
+        data={filteredSlotGames as ISlot[]}
         totalPage={slotGames?.data?.totalItems || 0}
         currentPage={slotGames?.data?.currentPage || 0}
         pageSize={slotGames?.data?.pageSize || 0}

@@ -14,7 +14,8 @@ import QRCode from 'react-native-qrcode-svg';
 import type { DialogProps } from '.';
 import { useQuery } from '@tanstack/react-query';
 import { useLuckySpin } from '../../useLuckySpin';
-import { invitationCard } from '../../../../constants/lucky-spin';
+import { getInvitationCards } from '../../../../constants/lucky-spin';
+import { useTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 import Toast from 'react-native-toast-message';
@@ -177,6 +178,8 @@ const CardCarousel = ({
   inviteLink: string;
   viewShotRef: React.MutableRefObject<ViewShot | null>;
 }) => {
+  const { t } = useTranslation();
+  const invitationCard = getInvitationCards(t);
   const carouselRef = useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
   const { width: screenWidth } = Dimensions.get('window');

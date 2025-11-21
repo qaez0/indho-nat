@@ -62,11 +62,7 @@ export const RootRoutes: RouteConfig<
   { name: 'bonus', component: BonusScreen },
   { name: 'blog', component: BlogStack },
   { name: 'sponsor', component: SponsorScreen },
-  {
-    name: 'lucky-spin',
-    component: LuckySpinScreen,
-    options: { headerShown: false },
-  },
+  { name: 'lucky-spin', component: LuckySpinScreen },
   { name: 'invite-friends', component: InviteFriendsScreen },
 ];
 
@@ -94,6 +90,9 @@ export const TabRoutes: RouteConfig<
   { name: 'locked-details', component: LockedDetailsScreen },
   { name: 'vip', component: VipScreen },
   { name: 'kyc', component: KycScreen },
+  { name: 'blog', component: BlogStack },
+  { name: 'lucky-spin', component: LuckySpinScreen },
+  { name: 'invite-friends', component: InviteFriendsScreen },
 ];
 
 export const GameRoutes: RouteConfig<
@@ -154,6 +153,9 @@ export const HIDDEN_TABS = [
   'wallet-management',
   'vip',
   'kyc',
+  'blog',
+  'lucky-spin',
+  'invite-friends',
 ];
 
 export const HeaderTabs: (keyof TabsParamList)[] = [
@@ -164,5 +166,4 @@ export const HeaderTabs: (keyof TabsParamList)[] = [
   'vip',
   'promotions',
   'affiliate',
-
 ];

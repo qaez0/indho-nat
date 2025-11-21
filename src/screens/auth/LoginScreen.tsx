@@ -1,4 +1,3 @@
-import { TG_BOT_NAME } from '@env';
 import { useState, useEffect, useRef } from 'react';
 import {
   View,
@@ -39,20 +38,14 @@ import {
   UserIcon,
   PhoneIcon,
   PasswordIcon,
-  GoogleIcon,
-  TelegramIcon,
-  WhatsAppIcon,
-  FacebookIcon,
 } from '../../components/icons/SvgIcons';
 import { phoneLoginSchema, usernameLoginSchema } from '../../schemas/auth';
 import Toast from 'react-native-toast-message';
-import { RootStackNav, TabNav } from '../../types/nav';
+import { RootStackNav } from '../../types/nav';
 import { useNavigation } from '@react-navigation/native';
 import { IDevice } from '../../types/device';
 import { getBasicDeviceInfo } from '../../services/device.service';
 import ForgotPassDialog from './component/ForgotPassDialog';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import TelegramWebView from './component/TelegramWebView';
 import { useTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -61,11 +54,10 @@ export default function LoginScreen() {
   const navigation = useNavigation<RootStackNav>();
   const theme = useTheme();
   const setToken = useUserStore(state => state.setToken);
-  const [loginType, setLoginType] = useState<'username' | 'phone'>('username');
+  const [loginType, setLoginType] = useState<'username' | 'phone'>('phone');
   const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [telegramWebViewOpen, setTelegramWebViewOpen] = useState(false);
   const adjust_id = useUserStore(state => state.adjust_id);
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
@@ -195,7 +187,7 @@ export default function LoginScreen() {
     },
   });
 
-  const { mutateAsync: mutateSso, isPending: isSsoPending } = useMutation({
+  const { isPending: isSsoPending } = useMutation({
     mutationKey: ['ssoLogin'],
     mutationFn: async (
       payload: (ISsoLoginPayload | ITelegramLoginPayload) & IDevice,
@@ -267,55 +259,6 @@ export default function LoginScreen() {
       formUsername.handleSubmit(onSubmit, err => {
         console.error(err);
       })();
-    }
-  };
-  const handleSocial = (provider: 'whatsapp' | 'facebook') => {
-    if (provider === 'whatsapp') {
-      Toast.show({
-        type: 'error',
-        text1:
-          'Sorry for the inconvenience, WhatsApp login is not available yet!',
-      });
-    } else if (provider === 'facebook') {
-      Toast.show({
-        type: 'error',
-        text1:
-          'Sorry for the inconvenience, Facebook login is not available yet!',
-      });
-    }
-  };
-  const handleGoogleSSO = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const response = await GoogleSignin.signIn();
-
-      if (response?.type === 'cancelled') {
-        Toast.show({
-          type: 'error',
-          text1: 'Google login cancelled',
-        });
-        return;
-      }
-      const deviceInfo = await getBasicDeviceInfo();
-      const payload: ISsoLoginPayload = {
-        provider: 'google',
-        sso_id: response?.data?.user?.id ?? '',
-        email: response?.data?.user?.email ?? '',
-        name: response?.data?.user?.name ?? 'Unknown',
-        avatar: response?.data?.user?.photo ?? undefined,
-        access_token: response?.data?.idToken ?? '',
-        raw_provider_data: response?.data,
-        ...deviceInfo,
-      };
-      console.log('GOOGLE DATA', response);
-      mutateSso(payload);
-    } catch (error) {
-      console.error('Google Sign-In Error:', error);
-      Toast.show({
-        type: 'error',
-        text1: 'Google login failed',
-        text2: 'An unexpected error occurred.',
-      });
     }
   };
 
@@ -961,6 +904,7 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   bannerDrawer: {
+    marginTop: 20,
     height: 150,
     width: '100%',
     borderRadius: 14,

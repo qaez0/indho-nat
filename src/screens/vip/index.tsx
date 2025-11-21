@@ -16,6 +16,12 @@ export default function VipScreen() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const { user } = useUser();
   const levels = Object.values(user?.vip || {});
+  const safeIndex = Math.min(
+    Math.max(currentSlideIndex, 0),
+    HardCodedLevels.length - 1,
+  );
+  const fallbackLevel = { weekly: 0, extra: 0 };
+  const currentLevel = HardCodedLevels[safeIndex] || fallbackLevel;
 
   return (
     <ScrollView
@@ -27,9 +33,9 @@ export default function VipScreen() {
         setCurrentSlideIndex={setCurrentSlideIndex}
       />
       <BonusCardsSection
-        weeklyCashback={HardCodedLevels[currentSlideIndex]?.weekly}
-        extraDepositBonus={HardCodedLevels[currentSlideIndex]?.extra}
-        currentVipLevel={currentSlideIndex}
+        weeklyCashback={currentLevel.weekly}
+        extraDepositBonus={currentLevel.extra}
+        currentVipLevel={safeIndex}
       />
       <VipLevelsTable />
       <TermsSection />

@@ -50,7 +50,6 @@ export const useGameLogin = () => {
     _isReload: boolean = false,
     id?: string,
   ): Promise<InitStatus> => {
-    console.log('INTIALIZE', data)
     if (data.url === '' || data.url === null) {
       Toast.show({
         type: 'error',
@@ -87,7 +86,6 @@ export const useGameLogin = () => {
 
     try {
       openLoader(t('common-terms.game-loading'));
-      console.log
 
       const response = await apiRequest.get<IBaseResponse<string>>({
         path: data.url,
@@ -95,8 +93,6 @@ export const useGameLogin = () => {
           // baseUrlOverride: 'http://cap1.11ic.pk/capi',
         }),
       });
-
-      console.log(response)
       let game: string;
       if (response.data && response.data.startsWith('/capi')) {
         game = `http://cap1.11ic.pk${response.data}`;
@@ -104,7 +100,6 @@ export const useGameLogin = () => {
         game = response.data;
       }
 
-      console.log(game)
       if (data.url.includes('nw/lobby')) {
         Linking.openURL(game);
         return 'success';
@@ -123,7 +118,6 @@ export const useGameLogin = () => {
       navigation.navigate('game');
       return 'success';
     } catch (e: any) {
-      console.log(e)
       const errorMessage =
         JSON.parse(e.message).message || t('common-terms.something-went-wrong');
 

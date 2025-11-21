@@ -110,6 +110,21 @@ const TransactionRecordScreen = () => {
     }
   };
 
+  const formatTimeMinusThreeHours = (dateString?: string) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return dateString.replace?.('T', ' ') ?? dateString;
+    }
+    date.setHours(date.getHours() - 3);
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
+
   // Handle continue payment - retrieve payment URL from storage and open it
   const handleContinuePayment = async () => {
     try {
@@ -300,7 +315,7 @@ const TransactionRecordScreen = () => {
         <View style={styles.recordSummaryContent}>
           <View style={styles.recordLeft}>
             <Text style={styles.recordTime}>
-              {convertToPakistanTime(record.request_time, 'MM-DD HH:MM:ss')}
+              {formatTimeMinusThreeHours(record.request_time)}
             </Text>
             <Text style={styles.recordTypeLabel}>
               Type: <Text style={styles.recordTypeValue}>Deposit</Text>
@@ -363,7 +378,7 @@ const TransactionRecordScreen = () => {
             <Text style={styles.detailLabel}>Request Time:</Text>
             <View style={styles.detailValueContainer}>
               <Text style={styles.detailValue}>
-                {convertToPakistanTime(record.request_time, 'MM-DD HH:MM:ss')}
+                {formatTimeMinusThreeHours(record.request_time)}
               </Text>
             </View>
           </View>
@@ -434,7 +449,7 @@ const TransactionRecordScreen = () => {
         <View style={styles.recordSummaryContent}>
           <View style={styles.recordLeft}>
             <Text style={styles.recordTime}>
-              {convertToPakistanTime(record.request_time, 'MM-DD HH:MM:ss')}
+              {formatTimeMinusThreeHours(record.request_time)}
             </Text>
             <Text style={styles.recordTypeLabel}>
               Type: <Text style={styles.recordTypeValue}>Withdrawal</Text>
@@ -514,12 +529,9 @@ const TransactionRecordScreen = () => {
           <View style={styles.detailRow}>
             <Text style={styles.detailLabel}>Request Time:</Text>
             <View style={styles.detailValueContainer}>
-              <Text style={styles.detailValue}>
-                {convertToPakistanTime(
-                  record.request_time,
-                  'YYYY-DD-MM HH:MM:ss',
-                )}
-              </Text>
+            <Text style={styles.detailValue}>
+              {formatTimeMinusThreeHours(record.request_time)}
+            </Text>
             </View>
           </View>
           <View style={styles.detailRow}>
@@ -553,7 +565,7 @@ const TransactionRecordScreen = () => {
         <View style={styles.recordSummaryContent}>
           <View style={styles.recordLeft}>
             <Text style={styles.recordTime}>
-              {convertToPakistanTime(record.review_time || record.request_time, 'MM-DD HH:MM:ss')}
+              {formatTimeMinusThreeHours(record.review_time)}
             </Text>
             <Text style={styles.recordTypeLabel}>
               Type: <Text style={styles.recordTypeValue}>Bonus</Text>
@@ -616,11 +628,8 @@ const TransactionRecordScreen = () => {
           <View style={styles.detailRow}>
             <Text style={styles.detailLabel}>Review Time:</Text>
             <View style={styles.detailValueContainer}>
-              <Text style={styles.detailValue}>
-                {convertToPakistanTime(
-                  record.review_time || record.request_time,
-                  'MM-DD HH:MM:ss'
-                )}
+            <Text style={styles.detailValue}>
+                {formatTimeMinusThreeHours(record.review_time)}
               </Text>
             </View>
           </View>

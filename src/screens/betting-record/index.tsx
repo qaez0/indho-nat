@@ -74,8 +74,13 @@ const BettingRecordScreen = () => {
     bettingQuery.refetch();
   };
 
-  const formatTimeWithoutYear = (dateString: string) => {
+  const formatTimeMinusThreeHours = (dateString: string) => {
+    if (!dateString) return 'N/A';
     const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return dateString.replace?.('T', ' ') ?? dateString;
+    }
+    date.setHours(date.getHours() - 3);
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
@@ -106,7 +111,7 @@ const BettingRecordScreen = () => {
         label: 'Bet Amount',
         value: `${record.amount.toLocaleString()} ${record.currency}`,
       },
-      { label: 'Bet Time', value: formatTimeWithoutYear(record.bet_time) },
+      { label: 'Bet Time', value: formatTimeMinusThreeHours(record.bet_time) },
       { label: 'Betting Slip', value: record.bet_serial, isCopyable: true },
     ];
 
@@ -271,7 +276,7 @@ const BettingRecordScreen = () => {
                     <View style={styles.recordSummaryContent}>
                       <View style={styles.recordLeft}>
                         <Text style={styles.recordTime}>
-                          {formatTimeWithoutYear(record.bet_time)}
+                          {formatTimeMinusThreeHours(record.bet_time)}
                         </Text>
                         <Text style={styles.recordTypeLabel}>
                           Type:{' '}
