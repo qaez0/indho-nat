@@ -27,7 +27,9 @@ import { useEffect, useMemo } from 'react';
 import { Toast } from 'react-native-toast-message/lib/src/Toast';
 import { useUser } from '../../../hooks/useUser';
 import { useNavigation } from '@react-navigation/native';
-import { RootStackNav, TabNav } from '../../../types/nav';
+import { 
+  // RootStackNav,
+  TabNav } from '../../../types/nav';
 
 interface ITransactionInfo {
   overall_turnover_amount: number;
@@ -163,7 +165,6 @@ const Withdraw = ({
 
   const systemCheck = async () => {
     const needsWalletPass = playerInfo.has_wallet_pass === false;
-    const needsPhoneVerification = playerInfo.phone_validation === false;
 
     if (needsWalletPass) {
       await new Promise<void>(resolve => {
@@ -192,36 +193,6 @@ const Withdraw = ({
         });
       });
     }
-
-    if (needsPhoneVerification) {
-      await new Promise<void>(resolve => {
-        const openPhoneVerification = () => {
-          openDialog({
-            title: '🔒 Mobile Verification Required',
-            content: 'otp_verify',
-            externalValue: {
-              phone: playerInfo.phone,
-              device: 1,
-            },
-            onSuccess: () => {
-              refetch();
-              Toast.show({
-                type: 'success',
-                text1: 'Phone number verified successfully',
-              });
-              resolve();
-              form.reset();
-            },
-          });
-        };
-
-        if (needsWalletPass) {
-          setTimeout(openPhoneVerification, 200);
-        } else {
-          openPhoneVerification();
-        }
-      });
-    }
   };
 
   const onSubmit = () => {
@@ -238,8 +209,7 @@ const Withdraw = ({
       if (
         form.formState.dirtyFields.amount &&
         !form.formState.errors.amount &&
-        playerInfo.has_wallet_pass === true &&
-        playerInfo.phone_validation === true
+        playerInfo.has_wallet_pass === true
       ) {
         openDialog({
           content: 'withdraw_req',

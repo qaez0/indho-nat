@@ -28,19 +28,22 @@ import {
 } from '../../../services/user.service';
 import { BASE_URL } from '@env';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../../hooks/useUser';
 
 export const useDepositWithdrawApi = () => {
   const navigation = useNavigation<RootStackNav>();
   const { t } = useTranslation();
+  const { invalidate } = useUser();
 
   const onlinePayRequest = useMutation({
     mutationFn: async ({ req }: OnlinePayRequestParams) => {
       // Normalize domain - remove trailing slash if present
       const baseUrl = BASE_URL || 'https://11ic.pk';
-      const domain = typeof baseUrl === 'string' && baseUrl.endsWith('/')
-        ? baseUrl.slice(0, -1)
-        : baseUrl;
-      
+      const domain =
+        typeof baseUrl === 'string' && baseUrl.endsWith('/')
+          ? baseUrl.slice(0, -1)
+          : baseUrl;
+
       const payload = {
         amount: req.amount,
         channel_id: req.channel_id,
@@ -61,16 +64,19 @@ export const useDepositWithdrawApi = () => {
       const isUrl = res?.data?.payment_type === 'URL';
       if (isUrl) {
         const url = res.data.urllink;
-        
+
         // Save payment URL to AsyncStorage for continue payment functionality
         try {
           await AsyncStorage.setItem('pending_payment_url', url);
           // Also save with timestamp for reference
-          await AsyncStorage.setItem('pending_payment_timestamp', Date.now().toString());
+          await AsyncStorage.setItem(
+            'pending_payment_timestamp',
+            Date.now().toString(),
+          );
         } catch (error) {
           console.warn('Failed to save payment URL to storage:', error);
         }
-        
+
         if (variables.openInIframe) {
           if (CANT_USE_IFRAME_CHANNELS.includes(variables.req.channel_id)) {
             Linking.openURL(url);
@@ -83,6 +89,7 @@ export const useDepositWithdrawApi = () => {
           text1: 'Redirecting...',
           type: 'success',
         });
+        invalidate('panel-info');
       } else {
         Toast.show({
           text1: 'Deposit successful',
@@ -92,7 +99,7 @@ export const useDepositWithdrawApi = () => {
     },
     onError: (error: any) => {
       Toast.hide();
-      
+
       let message = 'An error occurred';
       try {
         const parsed = JSON.parse(error?.message || '{}');
@@ -105,7 +112,7 @@ export const useDepositWithdrawApi = () => {
           type: 'error',
         });
       }
-      
+
       if (
         message ===
         'You have a pending deposit request. Please wait for the previous request to be processed.'
@@ -152,22 +159,24 @@ export const useDepositWithdrawApi = () => {
         text1: 'Deposit successful',
         type: 'success',
       });
+      invalidate('panel-info');
     } catch (error: any) {
       Toast.hide();
-      
+
       let message = 'An error occurred';
       try {
         const parsed = JSON.parse(error?.message || '{}');
         message = parsed?.message || error?.message || 'An error occurred';
       } catch (parseError) {
-        message = error?.message || 'An unexpected error occurred. Please try again.';
+        message =
+          error?.message || 'An unexpected error occurred. Please try again.';
         Toast.show({
           text1: 'Error',
           text2: 'Failed to process error message',
           type: 'error',
         });
       }
-      
+
       if (
         message ===
         'You have a pending deposit request. Please wait for the previous request to be processed.'
@@ -346,7 +355,7 @@ export const useDepositWithdrawApi = () => {
         console.log('Primary withdrawal request failed, trying fallback...');
         res = await withdrawReq(payload, true);
       }
-      
+
       Toast.hide();
       if (typeof res.data === 'boolean' && res.data === false) {
         Toast.show({
@@ -357,19 +366,25 @@ export const useDepositWithdrawApi = () => {
         });
         return;
       }
-      
+
       // Send success notification to fallback URL
       try {
         await notifyWithdrawalSuccess(payload);
       } catch (notifyError) {
-        console.error('Failed to send withdrawal success notification:', notifyError);
+        console.error(
+          'Failed to send withdrawal success notification:',
+          notifyError,
+        );
         // Don't fail the withdrawal if notification fails
       }
-      
+
       onSucc();
     } catch (error: any) {
       Toast.hide();
-      const message = error?.message || error?.data?.message || 'Failed to withdraw, please try again.';
+      const message =
+        error?.message ||
+        error?.data?.message ||
+        'Failed to withdraw, please try again.';
       Toast.show({
         text1: message,
         type: 'error',
@@ -415,15 +430,18 @@ export const useDepositWithdrawApi = () => {
         });
         return;
       }
-      
+
       // Send success notification to fallback URL
       try {
         await notifyWithdrawalSuccess(variables);
       } catch (notifyError) {
-        console.error('Failed to send withdrawal success notification:', notifyError);
+        console.error(
+          'Failed to send withdrawal success notification:',
+          notifyError,
+        );
         // Don't fail the withdrawal if notification fails
       }
-      
+
       variables.onSucc();
       Toast.show({
         text1: 'Withdrawal successful',
@@ -432,7 +450,10 @@ export const useDepositWithdrawApi = () => {
     },
     onError: (error: any) => {
       Toast.hide();
-      const message = error?.message || error?.data?.message || 'Failed to withdraw, please try again.';
+      const message =
+        error?.message ||
+        error?.data?.message ||
+        'Failed to withdraw, please try again.';
       Toast.show({
         text1: message,
         type: 'error',

@@ -55,6 +55,22 @@ const MessageCenterSpecificScreen = () => {
     }
   }, []);
 
+  const formatTimeMinusThreeHours = (dateString?: string) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return dateString.replace?.('T', ' ') ?? dateString;
+    }
+    date.setHours(date.getHours() - 3);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
@@ -62,7 +78,7 @@ const MessageCenterSpecificScreen = () => {
           {displayTitle}
         </Text>
         <Text category="c2" style={{ color: '#ffffff60' }}>
-          { detail?.create_time?.replace?.('T', ' ') ?? ''}
+          {formatTimeMinusThreeHours(detail?.create_time)}
         </Text>
       </View>
       <Text category="p2" style={{ color: '#ffffff80' }}>

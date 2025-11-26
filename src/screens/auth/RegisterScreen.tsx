@@ -351,7 +351,6 @@ export default function RegisterScreen() {
     })();
   };
 
-
   return (
     <LinearGradient
       colors={['#000000', '#447916']}
@@ -363,15 +362,13 @@ export default function RegisterScreen() {
         style={styles.container}
         contentContainerStyle={styles.scrollViewContent}
       >
-       
-
         <View style={styles.mainContainer}>
-        <Image
-          style={styles.bannerDrawer}
-          source={{
-            uri: 'https://imagedelivery.net/SViyH5iSEWrJ3_F3ZK6HYg/11ic_register_mb/public',
-          }}
-        />
+          <Image
+            style={styles.bannerDrawer}
+            source={{
+              uri: 'https://imagedelivery.net/SViyH5iSEWrJ3_F3ZK6HYg/11ic_register_mb/public',
+            }}
+          />
           <View style={styles.titleContainer}>
             <Text category="h4" style={[styles.title]}>
               {t('register-screen.title')}
@@ -432,21 +429,29 @@ export default function RegisterScreen() {
                 // Get all errors for phone field
                 const phoneErrors = form.formState.errors.phone;
                 let errorMessage = '';
-                
+
                 if (phoneErrors) {
                   // Translate Yup error messages first
                   const yupMessage = phoneErrors.message || '';
-                  
+
                   // Check if it's a required error
-                  if (!value || yupMessage === 'Phone number is required' || yupMessage.includes('required')) {
+                  if (
+                    !value ||
+                    yupMessage === 'Phone number is required' ||
+                    yupMessage.includes('required')
+                  ) {
                     errorMessage = t('auth.phone-number-is-required');
                   } else {
                     // Check if we have multiple error types
                     const errors: string[] = [];
-                    
+
                     // Check for prefix error first
-                    const hasPrefixError = value && (value.startsWith('0') || value.startsWith('92') || value.startsWith('+92'));
-                    
+                    const hasPrefixError =
+                      value &&
+                      (value.startsWith('0') ||
+                        value.startsWith('92') ||
+                        value.startsWith('+92'));
+
                     if (hasPrefixError) {
                       // When prefix error occurs, show both errors
                       errors.push(t('auth.invalid-mobile-number-format'));
@@ -458,7 +463,7 @@ export default function RegisterScreen() {
                         errors.push(t('auth.do-not-add-prefix'));
                       }
                     }
-                    
+
                     // Combine errors with newline
                     if (errors.length > 0) {
                       errorMessage = errors.join('\n');
@@ -466,9 +471,14 @@ export default function RegisterScreen() {
                       // Translate other Yup error messages
                       if (yupMessage === 'Mobile number must be 10 digits') {
                         errorMessage = t('auth.phone-number-must-be-10-digits');
-                      } else if (yupMessage === 'Invalid Mobile Number Format') {
+                      } else if (
+                        yupMessage === 'Invalid Mobile Number Format'
+                      ) {
                         errorMessage = t('auth.invalid-mobile-number-format');
-                      } else if (yupMessage === 'Do not add 0, +92, or 92 at the start of the number.') {
+                      } else if (
+                        yupMessage ===
+                        'Do not add 0, +92, or 92 at the start of the number.'
+                      ) {
                         errorMessage = t('auth.do-not-add-prefix');
                       } else {
                         errorMessage = yupMessage;
@@ -476,7 +486,7 @@ export default function RegisterScreen() {
                     }
                   }
                 }
-                
+
                 return (
                   <View>
                     <Input
@@ -520,7 +530,7 @@ export default function RegisterScreen() {
               render={({ field: { onChange, onBlur, value } }) => {
                 const passwordError = form.formState.errors.password;
                 let errorMessage = '';
-                
+
                 if (passwordError?.message) {
                   // Translate Yup error messages
                   const yupMessage = passwordError.message;
@@ -532,7 +542,7 @@ export default function RegisterScreen() {
                     errorMessage = yupMessage;
                   }
                 }
-                
+
                 return (
                   <View>
                     <Input
@@ -540,18 +550,22 @@ export default function RegisterScreen() {
                       textStyle={styles.inputText}
                       placeholder={t('register-screen.placeholder.password')}
                       value={value}
-                      onChangeText={text => handlePasswordChange(text, onChange)}
+                      onChangeText={text =>
+                        handlePasswordChange(text, onChange)
+                      }
                       secureTextEntry={secureTextEntry}
                       onBlur={onBlur}
-                      accessoryLeft={() => <PasswordIcon width={16} height={16} />}
+                      accessoryLeft={() => (
+                        <PasswordIcon width={16} height={16} />
+                      )}
                       accessoryRight={renderIcon}
-                      status={form.formState.errors.password ? 'danger' : 'basic'}
+                      status={
+                        form.formState.errors.password ? 'danger' : 'basic'
+                      }
                     />
                     {errorMessage ? (
                       <View style={styles.errorContainer}>
-                        <Text style={styles.errorText}>
-                          {errorMessage}
-                        </Text>
+                        <Text style={styles.errorText}>{errorMessage}</Text>
                       </View>
                     ) : null}
                   </View>
@@ -565,7 +579,7 @@ export default function RegisterScreen() {
               render={({ field: { onChange, onBlur, value } }) => {
                 const invitationError = form.formState.errors.invitation_code;
                 let errorMessage = '';
-                
+
                 if (invitationError?.message) {
                   // Translate Yup error messages
                   const yupMessage = invitationError.message;
@@ -575,26 +589,30 @@ export default function RegisterScreen() {
                     errorMessage = yupMessage;
                   }
                 }
-                
+
                 return (
                   <View>
                     <Input
                       style={styles.input}
                       textStyle={styles.inputText}
-                      placeholder={t('register-screen.placeholder.invitation-code')}
+                      placeholder={t(
+                        'register-screen.placeholder.invitation-code',
+                      )}
                       value={value}
                       onChangeText={onChange}
                       onBlur={onBlur}
-                      accessoryLeft={() => <InviteIcon width={16} height={16} />}
+                      accessoryLeft={() => (
+                        <InviteIcon width={16} height={16} />
+                      )}
                       status={
-                        form.formState.errors.invitation_code ? 'danger' : 'basic'
+                        form.formState.errors.invitation_code
+                          ? 'danger'
+                          : 'basic'
                       }
                     />
                     {errorMessage ? (
                       <View style={styles.errorContainer}>
-                        <Text style={styles.errorText}>
-                          {errorMessage}
-                        </Text>
+                        <Text style={styles.errorText}>{errorMessage}</Text>
                       </View>
                     ) : null}
                   </View>
@@ -757,7 +775,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     marginBottom: 15, // No margin, error container will handle spacing
   },
-  errorContainer: { 
+  errorContainer: {
     marginTop: -20, // Space between input field and error messages
     marginBottom: 2,
     paddingTop: 20,

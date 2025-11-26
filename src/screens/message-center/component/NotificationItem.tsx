@@ -23,6 +23,23 @@ const NotificationItem = ({
 }: NotificationItemProps) => {
   // Note: Translation is handled at the parent component level (NotificationModal/MessageCenterOverviewScreen)
   // to avoid multiple API calls and improve performance
+  
+  const formatTimeMinusThreeHours = (dateString?: string) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) {
+      return dateString.replace?.('T', ' ') ?? dateString;
+    }
+    date.setHours(date.getHours() - 3);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  };
+  
   return (
     <TouchableOpacity
       onPress={() =>
@@ -62,7 +79,7 @@ const NotificationItem = ({
       </Text>
       {purpose === 'modal' && (
         <Text category="c2" style={{ color: '#FFFFFF40' }}>
-          { create_time?.replace?.('T', ' ') ?? ''}
+          {formatTimeMinusThreeHours(create_time)}
         </Text>
       )}
       {!is_seen && <View style={styles.isReadDot} />}

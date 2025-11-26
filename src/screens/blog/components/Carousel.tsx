@@ -88,7 +88,7 @@ export default function BlogCarousel({ blogs }: { blogs: IBlog[] }) {
 
       <View style={styles.controls}>
         <View style={styles.textContent}>
-          <Text style={styles.slideTitle} category="p1">
+          {/* <Text style={styles.slideTitle} category="p1">
             {blogs[currentIndex]?.title}
           </Text>
           <Text style={styles.slideDate} category="c1">
@@ -99,7 +99,7 @@ export default function BlogCarousel({ blogs }: { blogs: IBlog[] }) {
               month: 'long',
               day: 'numeric',
             })}
-          </Text>
+          </Text> */}
         </View>
 
         <Pagination.Custom

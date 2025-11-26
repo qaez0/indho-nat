@@ -49,6 +49,7 @@ const GameScreen = () => {
           try {
             Toast.show({ type: 'promise', text1: t('common-terms.logging-out-game') });
             invalidate('balance');
+            invalidate('panel-info');
             resetGameDisplay();
             setIsLandscape(false);
           } catch (error) {

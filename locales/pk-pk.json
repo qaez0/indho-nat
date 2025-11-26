@@ -122,6 +122,8 @@
     "all-games": "‎تمام کھیل",
     "live": "‎لائیو",
     "slots": "‎سلاٹس",
+    "recently-played": "‎حال ہی میں کھیلے گئے",
+    "no-recently-played-games": "‎حال ہی میں کوئی کھیل نہیں کھیلے گئے",
     "online-betting-blog": "‎آن لائن بٹنگ بلاگ",
     "mini-games": "‎منی گیمز",
     "search-for-games": "‎کھیل تلاش کریں"
@@ -814,7 +816,8 @@
     "withdrawal-password": {
       "title": "‎نکالی پاس ورڈ",
       "description": "‎تصدیق کے لیے اپنا نکالی پاس ورڈ درج کریں۔",
-      "placeholder": "‎نکالی پاس ورڈ"
+      "label": "‎نکالی پاس ورڈ درج کریں",
+      "placeholder": "‎اپنا نکالی پاس ورڈ درج کریں"
     },
     "usdt-address-card": {
       "usdt-address": "‎USDT ایڈریس"

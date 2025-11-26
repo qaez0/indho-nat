@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Image,
   RefreshControl,
+  Text,
 } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import FeatureBanners from './components/FeatureBanners';
@@ -33,7 +34,7 @@ export default function HomeScreen() {
   const scrollViewRef = React.useRef<ScrollView>(null);
   const { t, i18n } = useTranslation();
   const navigation = useNavigation<RootStackNav>();
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated, user, isLoading: userLoading } = useUser();
   const token = useUserStore(s => s.token);
   const { openPopUp, lastLoginToken, markPopupShownForSession, isOpen } =
     usePopUp();
@@ -161,6 +162,29 @@ export default function HomeScreen() {
       >
         <LiveSports />
       </Content> */}
+      {isAuthenticated && (
+        <Content
+          title={t('content-title.recently-played').toUpperCase()}
+          icon={
+            <Image
+              source={require('../../assets/common/home/slots-icon.png')}
+              style={styles.imageIcon}
+            />
+          }
+        >
+          {userLoading.panelInfo ? (
+            <GamePreview games={[]} isLoading={true} disableAutoSwipe={true} />
+          ) : user?.player_info?.recently_played_games && user.player_info.recently_played_games.length > 0 ? (
+            <GamePreview games={user.player_info.recently_played_games} isLoading={false} disableAutoSwipe={true} />
+          ) : (
+            <View style={styles.emptyStateContainer}>
+              <Text style={styles.emptyStateText}>
+                {t('content-title.no-recently-played-games')}
+              </Text>
+            </View>
+          )}
+        </Content>
+      )}
       <Content
         title={t('content-title.slots').toUpperCase()}
         icon={
@@ -273,5 +297,15 @@ const styles = StyleSheet.create({
   imageIcon: {
     width: 20,
     height: 20,
+  },
+  emptyStateContainer: {
+    paddingVertical: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyStateText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    opacity: 0.7,
   },
 });

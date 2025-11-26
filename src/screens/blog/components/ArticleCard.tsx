@@ -130,8 +130,9 @@ const style = StyleSheet.create({
     zIndex: 1,
   },
   title: {
-    fontSize: 14,
-    fontWeight: '500',
+    fontFamily: 'var(--font-roboto)',
+    fontSize: 12,
+    fontWeight: '600',
     color: '#fff',
   },
   loadingOverlay: {

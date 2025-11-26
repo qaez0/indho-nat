@@ -97,8 +97,12 @@ const style = StyleSheet.create({
     gap: 8,
   },
   viewAllButton: {
+    padding: 0,
+    margin: 0,
     backgroundColor: '#FFFFFF',
     borderRadius: 24,
+    width: 60,
+    height: 24,
   },
   viewAllButtonText: {
     color: '#000',

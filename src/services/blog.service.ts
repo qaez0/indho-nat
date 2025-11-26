@@ -7,8 +7,8 @@ import { apiRequest } from './api.config';
 export const getSpecificArticle = (articleId: number) => {
   console.log(articleId, 'articleId');
   return apiRequest.get<IBaseResponse<Article>>({
-    path: `/blogs/${articleId}`,
-    baseUrlOverride: MICROSERVICE_URL,
+    path: `/${articleId}`,
+    baseUrlOverride: 'https://11ic.pk/api/blogs',
     customHeaders: {
       'X-Client-Key': PUBLIC_CLIENT_KEY,
     },
@@ -19,9 +19,9 @@ export const getBlogs = (
   category?: string,
 ): Promise<IBaseResponse<IBlog[]>> => {
   return apiRequest.get<IBaseResponse<IBlog[]>>({
-    path: '/blogs',
+    path: '',
     ...(category && { params: { category } }),
-    baseUrlOverride: MICROSERVICE_URL,
+    baseUrlOverride: 'https://11ic.pk/api/blogs',
     customHeaders: {
       'X-Client-Key': PUBLIC_CLIENT_KEY,
     },

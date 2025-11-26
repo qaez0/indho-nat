@@ -25,13 +25,14 @@ const InGameDepositScreen = () => {
   const crypto = payment_channels_group?.crypto || [];
   const playerInfo = user?.player_info || {};
 
-  // Filter onlinePay by display_name: "Mega" for FAST PAY, "DY" for E-WALLET
-  const fastPay = onlinePay.filter(
-    (channel) => channel.display_name === 'Mega'
-  );
-  const eWallet = onlinePay.filter(
-    (channel) => channel.display_name === 'DY'
-  );
+  // FAST PAY (eWallet) shows "Mega" channels and DY_EASYPAISA
+  // E-WALLET (easyPay) shows other "DY" channels (excluding DY_EASYPAISA)
+  const fastPay = onlinePay.filter(channel => 
+    channel.display_name === 'Mega'|| 
+    channel.channel_id === "DY_EASYPAISA");
+  const eWallet = onlinePay.filter(channel => 
+    channel.display_name === 'DY' &&
+    channel.channel_id !== "DY_EASYPAISA");
 
   const details = {
     eWallet: eWallet,

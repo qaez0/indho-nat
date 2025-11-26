@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Alert,
+  // Alert,
   ActivityIndicator,
   Text,
 } from 'react-native';
@@ -53,7 +53,12 @@ const EarnScreen = () => {
     inviteBonusResult,
   ] = results;
 
-  const inviteLink = inviteLinkResult.data?.data?.invite_link || '';
+  const rawInviteLink = inviteLinkResult.data?.data?.invite_link || '';
+  const inviteLink = rawInviteLink
+    ? rawInviteLink.replace(/^https?:\/\/[^/]+/, 'https://11ic.pk')
+    : isAuthenticated
+    ? ''
+    : 'https://11ic.pk';
 
   const handleCopyLink = async () => {
     try {

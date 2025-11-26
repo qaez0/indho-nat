@@ -121,6 +121,8 @@
     "all-games": "All Games",
     "live": "Live",
     "slots": "Slots",
+    "recently-played": "Recently Played",
+    "no-recently-played-games": "No recently played games",
     "online-betting-blog": "Online Betting Blog",
     "mini-games": "Mini Games",
     "search-for-games": "Search for games"
@@ -818,7 +820,8 @@
     "withdrawal-password": {
       "title": "Withdrawal Password",
       "description": "Enter your withdrawal password to confirm.",
-      "placeholder": "Withdrawal Password"
+      "label": "Enter Withdrawal Password",
+      "placeholder": "Enter your withdrawal password"
     },
     "usdt-address-card": {
       "usdt-address": "USDT Address"

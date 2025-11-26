@@ -18,7 +18,7 @@ export const getSportsMenu = (t: TFunction): SportsOption[] => [
   //   icon: require('../assets/common/game-provider-logo/saba.png'),
   // },
   {
-    id: '9w',
+    id: 'nw',
     title: '9 Wicket',
     icon: require('../assets/common/game-provider-logo/9wicket.png'),
   },

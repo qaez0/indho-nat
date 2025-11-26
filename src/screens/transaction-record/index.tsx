@@ -555,12 +555,16 @@ const TransactionRecordScreen = () => {
   );
 
   // Render bonus record card
-  const renderBonusRecord = (record: BonusRecord) => (
-    <View key={record.id || record.guid} style={styles.recordCard}>
+  const renderBonusRecord = (record: BonusRecord, index: number) => {
+    // Create a unique identifier for each record
+    const recordId = record.id || record.guid || `bonus-${index}-${record.request_time}`;
+    
+    return (
+    <View key={recordId} style={styles.recordCard}>
       {/* Summary */}
       <TouchableOpacity
         style={styles.recordSummary}
-        onPress={() => toggleExpanded(record.id || record.guid || '')}
+        onPress={() => toggleExpanded(recordId)}
       >
         <View style={styles.recordSummaryContent}>
           <View style={styles.recordLeft}>
@@ -597,7 +601,7 @@ const TransactionRecordScreen = () => {
         <Text style={styles.expandIcon}>
           <Feather
             name={
-              expandedItems.has(record.id || record.guid || '')
+              expandedItems.has(recordId)
                 ? 'chevron-down'
                 : 'chevron-up'
             }
@@ -608,7 +612,7 @@ const TransactionRecordScreen = () => {
       </TouchableOpacity>
 
       {/* Details */}
-      {expandedItems.has(record.id || record.guid || '') && (
+      {expandedItems.has(recordId) && (
         <View style={styles.recordDetails}>
           <View style={styles.detailRow}>
             <Text style={styles.detailLabel}>Bonus Details:</Text>
@@ -652,7 +656,7 @@ const TransactionRecordScreen = () => {
       )}
     </View>
   );
-
+};
   return (
     <View style={[styles.container, { backgroundColor: '#171717' }]}>
       <ScrollView
@@ -901,7 +905,7 @@ const TransactionRecordScreen = () => {
                     </Text>
                   </View>
                 ) : (
-                  bonusQuery.records.map(record => renderBonusRecord(record))
+                  bonusQuery.records.map((record, index) => renderBonusRecord(record, index))
                 )}
               </View>
             )}

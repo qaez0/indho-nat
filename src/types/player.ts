@@ -1,3 +1,5 @@
+import { ISlot } from './slot';
+
 export interface IPlayerCardInfo {
   card_type: 'BANK' | 'EWALLET' | 'CRYPTO';
   card_id: string;
@@ -26,6 +28,7 @@ export interface IPlayerDetails {
   has_wallet_pass: boolean;
   kyc_id_status: KYCStatus | string;
   bank_id_status: KYCStatus | string;
+  recently_played_games?: ISlot[];
 }
 
 export interface IPlayerTransactionInfo {

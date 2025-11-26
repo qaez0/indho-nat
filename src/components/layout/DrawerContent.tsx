@@ -261,8 +261,13 @@ const DrawerContent = ({ navigation }: DrawerContentComponentProps) => {
                   value: balance?.total?.toLocaleString() ?? '--',
                 }}
                 right={
-                  <TouchableOpacity onPress={() => invalidate('balance')}>
-                    <SpinningIcon isLoading={isLoading.balance}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      invalidate('panel-info');
+                      invalidate('balance');
+                    }}
+                  >
+                    <SpinningIcon isLoading={isLoading.panelInfo || isLoading.balance}>
                       <Feather name="refresh-ccw" size={16} color="gray" />
                     </SpinningIcon>
                   </TouchableOpacity>

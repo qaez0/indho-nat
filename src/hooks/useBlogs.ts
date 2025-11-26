@@ -13,8 +13,8 @@ export const useBlogs = () => {
     queryKey: ['blogs'],
     queryFn: async () => {
       return apiRequest.get<IBaseResponse<IBlog[]>>({
-        path: '/blogs',
-        baseUrlOverride: MICROSERVICE_URL,
+        path: '',
+        baseUrlOverride: 'https://11ic.pk/api/blogs',
         customHeaders: {
           'X-Client-Key': PUBLIC_CLIENT_KEY,
         },

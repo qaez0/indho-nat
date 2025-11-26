@@ -43,13 +43,14 @@ const DepositWithdrawScreen = () => {
   const bankInfo = user?.bank_info || [];
   const transactionInfo = user?.transaction_info || {};
 
-  // Filter onlinePay by display_name: "Mega" for FAST PAY, "DY" for E-WALLET
-  const fastPay = onlinePay.filter(
-    (channel) => channel.display_name === 'Mega'
-  );
-  const eWallet = onlinePay.filter(
-    (channel) => channel.display_name === 'DY'
-  );
+  // FAST PAY (eWallet) shows "Mega" channels and DY_EASYPAISA
+  // E-WALLET (easyPay) shows other "DY" channels (excluding DY_EASYPAISA)
+  const fastPay = onlinePay.filter(channel => 
+    channel.display_name === 'Mega'|| 
+    channel.channel_id === "DY_EASYPAISA");
+  const eWallet = onlinePay.filter(channel => 
+    channel.display_name === 'DY' &&
+    channel.channel_id !== "DY_EASYPAISA");
 
   const details = {
     eWallet: eWallet,
@@ -76,10 +77,13 @@ const DepositWithdrawScreen = () => {
             style={[
               styles.naviButtonBase,
               {
-                backgroundColor: activeTab === 'deposit' ? theme['color-success-500'] : '#1a1a1a',
+                backgroundColor:
+                  activeTab === 'deposit'
+                    ? theme['color-success-500']
+                    : '#1a1a1a',
                 borderWidth: activeTab === 'deposit' ? 0 : 1,
                 borderColor: activeTab === 'deposit' ? 'transparent' : '#333',
-              }
+              },
             ]}
             appearance="filled"
             status="basic"
@@ -92,7 +96,7 @@ const DepositWithdrawScreen = () => {
                   {
                     color: activeTab === 'deposit' ? '#23272f' : '#fff',
                     fontWeight: activeTab === 'deposit' ? '700' : '500',
-                  }
+                  },
                 ]}
               >
                 {t('common-terms.deposit')}
@@ -104,14 +108,18 @@ const DepositWithdrawScreen = () => {
             style={[
               styles.naviButtonBase,
               {
-                backgroundColor: activeTab === 'withdraw' ? theme['color-success-500'] : '#1a1a1a',
+                backgroundColor:
+                  activeTab === 'withdraw'
+                    ? theme['color-success-500']
+                    : '#1a1a1a',
                 borderWidth: activeTab === 'withdraw' ? 0 : 1,
                 borderColor: activeTab === 'withdraw' ? 'transparent' : '#333',
-              }
+              },
             ]}
             status="basic"
             onPress={() => {
               setActiveTab('withdraw');
+              invalidate('panel-info');
             }}
           >
             {(evaProps: any) => (
@@ -122,7 +130,7 @@ const DepositWithdrawScreen = () => {
                   {
                     color: activeTab === 'withdraw' ? '#23272f' : '#fff',
                     fontWeight: activeTab === 'withdraw' ? '700' : '500',
-                  }
+                  },
                 ]}
               >
                 {t('common-terms.withdraw')}
