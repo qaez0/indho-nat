@@ -10,9 +10,70 @@ interface Props {
   isLoading?: boolean;
   rows?: number;
   disableAutoSwipe?: boolean;
+  autoSwipeRowIndex?: number; // Enable autoscroll for a specific row (0-indexed)
 }
 
-const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = false }: Props) => {
+// Separate component for a row with optional autoscroll
+interface GameRowProps {
+  row: ISlot[];
+  rowIndex: number;
+  rowWidth: number;
+  screenWidth: number;
+  containerPadding: number;
+  shouldAutoSwipe: boolean;
+}
+
+const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPadding, shouldAutoSwipe }: GameRowProps) => {
+  const rowAutoSwipe = useAutoSwipe({
+    itemWidth: 109,
+    itemGap: 8,
+    totalItems: row.length,
+    autoSwipeInterval: 3000,
+  });
+
+  // Only start autoscroll if this row should have it
+  React.useEffect(() => {
+    if (shouldAutoSwipe) {
+      rowAutoSwipe.startAutoSwipe();
+    } else {
+      rowAutoSwipe.stopAutoSwipe();
+    }
+    return () => {
+      rowAutoSwipe.stopAutoSwipe();
+    };
+  }, [shouldAutoSwipe, rowAutoSwipe]);
+
+  return (
+    <ScrollView
+      key={`row-${rowIndex}`}
+      ref={rowAutoSwipe.scrollViewRef}
+      horizontal
+      style={styles.rowScrollView}
+      contentContainerStyle={[
+        styles.gridRow,
+        { width: Math.max(rowWidth, screenWidth - containerPadding) },
+      ]}
+      showsHorizontalScrollIndicator={false}
+      scrollEventThrottle={16}
+      onScroll={shouldAutoSwipe ? rowAutoSwipe.handleScroll : undefined}
+      onScrollEndDrag={shouldAutoSwipe ? rowAutoSwipe.handleManualScrollEnd : undefined}
+      onMomentumScrollEnd={shouldAutoSwipe ? rowAutoSwipe.handleManualScrollEnd : undefined}
+      onTouchStart={shouldAutoSwipe ? rowAutoSwipe.pauseAutoSwipe : undefined}
+      onTouchEnd={shouldAutoSwipe ? rowAutoSwipe.resumeAutoSwipe : undefined}
+    >
+      {row.map((game, gameIndex) => (
+        <GameCard
+          key={`${rowIndex}-${gameIndex}`}
+          {...game}
+          customWidth={109}
+          customHeight={109}
+        />
+      ))}
+    </ScrollView>
+  );
+});
+
+const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = false, autoSwipeRowIndex }: Props) => {
   const scrollViewRef = React.useRef<ScrollView>(null);
   
   const autoSwipe = useAutoSwipe({
@@ -47,9 +108,6 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
   const gap = 8;
   const itemsPerRow = Math.floor((screenWidth - containerPadding) / (cardWidth + gap));
   
-  // Create refs for each row's ScrollView
-  const rowScrollRefs = useRef<{ [key: number]: ScrollView | null }>({});
-  
   // Group games into rows for grid layout
   const groupGamesIntoRows = (gamesList: ISlot[], numRows: number) => {
     const rows: ISlot[][] = [];
@@ -71,30 +129,18 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
         <View style={styles.gridWrapper}>
           {gameRows.map((row, rowIndex) => {
             const rowWidth = row.length * (cardWidth + gap) - gap;
+            const shouldAutoSwipe = autoSwipeRowIndex !== undefined && rowIndex === autoSwipeRowIndex;
+            
             return (
-              <ScrollView
+              <GameRow
                 key={`row-${rowIndex}`}
-                ref={(ref) => {
-                  rowScrollRefs.current[rowIndex] = ref;
-                }}
-                horizontal
-                style={styles.rowScrollView}
-                contentContainerStyle={[
-                  styles.gridRow,
-                  { width: Math.max(rowWidth, screenWidth - containerPadding) },
-                ]}
-                showsHorizontalScrollIndicator={false}
-                scrollEventThrottle={16}
-              >
-                {row.map((game, gameIndex) => (
-                  <GameCard
-                    key={`${rowIndex}-${gameIndex}`}
-                    {...game}
-                    customWidth={109}
-                    customHeight={109}
-                  />
-                ))}
-              </ScrollView>
+                row={row}
+                rowIndex={rowIndex}
+                rowWidth={rowWidth}
+                screenWidth={screenWidth}
+                containerPadding={containerPadding}
+                shouldAutoSwipe={shouldAutoSwipe}
+              />
             );
           })}
         </View>

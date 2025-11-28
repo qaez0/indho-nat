@@ -207,7 +207,7 @@ export default function HomeScreen() {
             }),
         }}
       >
-        <GamePreview games={slotsGame} isLoading={isLoading.gamesLoading} rows={3} />
+        <GamePreview games={slotsGame} isLoading={isLoading.gamesLoading} rows={3} autoSwipeRowIndex={2} />
       </Content>
       <Content
         title={t('content-title.most-visited').toUpperCase()}

@@ -40,9 +40,9 @@ const fixedPositionsConfig = [
   { position: 5, gameId: '', gameName: '9Wicket' }, // Position 11 - 9Wicket (uses mock data if not found)
   { position: 8, gameId: '', gameName: 'The Chicken House' }, // Position 12 - The Chicken House
 
-  { position: 3, gameId: "", gameName: "Wild Bounty Showdown" },
-  { position: 6, gameId: "", gameName: "Fortune Rabbit" },
-  { position: 9, gameId: "", gameName: "Treasures of Aztec" },
+  // { position: 3, gameId: "", gameName: "Wild Bounty Showdown" },
+  // { position: 6, gameId: "", gameName: "Fortune Rabbit" },
+  // { position: 9, gameId: "", gameName: "Treasures of Aztec" },
   
 ];
 
@@ -130,6 +130,7 @@ export const useHome = () => {
   });
 
   const { blogs, isBlogsLoading } = useBlogs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const all = (data?.data?.data as ISlot[]) || [];
 
   const shuffle = (arr: ISlot[]) =>

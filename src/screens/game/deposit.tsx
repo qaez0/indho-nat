@@ -27,9 +27,16 @@ const InGameDepositScreen = () => {
 
   // FAST PAY (eWallet) shows "Mega" channels and DY_EASYPAISA
   // E-WALLET (easyPay) shows other "DY" channels (excluding DY_EASYPAISA)
-  const fastPay = onlinePay.filter(channel => 
-    channel.display_name === 'Mega'|| 
-    channel.channel_id === "DY_EASYPAISA");
+  const fastPayChannelIds = new Set([
+    'DY_EASYPAISA',
+    'TOPPAY_EASYPAISA',
+    'TOPPAY_JAZZCASH',
+  ]);
+  const filteredOnlinePayMega = onlinePay.filter(channel => {
+    const name = (channel.display_name || '').toLowerCase();
+    return name.includes('mega') || fastPayChannelIds.has(channel.channel_id);
+  });
+  const fastPay = filteredOnlinePayMega;
   const eWallet = onlinePay.filter(channel => 
     channel.display_name === 'DY' &&
     channel.channel_id !== "DY_EASYPAISA");
