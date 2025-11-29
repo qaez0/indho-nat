@@ -54,11 +54,27 @@ const EarnScreen = () => {
   ] = results;
 
   const rawInviteLink = inviteLinkResult.data?.data?.invite_link || '';
+  
+  // Replace with current domain and add /download path
+  const processInviteLink = (link: string): string => {
+    if (!link) return '';
+    
+    const currentOrigin = 'https://11ic.pk';
+    // Extract query params (everything after '?')
+    const queryIndex = link.indexOf('?');
+    const queryParams = queryIndex !== -1 ? link.substring(queryIndex) : '';
+    
+    // Construct URL with /download path
+    return queryParams 
+      ? `${currentOrigin}/download${queryParams}`
+      : `${currentOrigin}/download?`;
+  };
+  
   const inviteLink = rawInviteLink
-    ? rawInviteLink.replace(/^https?:\/\/[^/]+/, 'https://11ic.pk')
+    ? processInviteLink(rawInviteLink)
     : isAuthenticated
     ? ''
-    : 'https://11ic.pk';
+    : 'https://11ic.pk/download?';
 
   const handleCopyLink = async () => {
     try {

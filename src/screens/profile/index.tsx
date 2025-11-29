@@ -332,6 +332,7 @@ export default function ProfileScreen() {
                           min={new Date('1900-01-01')}
                           max={maxDate}
                           date={selectedDate}
+                          initialVisibleDate={selectedDate || maxDate}
                           onSelect={date => {
                             field.onChange(date.toISOString());
                           }}

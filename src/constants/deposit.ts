@@ -2,8 +2,7 @@ import type { SvgProps } from 'react-native-svg';
 import FastUpiIcon from '../assets/dep-with/fast-upi.svg';
 import SharkIcon from '../assets/dep-with/shark.svg';
 import UsdtIcon from '../assets/dep-with/t.svg';
-import EasyPayIcon from '../assets/dep-with/easy-pay.svg';
-import EasyIcon from '../assets/dep-with/easy.svg';
+import EasyIcon from '../assets/dep-with/easy-paisa.svg';
 import JazzIcon from '../assets/dep-with/jazz.svg';
 export const staticData = (
   tutorial:

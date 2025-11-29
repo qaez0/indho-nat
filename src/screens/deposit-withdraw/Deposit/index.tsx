@@ -34,8 +34,9 @@ import {
 } from '../../../schemas/deposit';
 import { useTranslation } from 'react-i18next';
 import { staticData } from '../../../constants/deposit';
-import UPI from '../../../assets/dep-with/easy-jazz.svg';
-import WALLET from '../../../assets/dep-with/jazz-easy.svg';
+import UPI from '../../../assets/dep-with/fast-pay.svg';
+import UPIACT from '../../../assets/dep-with/fast-pay-active.svg';
+import WALLET from '../../../assets/dep-with/e-wallet.svg';
 import USDT from '../../../assets/dep-with/t.svg';
 import { useDepositWithdrawApi } from '../store/useDepositWithdraw';
 import { usePopUp } from '../../../store/useUIStore';
@@ -139,7 +140,7 @@ const Deposit = ({
     }
   }, [cryptoAmount, selectedOption?.xrate, activeDepOption, cryptoForm]);
 
-  const {isOpen} = usePopUp()
+  const { isOpen } = usePopUp();
 
   useEffect(() => {
     if (details?.playerInfo?.real_name === '' && !isOpen) {
@@ -274,7 +275,12 @@ const Deposit = ({
 
   const depositOptions: IPartnerBtnProps[] = [
     {
-      icon: <UPI width={40} height={40} />,
+      icon:
+        activeDepOption === 'fastPay' ? (
+          <UPIACT width={40} height={40} />
+        ) : (
+          <UPI width={40} height={40} />
+        ),
       label: t('deposit-withdraw.deposit.fast-pay'),
       onClick: () => {
         resetAllForms();
@@ -284,7 +290,13 @@ const Deposit = ({
       isDisabled: fastPay.length === 0,
     },
     {
-      icon: <WALLET width={40} height={40} />,
+      icon: (
+        <WALLET
+          width={40}
+          height={40}
+          color={activeDepOption === 'eWallet' ? '#000' : '#FFFFFF'}
+        />
+      ),
       label: t('deposit-withdraw.deposit.e-wallet'),
       onClick: () => {
         resetAllForms();
@@ -308,34 +320,24 @@ const Deposit = ({
   const RenderContent = () => {
     // Reorder UPI options: OSpay UPI in center, TYpay at last
     const reorderUpiOptions = (data: any[]) => {
-      if (activeDepOption === 'eWallet') {
-        const toppayIndex = data.findIndex(item =>
-          item.display_name?.toLowerCase().includes('toppay'),
-        );
-        const typayIndex = data.findIndex(item =>
-          item.display_name?.toLowerCase().includes('typay'),
-        );
-        const ospayIndex = data.findIndex(item =>
-          item.display_name?.toLowerCase().includes('ospay'),
-        );
+      if (activeDepOption === 'fastPay') {
+        const orderMap: Record<string, number> = {
+          MEGA_EASYPAISA: 1,
+          DY_JAZZCASH: 2,
+          DY_EASYPAISA: 3,
+          MEGA_JAZZCASH: 4,
+          TOPPAY_JAZZCASH: 4,
+          TOPPAY_EASYPAISA: 3,
+        };
+        const reorder = [...data].sort((a, b) => {
+          const orderA = orderMap[a.channel_id] || 999; // Unknown gateways go to the end
+          const orderB = orderMap[b.channel_id] || 999;
+          return orderA - orderB;
+        });
 
-        if (toppayIndex !== -1 && typayIndex !== -1 && ospayIndex !== -1) {
-          const reorderedData = [...data];
-          // Move OSpay to center (index 1)
-          const ospayItem = reorderedData.splice(ospayIndex, 1)[0];
-          reorderedData.splice(1, 0, ospayItem);
 
-          // Move TYpay to last
-          const typayItem = reorderedData.splice(
-            reorderedData.findIndex(item =>
-              item.display_name?.toLowerCase().includes('typay'),
-            ),
-            1,
-          )[0];
-          reorderedData.push(typayItem);
-
-          return reorderedData;
-        }
+        console.log(reorder)
+        return reorder 
       }
       return data;
     };
