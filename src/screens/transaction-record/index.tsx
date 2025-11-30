@@ -19,7 +19,7 @@ import {
 } from '@ui-kitten/components';
 import Feather from '@react-native-vector-icons/feather';
 import Toast from 'react-native-toast-message';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import {
   useDepositRecords,
   useWithdrawalRecords,
@@ -68,6 +68,15 @@ const TransactionRecordScreen = () => {
   const bonusQuery = useBonusRecords(selectedDays, currentPage, pageSize);
   const cancelDepositMutation = useCancelDepositRequest();
   const allRecordsQuery = useAllTransactionRecords(activeTab, selectedDays);
+
+  // Refetch all records when screen comes into focus
+  useFocusEffect(
+    React.useCallback(() => {
+      depositQuery.refetch();
+      withdrawalQuery.refetch();
+      bonusQuery.refetch();
+    }, [depositQuery.refetch, withdrawalQuery.refetch, bonusQuery.refetch]),
+  );
 
   const tabOptions = [
     { label: t('common-terms.deposit'), value: 'deposit' as TransactionType },

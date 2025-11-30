@@ -26,7 +26,6 @@ import {
   updateWalletPassOrRealName,
   verifyPhoneNumber,
 } from '../../../services/user.service';
-import { BASE_URL } from '@env';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../../hooks/useUser';
 
@@ -37,17 +36,10 @@ export const useDepositWithdrawApi = () => {
 
   const onlinePayRequest = useMutation({
     mutationFn: async ({ req }: OnlinePayRequestParams) => {
-      // Normalize domain - remove trailing slash if present
-      const baseUrl = BASE_URL || 'https://11ic.pk';
-      const domain =
-        typeof baseUrl === 'string' && baseUrl.endsWith('/')
-          ? baseUrl.slice(0, -1)
-          : baseUrl;
-
       const payload = {
         amount: req.amount,
         channel_id: req.channel_id,
-        domain: domain,
+        domain: 'game11ic://transaction-record',
         image: null,
       };
       return onlinePayReq(payload);

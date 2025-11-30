@@ -13,12 +13,36 @@ import { HelperModal } from '../components/modal';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const linking = {
+  prefixes: ['game11ic://'],
+  config: {
+    screens: {
+      'transaction-record': 'transaction-record',
+      'main-tabs': {
+        screens: {
+          auth: {
+            screens: {
+              register: {
+                path: ':invite_code',
+                parse: {
+                  invite_code: (invite_code: string) => invite_code,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
 const RootNavigator = () => {
   const theme = useTheme();
 
   return (
     <NavigationContainer
       ref={navigationRef}
+      linking={linking}
       onReady={navigateToRegistration}
       onStateChange={rootOnStateChange}
     >

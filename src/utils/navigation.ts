@@ -67,30 +67,57 @@ export function navigateToLogin() {
   });
 }
 
-export const navigateToRegistration = () => {
-  const handleDeepLink = (event: { url: string }) => {
-    let url = event.url.split('://')[1];
-    if (url.endsWith('/')) {
-      url = url.slice(0, -1);
-    }
-    if (url) {
+export const handleDeepLink = (url: string) => {
+  if (!url || !url.includes('://')) return;
+
+  const path = url.split('://')[1]?.split('/')[0] || '';
+  const cleanPath = path.endsWith('/') ? path.slice(0, -1) : path;
+
+  if (!navigationRef.isReady()) {
+    // Wait for navigation to be ready
+    setTimeout(() => handleDeepLink(url), 100);
+    return;
+  }
+
+  // Handle transaction-record deep link
+  if (cleanPath === 'transaction-record') {
+    navigationRef.navigate('transaction-record');
+    return;
+  }
+
+  // Handle registration/invite code deep links
+  if (cleanPath && cleanPath.length > 0) {
+    // Check if it's a valid invite code (alphanumeric, reasonable length)
+    // Otherwise treat as transaction-record or other routes
+    if (cleanPath.length < 20 && /^[a-zA-Z0-9]+$/.test(cleanPath)) {
+      // Likely an invite code
       navigationRef.navigate('main-tabs', {
         screen: 'auth',
         params: {
           screen: 'register',
           params: {
-            invite_code: url,
+            invite_code: cleanPath,
           },
         },
       });
+    } else {
+      // Try to navigate to the route directly
+      const routeName = cleanPath as keyof RootStackParamList;
+      if (routeName === 'transaction-record') {
+        navigationRef.navigate('transaction-record');
+      }
     }
-  };
+  }
+};
 
+export const navigateToRegistration = () => {
   Linking.getInitialURL().then(url => {
-    if (url) handleDeepLink({ url });
+    if (url) handleDeepLink(url);
   });
 
-  const subscription = Linking.addEventListener('url', handleDeepLink);
+  const subscription = Linking.addEventListener('url', event => {
+    handleDeepLink(event.url);
+  });
   return () => subscription.remove();
 };
 
