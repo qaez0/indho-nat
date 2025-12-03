@@ -13,14 +13,14 @@ export const getSlotProviderOptions = (t: TFunction): optionProps[] => [
     label: t('common-terms.all').toUpperCase() 
   },
   {
-    value: 'CQ9',
-    label: 'CQ9',
-    image: require('../assets/common/game-provider-logo/cq9.png'),
-  },
-  {
     value: 'JILI',
     label: 'JILI',
     image: require('../assets/common/game-provider-logo/jili.png'),
+  },
+  {
+    value: 'PG',
+    label: 'PG',
+    image: require('../assets/common/game-provider-logo/pg.png'),
   },
   {
     value: 'SPRIBE',
@@ -28,9 +28,9 @@ export const getSlotProviderOptions = (t: TFunction): optionProps[] => [
     image: require('../assets/common/game-provider-logo/spribe.png'),
   },
   {
-    value: 'PG',
-    label: 'PG',
-    image: require('../assets/common/game-provider-logo/pg.png'),
+    value: 'CQ9',
+    label: 'CQ9',
+    image: require('../assets/common/game-provider-logo/cq9.png'),
   },
   // {
   //   value: 'EFG',

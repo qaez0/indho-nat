@@ -37,7 +37,7 @@ const NotificationModal = ({
   const closeModal = useNotificationModal(s => s.closeModal);
 
   const pagination = { page: 1, pagesize: 100, read_status: undefined }; // Fetch all messages
-  
+
   const {
     data: messageRecord,
     isLoading,
@@ -60,15 +60,13 @@ const NotificationModal = ({
   }, [messageRecord?.data?.data]);
 
   // Translate messages if language is Urdu
-  const { translatedMessages, isTranslating } = useTranslateMessages(unreadMessagesRaw);
+  const { translatedMessages, isTranslating } =
+    useTranslateMessages(unreadMessagesRaw);
   const unreadMessages = translatedMessages;
 
   const markAllAsReadMutation = useMutation({
     mutationFn: async () => {
-      const messageIds = unreadMessages.map(item => item.id);
-      if (messageIds && messageIds.length > 0) {
-        await Promise.all(messageIds.map(id => markMessageAsRead(id)));
-      }
+      return markMessageAsRead('all');
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['message-center'] });
@@ -98,27 +96,27 @@ const NotificationModal = ({
             {t('message-center.notifications')}
           </Text>
           {unreadMessages && unreadMessages.length > 0 && (
-              <TouchableOpacity
-                style={styles.headerRight}
-                onPress={() => markAllAsReadMutation.mutate()}
+            <TouchableOpacity
+              style={styles.headerRight}
+              onPress={() => markAllAsReadMutation.mutate()}
+            >
+              <Text
+                category="c2"
+                style={{
+                  textDecorationLine: 'underline',
+                  color: '#E78F07',
+                }}
               >
-                <Text
-                  category="c2"
-                  style={{
-                    textDecorationLine: 'underline',
-                    color: '#E78F07',
-                  }}
-                >
-                  {t('message-center.mark-all-as-read')}
-                </Text>
-                <Feather name="check-circle" size={16} color="white" />
-              </TouchableOpacity>
-            )}
+                {t('message-center.mark-all-as-read')}
+              </Text>
+              <Feather name="check-circle" size={16} color="white" />
+            </TouchableOpacity>
+          )}
         </View>
         <Divider
           style={{ width: '100%', height: 1, backgroundColor: '#FFFFFF15' }}
         />
-        {(isProcessing || isTranslating) ? (
+        {isProcessing || isTranslating ? (
           <View
             style={{
               minHeight: 100,
@@ -171,11 +169,35 @@ const NotificationModal = ({
               minHeight: 100,
               justifyContent: 'center',
               alignItems: 'center',
+              gap: 16,
             }}
           >
             <Text category="s1" style={{ color: '#FFFFFF80' }}>
               {t('message-center.no-new-notifications')}
             </Text>
+
+
+            <View style={{ width: '100%', borderTopWidth: 1, borderTopColor: '#FFFFFF15', paddingTop: 16 }}>
+            <TouchableOpacity
+              onPress={() => {
+                closeModal();
+                onSeeAllNotifications();
+              }}
+            >
+              <Text
+                category="h6"
+                style={{
+                  color: '#E78F07',
+                  textAlign: 'center',
+                  textDecorationLine: 'underline',
+                  fontSize: 14,
+              
+                }}
+              >
+                {t('message-center.see-all-notifications')}
+              </Text>
+            </TouchableOpacity>
+            </View>
           </View>
         )}
       </View>

@@ -23,8 +23,14 @@ interface InviteEarnTabProps {
   activeTimeFilter: string;
   setActiveTimeFilter: (filter: string) => void;
   inviteLink: string;
-  copied: boolean;
-  handleCopyLink: () => void;
+  registerLink: string;
+  inviteCode: string;
+  copiedInviteLink: boolean;
+  copiedRegisterLink: boolean;
+  copiedCode: boolean;
+  handleCopyInviteLink: () => void;
+  handleCopyRegisterLink: () => void;
+  handleCopyCode: () => void;
 }
 
 const InfoBox = ({
@@ -66,38 +72,38 @@ const TimeFilterButtons = ({
   t: any;
 }) => {
   const theme = useTheme();
-  const filters = [
-    { key: 'today', label: t('invite.invite-earn-tab.today') },
-    { key: 'yesterday', label: t('invite.invite-earn-tab.yesterday') },
-    { key: 'all', label: t('invite.invite-earn-tab.all') }
+  const timeFilterButtons = [
+    t('invite.invite-earn-tab.today'),
+    t('invite.invite-earn-tab.yesterday'),
+    t('invite.invite-earn-tab.all'),
   ];
   return (
     <View style={styles.timeFilterContainer}>
-      {filters.map(filter => (
+      {timeFilterButtons.map((filter) => (
         <TouchableOpacity
-          key={filter.key}
+          key={filter}
           style={[
             styles.timeFilterButton,
             {
               backgroundColor:
-                activeTimeFilter === filter.key
+                activeTimeFilter === filter
                   ? theme['color-success-500']
                   : 'transparent',
               borderColor:
-                activeTimeFilter === filter.key
+                activeTimeFilter === filter
                   ? theme['color-success-500']
                   : '#FFFFFF',
             },
           ]}
-          onPress={() => setActiveTimeFilter(filter.key)}>
+          onPress={() => setActiveTimeFilter(filter)}>
           <Text
             style={[
               styles.timeFilterText,
               {
-                color: activeTimeFilter === filter.key ? '#000000' : '#FFFFFF',
+                color: activeTimeFilter === filter ? '#000000' : '#FFFFFF',
               },
             ]}>
-            {filter.label}
+            {filter}
           </Text>
         </TouchableOpacity>
       ))}
@@ -111,8 +117,14 @@ export const InviteEarnTab: React.FC<InviteEarnTabProps> = ({
   activeTimeFilter,
   setActiveTimeFilter,
   inviteLink,
-  copied,
-  handleCopyLink,
+  registerLink,
+  inviteCode,
+  copiedInviteLink,
+  copiedRegisterLink,
+  copiedCode,
+  handleCopyInviteLink,
+  handleCopyRegisterLink,
+  handleCopyCode,
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -179,8 +191,14 @@ export const InviteEarnTab: React.FC<InviteEarnTabProps> = ({
       nestedScrollEnabled>
       <InviteLinkSection
         inviteLink={inviteLink}
-        copied={copied}
-        onCopy={handleCopyLink}
+        registerLink={registerLink}
+        inviteCode={inviteCode}
+        copiedInviteLink={copiedInviteLink}
+        copiedRegisterLink={copiedRegisterLink}
+        copiedCode={copiedCode}
+        onCopyInviteLink={handleCopyInviteLink}
+        onCopyRegisterLink={handleCopyRegisterLink}
+        onCopyCode={handleCopyCode}
       />
 
       {isAuthenticated && (
@@ -194,16 +212,15 @@ export const InviteEarnTab: React.FC<InviteEarnTabProps> = ({
             {infoBoxConfig.map(item => {
               const rawValue =
                 inviteBonusData?.[item.dataKey as keyof InviteBonusData] ?? 0;
+              const displayValue = isLoadingInviteBonus
+                ? '-'
+                : `${item.prefix ?? ''}${rawValue}`;
               return (
                 <View key={item.dataKey} style={styles.infoBoxWrapper}>
                   <InfoBox
                     item={{
                       ...item,
-                      value:
-                        typeof rawValue === 'number' ||
-                        typeof rawValue === 'string'
-                          ? rawValue
-                          : '',
+                      value: displayValue,
                     }}
                     isLoading={isLoadingInviteBonus}
                   />
@@ -322,7 +339,7 @@ export const InviteEarnTab: React.FC<InviteEarnTabProps> = ({
           </Text>
         </View>
 
-        <Text style={styles.noteTitle}>{t('invite.invite-earn-tab.deposit-commission.note-title')}:</Text>
+        <Text style={styles.noteTitle}>{t('invite.invite-earn-tab.deposit-commission.note-label')}:</Text>
         
         {/* Note 1 */}
         <View style={styles.noteItem}>

@@ -573,6 +573,9 @@
       "bet-bonus": "Bet Bonus",
       "eligible-refers": "Eligible Refers",
       "invite-link": "Invite Link",
+      "register-link": "Register Link",
+      "download-app": "Download App",
+      "invite-code": "Invite Code",
       "copy": "Copy",
       "copied": "Copied",
       "how-to-get-your-invitation-bonus": "How to Get Your Invitation Bonus",
@@ -593,6 +596,7 @@
       "deposit-commission": {
         "title": "DEPOSIT COMMISSION",
         "description": "Earn a reward when your invitee makes their first deposit",
+        "note-label": "Note",
         "note-title": "Note",
         "note-1": "The invitee's deposit must be at least 300 PKR.",
         "note-2": "Both inviter and invitee must complete their profile details, including:",

@@ -115,11 +115,8 @@ const GameScreen = () => {
         confirmButtonText: t('common-terms.quit'),
         cancelButtonText: t('common-terms.cancel'),
         onConfirm: async () => {
+          Toast.show({ type: 'promise', text1: t('common-terms.logging-out-game') });
           try {
-            Toast.show({ type: 'promise', text1: t('common-terms.logging-out-game') });
-            invalidate('balance');
-            invalidate('panel-info');
-            resetGameDisplay();
             setIsLandscape(false);
             // Unlock orientation when quitting game
             safeOrientationCall(() => {
@@ -131,6 +128,10 @@ const GameScreen = () => {
           } finally {
             Toast.hide();
             navigation.goBack();
+            // Invalidate user data and reset game AFTER quitting the game
+            invalidate('balance');
+            invalidate('panel-info');
+            resetGameDisplay();
           }
         },
       });

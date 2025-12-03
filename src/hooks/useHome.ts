@@ -32,18 +32,16 @@ const mockGames: Record<string, ISlot> = {
 };
 
 // Fixed positions configuration for prioritized games
+// Positions are 1-based. When distributed to rows: odd positions → row 1, even positions → row 2
 const fixedPositionsConfig = [
-  { position: 1, gameId: '', gameName: 'Fortune Gems' }, // Position 1 - Fortune Gems
-  { position: 4, gameId: '', gameName: 'Money Coming' }, // Position 2 - Money Coming
-  { position: 7, gameId: '', gameName: 'Super Ace' }, // Position 3 - Super Ace
-  { position: 2, gameId: '', gameName: 'Aviator' }, // Position 10 - Aviator
-  { position: 5, gameId: '', gameName: '9Wicket' }, // Position 11 - 9Wicket (uses mock data if not found)
-  { position: 8, gameId: '', gameName: 'The Chicken House' }, // Position 12 - The Chicken House
-
-  // { position: 3, gameId: "", gameName: "Wild Bounty Showdown" },
-  // { position: 6, gameId: "", gameName: "Fortune Rabbit" },
-  // { position: 9, gameId: "", gameName: "Treasures of Aztec" },
-  
+  { position: 1, gameId: '', gameName: 'Aviator' }, // Row 1, Position 1
+  { position: 3, gameId: '', gameName: 'Super Ace' }, // Row 1, Position 2
+  { position: 5, gameId: '', gameName: 'Fortune Gems' }, // Row 1, Position 3
+  { position: 2, gameId: '', gameName: '9Wicket' }, // Row 2, Position 1
+  { position: 4, gameId: '', gameName: 'Golden Empire' }, // Row 2, Position 2
+  { position: 6, gameId: '', gameName: 'Wild Bounty Showdown' }, // Row 2, Position 3
+  { position: 7, gameId: '', gameName: 'Jackpot Fishing' }, // Row 1, Position 4
+  { position: 8, gameId: '', gameName: 'Fortune Dragon' }, // Row 2, Position 4
 ];
 
 // Helper function to shuffle an array

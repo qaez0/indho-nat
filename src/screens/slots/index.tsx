@@ -1,5 +1,5 @@
 import { StyleSheet, ScrollView } from 'react-native';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSlots } from '../../hooks/useSlots';
 import RecommendedGames from '../../components/game/RecommendedGames';
@@ -17,6 +17,12 @@ import {
 import { TabsParamList } from '../../types/nav';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
+// Define provider order based on tab arrangement (excluding "ALL")
+// Use case-insensitive matching to handle variations like "cq9" vs "CQ9"
+const PROVIDER_ORDER = ['JILI', 'PG', 'SPRIBE', 'CQ9'];
+const PAGE_SIZE = 24;
+const GAME_ID_MOST_PLAYED_RULES = ['cq9', 'JILI', 'SPRIBE'];
+
 const SlotsView = () => {
   const { t } = useTranslation();
   const scrollViewRef = React.useRef<ScrollView>(null);
@@ -24,6 +30,8 @@ const SlotsView = () => {
   const navigation =
     useNavigation<BottomTabNavigationProp<TabsParamList, 'slots'>>();
   const gameIdFromParams = route.params?.game_id;
+  const [clientPage, setClientPage] = useState(1);
+
   const {
     data: recomendedGames,
     isLoading: isLoadingRecomendedGames,
@@ -42,7 +50,7 @@ const SlotsView = () => {
     category: 'SLOTS',
     game_id: gameIdFromParams || '',
     page: 1,
-    pagesize: 21,
+    pagesize: PAGE_SIZE,
   };
 
   const {
@@ -53,6 +61,27 @@ const SlotsView = () => {
     isFetching,
     isRefetching,
   } = useSlots(initialFilterState);
+
+  // When showing ALL games (game_id is empty), fetch all games for client-side sorting
+  // When a specific provider is selected, use server-side pagination
+  const isShowingAll = !state.game_id || state.game_id === '';
+
+  // Fetch all games when showing ALL for proper sorting
+  const {
+    data: allSlotGames,
+    isLoading: isLoadingAllGames,
+  } = useSlots({
+    name: state.name || '',
+    category: 'SLOTS',
+    game_id: '',
+    page: 1,
+    pagesize: 1000, // Fetch all games when showing ALL
+  });
+
+  // Reset client page when filter changes
+  useEffect(() => {
+    setClientPage(1);
+  }, [state.game_id, state.name]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -116,14 +145,78 @@ const SlotsView = () => {
   );
 
   const mostPlayedGames = useMemo(() => {
-    const gameIdMostPlayedRules = ['cq9', 'JILI', 'SPRIBE', 'PG'];
     return recomendedGames?.data?.data?.filter((game: ISlot) =>
-      gameIdMostPlayedRules.includes(game.game_id),
+      GAME_ID_MOST_PLAYED_RULES.includes(game.game_id),
     );
   }, [recomendedGames]);
 
-  const filteredSlotGames =
-    slotGames?.data?.data?.filter((game: ISlot) => game.game_id !== 'EFG') || []; // end of hide efg games
+  // Sort games by provider order (only when showing ALL)
+  const sortedSlotGames = useMemo(() => {
+    if (!isShowingAll) {
+      // When a specific provider is selected, return games as-is (server-side pagination)
+      const games = slotGames?.data?.data || [];
+      // Filter out EFG games
+      return games.filter((game: ISlot) => game.game_id !== 'EFG');
+    }
+
+    // When showing ALL, use allSlotGames and sort by provider order
+    const games = allSlotGames?.data?.data || [];
+    // Filter out EFG games first
+    const filteredGames = games.filter((game: ISlot) => game.game_id !== 'EFG');
+    
+    return [...filteredGames].sort((a: ISlot, b: ISlot) => {
+      // Normalize game_id to uppercase for case-insensitive comparison
+      const gameIdA = (a.game_id || '').toUpperCase();
+      const gameIdB = (b.game_id || '').toUpperCase();
+
+      const indexA = PROVIDER_ORDER.findIndex(
+        provider => provider.toUpperCase() === gameIdA,
+      );
+      const indexB = PROVIDER_ORDER.findIndex(
+        provider => provider.toUpperCase() === gameIdB,
+      );
+
+      // If both are in the order list, sort by their position
+      if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+      }
+      // If only A is in the list, A comes first
+      if (indexA !== -1) return -1;
+      // If only B is in the list, B comes first
+      if (indexB !== -1) return 1;
+      // If neither is in the list, maintain original order
+      return 0;
+    });
+  }, [slotGames?.data?.data, allSlotGames?.data?.data, isShowingAll]);
+
+  // Client-side pagination for ALL games, server-side for filtered games
+  const paginatedGames = useMemo(() => {
+    if (!isShowingAll) {
+      // Server-side pagination - return games as-is
+      return sortedSlotGames;
+    }
+
+    // Client-side pagination - slice the sorted games
+    const startIndex = (clientPage - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
+    return sortedSlotGames.slice(startIndex, endIndex);
+  }, [sortedSlotGames, clientPage, isShowingAll]);
+
+  // Calculate total items for pagination
+  const totalItems = useMemo(() => {
+    if (!isShowingAll) {
+      return slotGames?.data?.totalItems || 0;
+    }
+    return sortedSlotGames.length;
+  }, [isShowingAll, slotGames?.data?.totalItems, sortedSlotGames.length]);
+
+  const handlePageChange = (page: number) => {
+    if (isShowingAll) {
+      setClientPage(page);
+    } else {
+      dispatch({ type: 'SET_PAGE', payload: page });
+    }
+  };
 
   return (
     <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
@@ -143,12 +236,12 @@ const SlotsView = () => {
         initialFilterState={initialFilterState}
       />
       <GameResult
-        data={filteredSlotGames as ISlot[]}
-        totalPage={slotGames?.data?.totalItems || 0}
-        currentPage={slotGames?.data?.currentPage || 0}
-        pageSize={slotGames?.data?.pageSize || 0}
-        setPage={page => dispatch({ type: 'SET_PAGE', payload: page })}
-        isLoading={isLoading || isFetching || isRefetching}
+        data={paginatedGames as ISlot[]}
+        totalItems={totalItems}
+        currentPage={isShowingAll ? clientPage : (slotGames?.data?.currentPage || 1)}
+        pageSize={PAGE_SIZE}
+        setPage={handlePageChange}
+        isLoading={isShowingAll ? isLoadingAllGames : (isLoading || isFetching || isRefetching)}
       />
     </ScrollView>
   );

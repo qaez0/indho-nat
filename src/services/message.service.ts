@@ -16,10 +16,10 @@ export const getMessageRecord = async (
 };
 
 export const markMessageAsRead = async (
-  messageId: number,
+  messageId: number | 'all',
 ): Promise<IBaseResponse<{ message: string }>> => {
   const data: IMarkMessageAsReadRequest = {
-    message_id: messageId.toString(),
+    message_id: messageId === 'all' ? 'all' : messageId.toString(),
   };
 
   return apiRequest.post<IBaseResponse<{ message: string }>>({

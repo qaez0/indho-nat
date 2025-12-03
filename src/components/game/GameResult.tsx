@@ -8,7 +8,7 @@ import Skeleton from '../Skeleton';
 interface IGameRes {
   data: ISlot[];
   currentPage: number;
-  totalPage: number;
+  totalItems: number;
   pageSize: number;
   setPage: (page: number) => void;
   isLoading: boolean;
@@ -16,12 +16,14 @@ interface IGameRes {
 
 const GameResult = ({
   data,
-  totalPage,
+  totalItems,
   currentPage,
   setPage,
   isLoading,
   pageSize,
 }: IGameRes) => {
+  // Calculate total pages from total items
+  const totalPage = Math.ceil(totalItems / pageSize);
   const { width: screenWidth } = Dimensions.get('window');
   const containerPadding = 15 * 2;
   const gap = 8;
@@ -82,9 +84,9 @@ const GameResult = ({
               />
             ))}
           </View>
-          {totalPage > 21 && (
+          {totalPage > 1 && (
             <CustomPagination
-              totalItems={totalPage}
+              totalItems={totalItems}
               pageSize={pageSize}
               currentPage={currentPage}
               onPageChange={setPage}

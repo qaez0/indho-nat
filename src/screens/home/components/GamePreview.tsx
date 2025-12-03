@@ -23,9 +23,9 @@ interface GameRowProps {
   shouldAutoSwipe: boolean;
 }
 
-const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPadding, shouldAutoSwipe }: GameRowProps) => {
+const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPadding, shouldAutoSwipe, cardWidth, cardHeight }: GameRowProps & { cardWidth: number; cardHeight: number }) => {
   const rowAutoSwipe = useAutoSwipe({
-    itemWidth: 109,
+    itemWidth: cardWidth,
     itemGap: 8,
     totalItems: row.length,
     autoSwipeInterval: 3000,
@@ -48,7 +48,7 @@ const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPad
       key={`row-${rowIndex}`}
       ref={rowAutoSwipe.scrollViewRef}
       horizontal
-      style={styles.rowScrollView}
+      style={[styles.rowScrollView, { height: cardHeight }]}
       contentContainerStyle={[
         styles.gridRow,
         { width: Math.max(rowWidth, screenWidth - containerPadding) },
@@ -65,8 +65,8 @@ const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPad
         <GameCard
           key={`${rowIndex}-${gameIndex}`}
           {...game}
-          customWidth={109}
-          customHeight={109}
+          customWidth={cardWidth}
+          customHeight={cardHeight}
         />
       ))}
     </ScrollView>
@@ -76,8 +76,19 @@ const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPad
 const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = false, autoSwipeRowIndex }: Props) => {
   const scrollViewRef = React.useRef<ScrollView>(null);
   
+  // Calculate responsive card dimensions
+  const { width: screenWidth } = Dimensions.get('window');
+  const containerPadding = 15 * 2;
+  const gap = 8;
+  
+  // On mobile, 3 cards fit fully within the screen (account for padding & gaps)
+  // 80px ≈ side paddings + Swiper gaps; adjust if layout changes
+  const isMobile = screenWidth < 600; // Adjust breakpoint as needed
+  const cardWidth = isMobile ? Math.floor((screenWidth - 80) / 3) : 109;
+  const cardHeight = cardWidth; // 1:1 aspect ratio
+  
   const autoSwipe = useAutoSwipe({
-    itemWidth: 109,
+    itemWidth: cardWidth,
     itemGap: 8,
     totalItems: games.length,
     autoSwipeInterval: 3000,
@@ -102,22 +113,72 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
   const activeScrollViewRef = disableAutoSwipe ? scrollViewRef : autoSwipe.scrollViewRef;
 
   // Calculate items per row for grid layout
-  const { width: screenWidth } = Dimensions.get('window');
-  const containerPadding = 15 * 2;
-  const cardWidth = 109;
-  const gap = 8;
   const itemsPerRow = Math.floor((screenWidth - containerPadding) / (cardWidth + gap));
   
+  // Games that should be in the third row
+  const thirdRowAllowedGames = [
+    "Fortune Rabbit",
+    "Super Ace Deluxe",
+    "Treasures of Aztec",
+    "Money Coming",
+    "Anubis Wrath",
+    "Boxing King",
+    "Fortune Ox",
+    "Mines",
+    "Fortune Tiger",
+    "Crazy 777",
+    "Legend of Perseus",
+    "Money Pot",
+    "Double Fortune",
+    "Charge Buffalo",
+    "Lucky Neko",
+    "Fortune King Jackpot",
+    "Wild Bandito",
+    "Alibaba",
+    "Pinata Wins",
+    "Money Coming_ Expanded Bets",
+  ];
+
   // Group games into rows for grid layout
+  // Note: gamesList already has fixed positions applied from useHome hook
   const groupGamesIntoRows = (gamesList: ISlot[], numRows: number) => {
     const rows: ISlot[][] = [];
     for (let i = 0; i < numRows; i++) {
       rows.push([]);
     }
-    gamesList.forEach((game, index) => {
-      const rowIndex = index % numRows;
+    
+    // Separate games that should be in the third row
+    const thirdRowGames: ISlot[] = [];
+    const otherGames: ISlot[] = [];
+    
+    gamesList.forEach((game) => {
+      const gameName = game.name?.trim();
+      const isThirdRowGame = thirdRowAllowedGames.some(
+        (allowedName) => gameName?.toLowerCase() === allowedName.toLowerCase()
+      );
+      
+      if (isThirdRowGame) {
+        thirdRowGames.push(game);
+      } else {
+        otherGames.push(game);
+      }
+    });
+    
+    // If we have a third row (index 2), put thirdRowGames there
+    if (numRows > 2) {
+      rows[2] = thirdRowGames;
+    }
+    
+    // Distribute remaining games to rows 1 and 2
+    // Since gamesList already has fixed positions applied, we maintain the order
+    // and distribute using modulo to preserve the fixed position arrangement
+    const rowsToFill = numRows > 2 ? 2 : numRows;
+    
+    otherGames.forEach((game, index) => {
+      const rowIndex = index % rowsToFill;
       rows[rowIndex].push(game);
     });
+    
     return rows;
   };
 
@@ -140,6 +201,8 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
                 screenWidth={screenWidth}
                 containerPadding={containerPadding}
                 shouldAutoSwipe={shouldAutoSwipe}
+                cardWidth={cardWidth}
+                cardHeight={cardHeight}
               />
             );
           })}
@@ -157,15 +220,15 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
             <ScrollView
               key={`skeleton-row-${rowIndex}`}
               horizontal
-              style={styles.rowScrollView}
+              style={[styles.rowScrollView, { height: cardHeight }]}
               contentContainerStyle={styles.gridRow}
               showsHorizontalScrollIndicator={false}
             >
               {Array.from({ length: skeletonItemsPerRow }, (_, index) => (
                 <Skeleton
                   key={`skeleton-${rowIndex}-${index}`}
-                  width={109}
-                  height={109}
+                  width={cardWidth}
+                  height={cardHeight}
                   borderRadius={6}
                 />
               ))}
@@ -181,7 +244,7 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
   const renderContent = () => {
     if (games.length > 0 && !isLoading) {
       return games.map((game, idx) => (
-        <GameCard key={idx} {...game} customWidth={109} customHeight={109} />
+        <GameCard key={idx} {...game} customWidth={cardWidth} customHeight={cardHeight} />
       ));
     }
     // Generate enough skeleton items to ensure horizontal scrolling
@@ -189,8 +252,8 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
     return Array.from({ length: skeletonCount }, (_, index) => (
       <Skeleton
         key={`skeleton-${index}`}
-        width={109}
-        height={109}
+        width={cardWidth}
+        height={cardHeight}
         borderRadius={6}
       />
     ));
@@ -201,7 +264,7 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
     return (
       <View
         key={`game-preview-grid-${games.length}-${isLoading}`}
-        style={[styles.gridScrollContainer, { height: rows * (109 + gap) - gap }]}
+        style={[styles.gridScrollContainer, { height: rows * (cardHeight + gap) - gap }]}
       >
         {renderGridContent()}
       </View>
@@ -214,7 +277,7 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
       key={`game-preview-${games.length}-${isLoading}`}
       ref={activeScrollViewRef}
       horizontal
-      style={styles.container}
+      style={[styles.container, { height: cardHeight }]}
       contentContainerStyle={styles.horizontalContent}
       showsHorizontalScrollIndicator={false}
       onScroll={handleScroll}
@@ -230,16 +293,18 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
 });
 
 const styles = StyleSheet.create({
-  container: { height: 109 },
+  container: { 
+    // height will be set dynamically based on cardHeight
+  },
   gridScrollContainer: {
-    height: 109,
+    // height will be set dynamically based on cardHeight
   },
   gridWrapper: {
     flexDirection: 'column',
     gap: 8,
   },
   rowScrollView: {
-    height: 109,
+    // height will be set dynamically based on cardHeight
   },
   gridRow: {
     flexDirection: 'row',
