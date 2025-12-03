@@ -70,6 +70,8 @@ const SlotsView = () => {
   const {
     data: allSlotGames,
     isLoading: isLoadingAllGames,
+    dispatch: dispatchAllGames,
+    state: allGamesState,
   } = useSlots({
     name: state.name || '',
     category: 'SLOTS',
@@ -77,6 +79,13 @@ const SlotsView = () => {
     page: 1,
     pagesize: 1000, // Fetch all games when showing ALL
   });
+  
+// Sync search term from main state to allGames state when showing ALL
+useEffect(() => {
+  if (isShowingAll && allGamesState.name !== state.name) {
+    dispatchAllGames({ type: "SET_NAME", payload: state.name || "" });
+  }
+}, [state.name, isShowingAll, allGamesState.name, dispatchAllGames]);
 
   // Reset client page when filter changes
   useEffect(() => {

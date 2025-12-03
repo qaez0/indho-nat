@@ -4,6 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import { Input, Text } from '@ui-kitten/components';
 import type { Dispatch } from 'react';
@@ -68,7 +69,14 @@ const GameFilter = ({
     setSearchValue(text);
   };
 
+  const handleClearSearch = () => {
+    setSearchValue('');
+    dispatch({ type: 'SET_NAME', payload: '' });
+  };
+
   const isSearching = isLoading && searchValue !== '';
+  const hasSearchValue = searchValue !== '';
+  
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: '700' }} category="s1">
@@ -102,6 +110,10 @@ const GameFilter = ({
         accessoryRight={
           isSearching ? (
             <ActivityIndicator size="small" color="#fff" />
+          ) : hasSearchValue ? (
+            <TouchableOpacity onPress={handleClearSearch} style={styles.clearButton}>
+              <Feather name="x" size={18} color="white" />
+            </TouchableOpacity>
           ) : undefined
         }
       />
@@ -122,5 +134,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 5,
     display: 'flex',
+  },
+  clearButton: {
+    padding: 4,
   },
 });
