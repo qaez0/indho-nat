@@ -80,6 +80,7 @@ const DepositWithdrawScreen = () => {
           <Button
             onPress={() => {
               setActiveTab('deposit');
+              invalidate('panel-info');
             }}
             style={[
               styles.naviButtonBase,
@@ -145,25 +146,29 @@ const DepositWithdrawScreen = () => {
             )}
           </Button>
         </View>
-        <View style={{ display: activeTab === 'deposit' ? 'flex' : 'none' }}>
-          <Deposit
-            details={details}
-            isLoading={isLoading.panelInfo}
-            refetch={() => invalidate('panel-info')}
-            isRefetching={isRefetching.panelInfo}
-            isAuthenticated={isAuthenticated}
-          />
-        </View>
-        <View style={{ display: activeTab === 'withdraw' ? 'flex' : 'none' }}>
-          <Withdraw
-            bankInfo={bankInfo}
-            playerInfo={playerInfo as IPlayerDetails}
-            transactInfo={transactionInfo as IPlayerTransactionInfo}
-            isLoading={isLoading.panelInfo}
-            isRefetching={isRefetching.panelInfo}
-            refetch={() => invalidate('panel-info')}
-          />
-        </View>
+        {activeTab === 'deposit' && (
+          <View>
+            <Deposit
+              details={details}
+              isLoading={isLoading.panelInfo}
+              refetch={() => invalidate('panel-info')}
+              isRefetching={isRefetching.panelInfo}
+              isAuthenticated={isAuthenticated}
+            />
+          </View>
+        )}
+        {activeTab === 'withdraw' && (
+          <View>
+            <Withdraw
+              bankInfo={bankInfo}
+              playerInfo={playerInfo as IPlayerDetails}
+              transactInfo={transactionInfo as IPlayerTransactionInfo}
+              isLoading={isLoading.panelInfo}
+              isRefetching={isRefetching.panelInfo}
+              refetch={() => invalidate('panel-info')}
+            />
+          </View>
+        )}
 
         <DepWithCustomDialog />
       </View>
