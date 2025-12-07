@@ -165,13 +165,13 @@ useEffect(() => {
       // When a specific provider is selected, return games as-is (server-side pagination)
       const games = slotGames?.data?.data || [];
       // Filter out EFG games
-      return games.filter((game: ISlot) => game.game_id !== 'EFG');
+      return games.filter((game: ISlot) => game.game_id !== '');
     }
 
     // When showing ALL, use allSlotGames and sort by provider order
     const games = allSlotGames?.data?.data || [];
     // Filter out EFG games first
-    const filteredGames = games.filter((game: ISlot) => game.game_id !== 'EFG');
+    const filteredGames = games.filter((game: ISlot) => game.game_id !== '');
     
     return [...filteredGames].sort((a: ISlot, b: ISlot) => {
       // Normalize game_id to uppercase for case-insensitive comparison

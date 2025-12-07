@@ -32,9 +32,9 @@ export const getSlotProviderOptions = (t: TFunction): optionProps[] => [
     label: 'CQ9',
     image: require('../assets/common/game-provider-logo/cq9.png'),
   },
-  // {
-  //   value: 'EFG',
-  //   label: 'EFG',
-  //   image: require('../assets/common/game-provider-logo/efg.png'),
-  // },
+  {
+    value: 'EFG',
+    label: 'EFG',
+    image: require('../assets/common/game-provider-logo/efg.png'),
+  },
 ];
