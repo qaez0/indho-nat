@@ -3,7 +3,7 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  // Alert,
+  Alert,
   ActivityIndicator,
   Text,
 } from 'react-native';
@@ -24,10 +24,8 @@ const EarnScreen = () => {
   const { t } = useTranslation();
   const [activeMainTab, setActiveMainTab] = useState<MainTab>('invite-earn');
   const [activeSubTab, setActiveSubTab] = useState<SubTab>('inviteLink');
-  const [activeTimeFilter, setActiveTimeFilter] = useState<string>('Today');
-  const [copiedInviteLink, setCopiedInviteLink] = useState(false);
-  const [copiedRegisterLink, setCopiedRegisterLink] = useState(false);
-  const [copiedCode, setCopiedCode] = useState(false);
+  const [activeTimeFilter, setActiveTimeFilter] = useState<string>('today');
+  const [copied, setCopied] = useState(false);
   const [dateRange, setDateRange] = useState({
     startDate: dayjs().subtract(7, 'day').toDate(),
     endDate: dayjs().toDate(),
@@ -35,22 +33,8 @@ const EarnScreen = () => {
   const theme = useTheme();
   const { isAuthenticated } = useUser();
 
-  // Map filter value to API format
-  const getApiTimeFilter = (filter: string): string => {
-    switch (filter) {
-      case 'Today':
-        return 'today';
-      case 'Yesterday':
-        return 'yesterday';
-      case 'All':
-        return 'all';
-      default:
-        return 'today';
-    }
-  };
-
   const { results, isLoading } = useInvite(
-    getApiTimeFilter(activeTimeFilter),
+    activeTimeFilter,
     {
       Page: 1,
       PageSize: 10,
@@ -69,87 +53,19 @@ const EarnScreen = () => {
     inviteBonusResult,
   ] = results;
 
-  const rawInviteLink = inviteLinkResult.isLoading
-    ? ''
-    : inviteLinkResult.error
-    ? ''
-    : inviteLinkResult.data?.data?.invite_link ?? 'https://11ic.pk';
-
-  // Download link (used in the first input)
-  const inviteLink = (() => {
-    if (inviteLinkResult.isLoading) {
-      return 'Loading...';
+  const inviteLink = (): string => {
+    const rawLink = inviteLinkResult.data?.data?.invite_link?.split('?')[1];
+    if (!rawLink) {
+      return 'https://11ic.pk/download/';
     }
-    if (inviteLinkResult.error) {
-      return 'Error fetching link';
-    }
+    return `https://11ic.pk/download/?${rawLink}`;
+  };
 
-    if (!rawInviteLink) {
-      return 'https://11ic.pk/';
-    }
-
+  const handleCopyLink = async () => {
     try {
-      // Parse the API invite link to extract the query parameter
-      const url = new URL(rawInviteLink);
-      const queryParams = url.search; // This includes the "?" and query string like "?i=elh5L18J5F"
-
-      // Replace with current domain and add /download path
-      return `https://11ic.pk/${queryParams}`;
-    } catch {
-      // If URL parsing fails, try to extract query params manually
-      const queryMatch = rawInviteLink.match(/\?.*$/);
-      const queryParams = queryMatch ? queryMatch[0] : '';
-      return `https://11ic.pk/${queryParams}`;
-    }
-  })();
-
-  // Registration link (homepage with invite code, used in the third input)
-  const registerLink = (() => {
-    if (inviteLinkResult.isLoading) {
-      return 'Loading...';
-    }
-    if (inviteLinkResult.error) {
-      return 'Error fetching link';
-    }
-    return 'https://11ic.pk/download';
-  })();
-
-  // Extract invite code from invite link
-  const inviteCode = (() => {
-    if (inviteLinkResult.isLoading) {
-      return 'Loading...';
-    }
-    if (inviteLinkResult.error) {
-      return 'Error fetching code';
-    }
-
-    if (!rawInviteLink) {
-      return '';
-    }
-
-    try {
-      const url = new URL(rawInviteLink);
-      return url.searchParams.get('i') || '';
-    } catch {
-      // If URL parsing fails, try to extract manually
-      const match = rawInviteLink.match(/[?&]i=([^&]*)/);
-      return match ? match[1] : '';
-    }
-  })();
-
-  const handleCopyInviteLink = async () => {
-    if (
-      !inviteLink ||
-      inviteLink === 'Loading...' ||
-      inviteLink === 'Error fetching link'
-    ) {
-      return;
-    }
-
-    try {
-      Clipboard.setString(inviteLink);
-      setCopiedInviteLink(true);
-      setTimeout(() => setCopiedInviteLink(false), 2000);
+      Clipboard.setString(inviteLink());
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
       Toast.show({
         type: 'success',
         text1: 'Invite link copied to clipboard',
@@ -157,57 +73,7 @@ const EarnScreen = () => {
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Failed to copy invite link',
-      });
-    }
-  };
-
-  const handleCopyRegisterLink = async () => {
-    if (
-      !registerLink ||
-      registerLink === 'Loading...' ||
-      registerLink === 'Error fetching link'
-    ) {
-      return;
-    }
-
-    try {
-      Clipboard.setString(registerLink);
-      setCopiedRegisterLink(true);
-      setTimeout(() => setCopiedRegisterLink(false), 2000);
-      Toast.show({
-        type: 'success',
-        text1: 'Register link copied to clipboard',
-      });
-    } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1: 'Failed to copy register link',
-      });
-    }
-  };
-
-  const handleCopyCode = async () => {
-    if (
-      !inviteCode ||
-      inviteCode === 'Loading...' ||
-      inviteCode === 'Error fetching code'
-    ) {
-      return;
-    }
-
-    try {
-      Clipboard.setString(inviteCode);
-      setCopiedCode(true);
-      setTimeout(() => setCopiedCode(false), 2000);
-      Toast.show({
-        type: 'success',
-        text1: 'Invite code copied to clipboard',
-      });
-    } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1: 'Failed to copy invite code',
+        text1: 'Failed to copy link',
       });
     }
   };
@@ -275,15 +141,9 @@ const EarnScreen = () => {
           isAuthenticated={isAuthenticated}
           activeTimeFilter={activeTimeFilter}
           setActiveTimeFilter={setActiveTimeFilter}
-          inviteLink={inviteLink}
-          registerLink={registerLink}
-          inviteCode={inviteCode}
-          copiedInviteLink={copiedInviteLink}
-          copiedRegisterLink={copiedRegisterLink}
-          copiedCode={copiedCode}
-          handleCopyInviteLink={handleCopyInviteLink}
-          handleCopyRegisterLink={handleCopyRegisterLink}
-          handleCopyCode={handleCopyCode}
+          inviteLink={inviteLink()}
+          copied={copied}
+          handleCopyLink={handleCopyLink}
         />
       )}
       {activeMainTab === 'daily-invite-reward' && (
@@ -291,15 +151,9 @@ const EarnScreen = () => {
           activeSubTab={activeSubTab}
           setActiveSubTab={setActiveSubTab}
           rebateSettingResult={rebateSettingResult}
-          inviteLink={inviteLink}
-          registerLink={registerLink}
-          inviteCode={inviteCode}
-          copiedInviteLink={copiedInviteLink}
-          copiedRegisterLink={copiedRegisterLink}
-          copiedCode={copiedCode}
-          handleCopyInviteLink={handleCopyInviteLink}
-          handleCopyRegisterLink={handleCopyRegisterLink}
-          handleCopyCode={handleCopyCode}
+          inviteLink={inviteLink()}
+          copied={copied}
+          handleCopyLink={handleCopyLink}
           rebateReportTotalResult={rebateReportTotalResult}
           rebateReportResult={rebateReportResult}
           earningHistoryResult={earningHistoryResult}
