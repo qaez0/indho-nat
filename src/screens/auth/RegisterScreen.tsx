@@ -36,12 +36,7 @@ import type {
 } from '../../types/auth';
 import { registerSchema } from '../../schemas/auth';
 import Toast from 'react-native-toast-message';
-import {
-  AuthParamList,
-  RootStackNav,
-  TabNav,
-  TabsParamList,
-} from '../../types/nav';
+import { AuthParamList, RootStackNav } from '../../types/nav';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { useUserStore } from '../../store/useUser';
 import { getBasicDeviceInfo } from '../../services/device.service';
@@ -50,14 +45,7 @@ import FontAwesome6 from '@react-native-vector-icons/fontawesome6';
 import { useTranslation } from 'react-i18next';
 import LinearGradient from 'react-native-linear-gradient';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import {
-  PasswordIcon,
-  GoogleIcon,
-  TelegramIcon,
-  WhatsAppIcon,
-  FacebookIcon,
-  InviteIcon,
-} from '../../components/icons/SvgIcons';
+import { PasswordIcon, InviteIcon } from '../../components/icons/SvgIcons';
 export default function RegisterScreen() {
   const [telegramWebViewOpen, setTelegramWebViewOpen] = useState(false);
   const { t } = useTranslation();
@@ -66,13 +54,11 @@ export default function RegisterScreen() {
   const setToken = useUserStore(state => state.setToken);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const adjust_id = useUserStore(state => state.adjust_id);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const glowAnim = useRef(new Animated.Value(0)).current;
   const route = useRoute<RouteProp<AuthParamList, 'register'>>();
 
   useEffect(() => {
-    // Original image pulse animation + container glow effect
     Animated.loop(
       Animated.sequence([
         // Phase 1: Scale up image + build glow
@@ -311,9 +297,9 @@ export default function RegisterScreen() {
         navigation.navigate('main-tabs', {
           screen: 'tabs',
           params: {
-            screen: 'deposit-withdraw',
+            screen: 'slots',
             params: {
-              tab: 'deposit',
+              game_id: undefined,
             },
           },
         });
