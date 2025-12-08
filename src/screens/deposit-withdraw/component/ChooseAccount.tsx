@@ -37,7 +37,14 @@ const ChooseAccount = ({ accounts }: ChooseAccountProps) => {
   };
 
   useEffect(() => {
-    if (accounts.length > 0 && !selectedCard) {
+    if (accounts.length === 0) return;
+
+    const currentCardStillExists = accounts.some(
+      (account) => account.card_id === selectedCard?.card_id
+    );
+
+    if (!selectedCard || !currentCardStillExists) {
+      // Default to the first account whenever switching categories
       setSelectedCard(accounts[0]);
     }
   }, [accounts, selectedCard, setSelectedCard]);

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Content from '../../components/Content';
@@ -13,6 +13,7 @@ import Skeleton from '../../components/Skeleton';
 import { useFocusEffect } from '@react-navigation/native';
 import { useCurrentRoute } from '../../store/useUIStore';
 import React from 'react';
+import { useUser } from '../../hooks/useUser';
 
 export default function LiveCasinoPage() {
   const {
@@ -22,6 +23,7 @@ export default function LiveCasinoPage() {
     setSelectedProvider,
     isLoading,
   } = useCasino();
+  const { user, isAuthenticated, isLoading: userLoading } = useUser();
   const scrollViewRef = React.useRef<ScrollView>(null);
   const { t } = useTranslation();
   const currentRoute = useCurrentRoute(state => state.currentRoute);
@@ -84,8 +86,55 @@ export default function LiveCasinoPage() {
     return null;
   };
 
+  const isCasinoCategory = (category: string) => {
+    if (!category) return false;
+    try {
+      const parsed = JSON.parse(category);
+      if (Array.isArray(parsed)) {
+        return parsed.some(
+          (item: string) => item?.toUpperCase?.() === 'CASINO',
+        );
+      }
+    } catch {
+      // fallback to substring check
+    }
+    return category.toUpperCase().includes('CASINO');
+  };
+
+  const recentlyPlayedCasino = useMemo(() => {
+    if (!isAuthenticated) return [];
+    const games = user?.player_info?.recently_played_games || [];
+    return games.filter(game => isCasinoCategory(game.category));
+  }, [isAuthenticated, user?.player_info?.recently_played_games]);
+
+  const showRecentlyPlayed =
+    !userLoading.panelInfo && recentlyPlayedCasino.length > 0;
+
   return (
     <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
+      {showRecentlyPlayed && (
+        <Content
+          title={t('content-title.recently-played').toUpperCase()}
+          icon={<CasinoSvg />}
+        >
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.gamesScrollContainer}
+            contentContainerStyle={styles.gamesScrollContent}
+          >
+            {recentlyPlayedCasino.map((game: ISlot) => (
+              <GameCard
+                key={game.url}
+                {...game}
+                customWidth={109}
+                customHeight={109}
+              />
+            ))}
+          </ScrollView>
+        </Content>
+      )}
+
       <Content
         title={t('content-title.live-casino').toUpperCase()}
         icon={<CasinoSvg />}

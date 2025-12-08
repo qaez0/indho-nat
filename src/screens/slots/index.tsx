@@ -8,6 +8,7 @@ import GameFilter from '../../components/game/GameFilter';
 import GameResult from '../../components/game/GameResult';
 import { getSlotProviderOptions } from '../../constants/slots';
 import React from 'react';
+import { useUser } from '../../hooks/useUser';
 import {
   useFocusEffect,
   useRoute,
@@ -25,6 +26,7 @@ const GAME_ID_MOST_PLAYED_RULES = ['cq9', 'JILI', 'SPRIBE'];
 
 const SlotsView = () => {
   const { t } = useTranslation();
+  const { user, isAuthenticated, isLoading: userLoading } = useUser();
   const scrollViewRef = React.useRef<ScrollView>(null);
   const route = useRoute<RouteProp<TabsParamList, 'slots'>>();
   const navigation =
@@ -79,13 +81,13 @@ const SlotsView = () => {
     page: 1,
     pagesize: 1000, // Fetch all games when showing ALL
   });
-  
-// Sync search term from main state to allGames state when showing ALL
-useEffect(() => {
-  if (isShowingAll && allGamesState.name !== state.name) {
-    dispatchAllGames({ type: "SET_NAME", payload: state.name || "" });
-  }
-}, [state.name, isShowingAll, allGamesState.name, dispatchAllGames]);
+
+  // Sync search term from main state to allGames state when showing ALL
+  useEffect(() => {
+    if (isShowingAll && allGamesState.name !== state.name) {
+      dispatchAllGames({ type: 'SET_NAME', payload: state.name || '' });
+    }
+  }, [state.name, isShowingAll, allGamesState.name, dispatchAllGames]);
 
   // Reset client page when filter changes
   useEffect(() => {
@@ -159,6 +161,40 @@ useEffect(() => {
     );
   }, [recomendedGames]);
 
+  const isSlotsCategory = (category: string) => {
+    if (!category) return false;
+    try {
+      const parsed = JSON.parse(category);
+      if (Array.isArray(parsed)) {
+        return parsed.some(
+          (item: string) => item?.toUpperCase?.() === 'SLOTS',
+        );
+      }
+    } catch {
+      // fallback to substring check
+    }
+    return category.toUpperCase().includes('SLOTS');
+  };
+
+  const recentlyPlayedSlots = useMemo(() => {
+    if (!isAuthenticated) return [];
+    const games = user?.player_info?.recently_played_games || [];
+    return games.filter((game: ISlot) => isSlotsCategory(game.category));
+  }, [isAuthenticated, user?.player_info?.recently_played_games]);
+
+  const useRecentlyPlayed = recentlyPlayedSlots.length > 0;
+
+  const recommendedSectionGames = useRecentlyPlayed
+    ? (recentlyPlayedSlots as ISlot[])
+    : ((mostPlayedGames || []) as ISlot[]);
+
+  const recommendedSectionLoading =
+    (isAuthenticated && userLoading.panelInfo) ||
+    (!useRecentlyPlayed &&
+      (isLoadingRecomendedGames ||
+        isFetchingRecomendedGames ||
+        isRefetchingRecomendedGames));
+
   // Sort games by provider order (only when showing ALL)
   const sortedSlotGames = useMemo(() => {
     if (!isShowingAll) {
@@ -230,12 +266,8 @@ useEffect(() => {
   return (
     <ScrollView ref={scrollViewRef} contentContainerStyle={styles.container}>
       <RecommendedGames
-        game={(mostPlayedGames || []) as ISlot[]}
-        loading={
-          isLoadingRecomendedGames ||
-          isFetchingRecomendedGames ||
-          isRefetchingRecomendedGames
-        }
+        game={recommendedSectionGames}
+        loading={recommendedSectionLoading}
       />
       <GameFilter
         dispatch={dispatch}
