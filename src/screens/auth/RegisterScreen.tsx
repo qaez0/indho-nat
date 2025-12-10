@@ -297,9 +297,9 @@ export default function RegisterScreen() {
         navigation.navigate('main-tabs', {
           screen: 'tabs',
           params: {
-            screen: 'slots',
+            screen: 'deposit-withdraw',
             params: {
-              game_id: undefined,
+              tab: 'deposit',
             },
           },
         });
