@@ -60,6 +60,7 @@ const GameRow = React.memo(({ row, rowIndex, rowWidth, screenWidth, containerPad
       onMomentumScrollEnd={shouldAutoSwipe ? rowAutoSwipe.handleManualScrollEnd : undefined}
       onTouchStart={shouldAutoSwipe ? rowAutoSwipe.pauseAutoSwipe : undefined}
       onTouchEnd={shouldAutoSwipe ? rowAutoSwipe.resumeAutoSwipe : undefined}
+      removeClippedSubviews 
     >
       {row.map((game, gameIndex) => (
         <GameCard
@@ -286,6 +287,7 @@ const GamePreview = React.memo(({ games, isLoading, rows, disableAutoSwipe = fal
       scrollEventThrottle={16}
       onTouchStart={pauseAutoSwipe}
       onTouchEnd={resumeAutoSwipe}
+      removeClippedSubviews 
     >
       {renderContent()}
     </ScrollView>

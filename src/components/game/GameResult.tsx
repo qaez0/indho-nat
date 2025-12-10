@@ -74,7 +74,7 @@ const GameResult = ({
         <SkeletonPlaceholderUI />
       ) : (
         <View style={styles.container}>
-          <View style={[styles.gridContainer]}>
+          <View style={[styles.gridContainer]} removeClippedSubviews>
             {data.map((game, index) => (
               <GameCard
                 key={index}

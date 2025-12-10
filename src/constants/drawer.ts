@@ -3,7 +3,6 @@ import { RootStackParamList, TabsParamList } from '../types/nav';
 import { useTranslation } from 'react-i18next';
 import { queryClient } from '../App';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import FastImage from 'react-native-fast-image';
 import { useGameDisplay } from '../store/useUIStore';
 import { useLanguageStore } from '../store/useLanguageStore';
 import Toast from 'react-native-toast-message';
@@ -30,11 +29,6 @@ const clearCache = async () => {
   try {
     // Clear React Query cache (API response cache)
     queryClient.clear();
-
-    // Clear FastImage caches (image cache)
-    FastImage.clearMemoryCache();
-    FastImage.clearDiskCache();
-
     // Clear game display cache storage
     await AsyncStorage.removeItem('11ic-native-game-display-storage');
     useGameDisplay.getState().resetGameDisplay();

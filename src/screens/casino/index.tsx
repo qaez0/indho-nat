@@ -122,6 +122,7 @@ export default function LiveCasinoPage() {
             showsHorizontalScrollIndicator={false}
             style={styles.gamesScrollContainer}
             contentContainerStyle={styles.gamesScrollContent}
+            removeClippedSubviews 
           >
             {recentlyPlayedCasino.map((game: ISlot) => (
               <GameCard
@@ -187,6 +188,7 @@ export default function LiveCasinoPage() {
                       showsHorizontalScrollIndicator={false}
                       style={styles.gamesScrollContainer}
                       contentContainerStyle={styles.gamesScrollContent}
+                      removeClippedSubviews 
                     >
                       {games.map((game: ISlot) => (
                         <GameCard key={game.url} {...game} customWidth={109} customHeight={109} />

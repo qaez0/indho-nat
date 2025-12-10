@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  Image
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import { useGameLogin } from '../hooks/useGameLogin';
 import { ISlot } from '../types/slot';
 import { imageHandler } from '../utils/image-url';
@@ -63,16 +63,16 @@ const GameCard = (slot: IGameCard) => {
       onPress={handleGameClick}
       style={[styles.container, { width: cardWidth, height: cardHeight, aspectRatio: 1 }]}
     >
-      <FastImage
+      <Image
         source={{ uri: imageHandler(slot.img_lnk) }}
         style={[styles.image, { display: state.imageError ? 'none' : 'flex' }]}
         onLoad={() => dispatch({ type: 'SET_IMAGE_LOADING', payload: false })}
-        onError={() => {
-          console.error('Image load error');
+        onError={(e) => {
+          console.log('Image load error:', e.nativeEvent);
           dispatch({ type: 'SET_IMAGE_LOADING', payload: false });
           dispatch({ type: 'SET_IMAGE_ERROR', payload: true });
         }}
-        resizeMode={FastImage.resizeMode.stretch}
+        resizeMode={'cover'}
       />
       {state.imageLoading && (
         <View style={styles.overlay}>

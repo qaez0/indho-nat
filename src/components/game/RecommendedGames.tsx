@@ -101,6 +101,7 @@ const RecommendedGames = ({
             setScrollPosition(event.nativeEvent.contentOffset.x);
           }}
           scrollEventThrottle={16}
+          removeClippedSubviews 
         >
           {game.map((game, index) => (
             <GameCard
