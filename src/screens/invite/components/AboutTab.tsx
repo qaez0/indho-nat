@@ -33,7 +33,10 @@ export const AboutTab: React.FC<AboutTabProps> = ({
 
   // Debug logs to see what's happening
   console.log('=== AboutTab Debug ===');
-  console.log('rebateSettingResult:', JSON.stringify(rebateSettingResult, null, 2));
+  console.log(
+    'rebateSettingResult:',
+    JSON.stringify(rebateSettingResult, null, 2),
+  );
   console.log('rebateSettingData:', rebateSettingData);
   console.log('rebateSettingData.length:', rebateSettingData.length);
   console.log('isLoadingRebateSetting:', isLoadingRebateSetting);
@@ -46,7 +49,8 @@ export const AboutTab: React.FC<AboutTabProps> = ({
     <ScrollView
       style={styles.tabContent}
       showsVerticalScrollIndicator={false}
-      nestedScrollEnabled>
+      nestedScrollEnabled
+    >
       <Image
         source={require('../../../assets/common/invite/IRabout.png')}
         style={styles.bannerImage as any}
@@ -60,39 +64,47 @@ export const AboutTab: React.FC<AboutTabProps> = ({
               style={[
                 styles.tableHeaderText,
                 { color: theme['color-success-500'] },
-              ]}>
+              ]}
+            >
               {t('invite.level')}
             </Text>
             <Text
               style={[
                 styles.tableHeaderText,
                 { color: theme['color-success-500'] },
-              ]}>
+              ]}
+            >
               {t('invite.bet-amount')}
             </Text>
             <Text
               style={[
                 styles.tableHeaderText,
                 { color: theme['color-success-500'] },
-              ]}>
+              ]}
+            >
               {t('invite.active-member')}
             </Text>
             <Text
               style={[
                 styles.tableHeaderText,
                 { color: theme['color-success-500'] },
-              ]}>
-            {t('invite.reward-rate')}
+              ]}
+            >
+              {t('invite.reward-rate')}
             </Text>
           </View>
           {isLoadingRebateSetting ? (
             <View style={styles.loaderRow}>
               <ActivityIndicator color="#fff" />
-              <Text style={styles.tableCellText}>{t('common-terms.loading')}</Text>
+              <Text style={styles.tableCellText}>
+                {t('common-terms.loading')}
+              </Text>
             </View>
           ) : rebateSettingData.length === 0 ? (
             <View style={styles.loaderRow}>
-              <Text style={styles.tableCellText}>{t('common-terms.no-data-available')}</Text>
+              <Text style={styles.tableCellText}>
+                {t('common-terms.no-data-available')}
+              </Text>
             </View>
           ) : (
             rebateSettingData
@@ -113,16 +125,17 @@ export const AboutTab: React.FC<AboutTabProps> = ({
 
       <View style={styles.termsCard}>
         <Text
-          style={[styles.termsTitle, { color: theme['color-success-500'] }]}>
+          style={[styles.termsTitle, { color: theme['color-success-500'] }]}
+        >
           {t('invite.daily-invite-reward-tab.about-tab.terms-title')}
         </Text>
         {[
-           t('invite.daily-invite-reward-tab.about-tab.terms-1'),
-           t('invite.daily-invite-reward-tab.about-tab.terms-2'),
-           t('invite.daily-invite-reward-tab.about-tab.terms-3'),
-           t('invite.daily-invite-reward-tab.about-tab.terms-4'),
-           t('invite.daily-invite-reward-tab.about-tab.terms-5'),
-        
+          t('invite.daily-invite-reward-tab.about-tab.terms-1'),
+          t('invite.daily-invite-reward-tab.about-tab.terms-2'),
+          t('invite.daily-invite-reward-tab.about-tab.terms-3'),
+          t('invite.daily-invite-reward-tab.about-tab.terms-4'),
+          t('invite.daily-invite-reward-tab.about-tab.terms-5'),
+          t('invite.daily-invite-reward-tab.about-tab.terms-6'),
         ].map((term, index) => (
           <Text key={index} style={styles.termText}>
             {index + 1}. {term}
