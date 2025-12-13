@@ -242,11 +242,11 @@ export default function LoginScreen() {
 
   const onSubmit = async (data: ILoginPhoneLogin | ILoginUsernameLogin) => {
     const deviceInfo = await getBasicDeviceInfo();
-      const payload = {
-        ...data,
-        ...('phone' in data && { phone: `92${data.phone}` }),
-        ...deviceInfo,
-      };
+    const payload = {
+      ...data,
+      ...('phone' in data && { phone: `92${data.phone}` }),
+      ...deviceInfo,
+    };
     mutateAsync(payload);
   };
 
@@ -271,21 +271,29 @@ export default function LoginScreen() {
           render={({ field: { onChange, onBlur, value } }) => {
             const phoneErrors = formPhone.formState.errors.phone;
             let errorMessage = '';
-            
+
             if (phoneErrors) {
               // Translate Yup error messages first
               const yupMessage = phoneErrors.message || '';
-              
+
               // Check if it's a required error
-              if (!value || yupMessage === 'Phone number is required' || yupMessage.includes('required')) {
+              if (
+                !value ||
+                yupMessage === 'Phone number is required' ||
+                yupMessage.includes('required')
+              ) {
                 errorMessage = t('auth.phone-number-is-required');
               } else {
                 // Check if we have multiple error types
                 const errors: string[] = [];
-                
+
                 // Check for prefix error first
-                const hasPrefixError = value && (value.startsWith('0') || value.startsWith('92') || value.startsWith('+92'));
-                
+                const hasPrefixError =
+                  value &&
+                  (value.startsWith('0') ||
+                    value.startsWith('92') ||
+                    value.startsWith('+92'));
+
                 if (hasPrefixError) {
                   // When prefix error occurs, show both errors
                   errors.push(t('auth.invalid-mobile-number-format'));
@@ -297,7 +305,7 @@ export default function LoginScreen() {
                     errors.push(t('auth.do-not-add-prefix'));
                   }
                 }
-                
+
                 // Combine errors with newline
                 if (errors.length > 0) {
                   errorMessage = errors.join('\n');
@@ -307,7 +315,10 @@ export default function LoginScreen() {
                     errorMessage = t('auth.phone-number-must-be-10-digits');
                   } else if (yupMessage === 'Invalid Mobile Number Format') {
                     errorMessage = t('auth.invalid-mobile-number-format');
-                  } else if (yupMessage === 'Do not add 0, +92, or 92 at the start of the number.') {
+                  } else if (
+                    yupMessage ===
+                    'Do not add 0, +92, or 92 at the start of the number.'
+                  ) {
                     errorMessage = t('auth.do-not-add-prefix');
                   } else {
                     errorMessage = yupMessage;
@@ -315,7 +326,7 @@ export default function LoginScreen() {
                 }
               }
             }
-            
+
             return (
               <View>
                 <Input
@@ -323,7 +334,7 @@ export default function LoginScreen() {
                   textStyle={styles.inputText}
                   placeholder={t('login-screen.placeholder.phone')}
                   value={value}
-                  onChangeText={(text) => handlePhoneChange(text, onChange)}
+                  onChangeText={text => handlePhoneChange(text, onChange)}
                   onBlur={onBlur}
                   keyboardType="number-pad"
                   maxLength={10}
@@ -361,7 +372,7 @@ export default function LoginScreen() {
           render={({ field: { onChange, onBlur, value } }) => {
             const passwordError = formPhone.formState.errors.password;
             let errorMessage = '';
-            
+
             if (passwordError?.message) {
               // Translate Yup error messages
               const yupMessage = passwordError.message;
@@ -373,7 +384,7 @@ export default function LoginScreen() {
                 errorMessage = yupMessage;
               }
             }
-            
+
             return (
               <View>
                 <Input
@@ -381,18 +392,18 @@ export default function LoginScreen() {
                   textStyle={styles.inputText}
                   placeholder={t('login-screen.placeholder.password')}
                   value={value}
-                  onChangeText={(text) => handlePasswordChange(text, onChange)}
+                  onChangeText={text => handlePasswordChange(text, onChange)}
                   secureTextEntry={secureTextEntry}
                   onBlur={onBlur}
                   accessoryLeft={() => <PasswordIcon width={16} height={16} />}
                   accessoryRight={renderIcon}
-                  status={formPhone.formState.errors.password ? 'danger' : 'basic'}
+                  status={
+                    formPhone.formState.errors.password ? 'danger' : 'basic'
+                  }
                 />
                 {errorMessage ? (
                   <View style={styles.errorContainer}>
-                    <Text style={styles.errorText}>
-                      {errorMessage}
-                    </Text>
+                    <Text style={styles.errorText}>{errorMessage}</Text>
                   </View>
                 ) : null}
               </View>
@@ -409,7 +420,7 @@ export default function LoginScreen() {
           render={({ field: { onChange, onBlur, value } }) => {
             const usernameError = formUsername.formState.errors.player_id;
             let errorMessage = '';
-            
+
             if (usernameError?.message) {
               // Translate Yup error messages
               const yupMessage = usernameError.message;
@@ -423,7 +434,7 @@ export default function LoginScreen() {
                 errorMessage = yupMessage;
               }
             }
-            
+
             return (
               <View>
                 <Input
@@ -431,7 +442,10 @@ export default function LoginScreen() {
                   textStyle={styles.inputText}
                   placeholder={t('login-screen.placeholder.username')}
                   value={value}
-                  onChangeText={onChange}
+                  onChangeText={e => {
+                    const textWithoutSpaces = e.replace(/\s/g, '');
+                    onChange(textWithoutSpaces);
+                  }}
                   onBlur={onBlur}
                   accessoryLeft={() => (
                     <View
@@ -451,9 +465,7 @@ export default function LoginScreen() {
                 />
                 {errorMessage ? (
                   <View style={styles.errorContainer}>
-                    <Text style={styles.errorText}>
-                      {errorMessage}
-                    </Text>
+                    <Text style={styles.errorText}>{errorMessage}</Text>
                   </View>
                 ) : null}
               </View>
@@ -467,7 +479,7 @@ export default function LoginScreen() {
           render={({ field: { onChange, onBlur, value } }) => {
             const passwordError = formUsername.formState.errors.password;
             let errorMessage = '';
-            
+
             if (passwordError?.message) {
               // Translate Yup error messages
               const yupMessage = passwordError.message;
@@ -479,7 +491,7 @@ export default function LoginScreen() {
                 errorMessage = yupMessage;
               }
             }
-            
+
             return (
               <View>
                 <Input
@@ -487,7 +499,7 @@ export default function LoginScreen() {
                   textStyle={styles.inputText}
                   placeholder={t('login-screen.placeholder.password')}
                   value={value}
-                  onChangeText={(text) => handlePasswordChange(text, onChange)}
+                  onChangeText={text => handlePasswordChange(text, onChange)}
                   onBlur={onBlur}
                   secureTextEntry={secureTextEntry}
                   accessoryLeft={() => <PasswordIcon width={16} height={16} />}
@@ -498,9 +510,7 @@ export default function LoginScreen() {
                 />
                 {errorMessage ? (
                   <View style={styles.errorContainer}>
-                    <Text style={styles.errorText}>
-                      {errorMessage}
-                    </Text>
+                    <Text style={styles.errorText}>{errorMessage}</Text>
                   </View>
                 ) : null}
               </View>
@@ -608,9 +618,12 @@ export default function LoginScreen() {
               {/* <View
                 style={[styles.questionMark, { backgroundColor: '#F3B876' }]}
               > */}
-                <Text category="c1" style={[styles.fontText,styles.fontTextindia]}>
-                  ?
-                </Text>
+              <Text
+                category="c1"
+                style={[styles.fontText, styles.fontTextindia]}
+              >
+                ?
+              </Text>
               {/* </View> */}
             </TouchableOpacity>
           </View>
@@ -642,7 +655,7 @@ export default function LoginScreen() {
             </Button>
           </View>
 
-{/* 
+          {/* 
 
           <View style={styles.dividerContainer}>
             <View style={[styles.divider, { backgroundColor: '#7F8487' }]} />
@@ -685,7 +698,6 @@ export default function LoginScreen() {
               />
             </View>
           </View> */}
-
 
           {/* Register Link */}
           <View style={styles.registerContainer}>
@@ -916,7 +928,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     marginBottom: 15,
   },
-  errorContainer: { 
+  errorContainer: {
     marginTop: -20,
     marginBottom: 2,
     paddingTop: 20,

@@ -260,19 +260,21 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                 render={({ field: { onChange, onBlur, value } }) => {
                   const usernameError = smsForm.formState.errors.username;
                   let errorMessage = '';
-                  
+
                   if (usernameError?.message) {
                     // Translate Yup error messages
                     const yupMessage = usernameError.message;
                     if (yupMessage === 'Username is required') {
                       errorMessage = t('auth.username-is-required');
-                    } else if (yupMessage === 'Username cannot contain spaces') {
+                    } else if (
+                      yupMessage === 'Username cannot contain spaces'
+                    ) {
                       errorMessage = t('auth.username-cannot-contain-spaces');
                     } else {
                       errorMessage = yupMessage;
                     }
                   }
-                  
+
                   return (
                     <View>
                       <Input
@@ -280,7 +282,10 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                         textStyle={styles.inputText}
                         placeholder={t('login-screen.placeholder.username')}
                         value={value}
-                        onChangeText={onChange}
+                        onChangeText={text => {
+                          const textWithoutSpaces = text.replace(/\s/g, '');
+                          onChange(textWithoutSpaces);
+                        }}
                         onBlur={onBlur}
                         accessoryLeft={() => (
                           <View style={styles.countryCodeContainer}>
@@ -293,9 +298,7 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                       />
                       {errorMessage ? (
                         <View style={styles.errorContainer}>
-                          <Text style={styles.errorText}>
-                            {errorMessage}
-                          </Text>
+                          <Text style={styles.errorText}>{errorMessage}</Text>
                         </View>
                       ) : null}
                     </View>
@@ -308,21 +311,29 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                 render={({ field: { onChange, onBlur, value } }) => {
                   const phoneErrors = smsForm.formState.errors.phone;
                   let errorMessage = '';
-                  
+
                   if (phoneErrors) {
                     // Translate Yup error messages first
                     const yupMessage = phoneErrors.message || '';
-                    
+
                     // Check if it's a required error
-                    if (!value || yupMessage === 'Phone number is required' || yupMessage.includes('required')) {
+                    if (
+                      !value ||
+                      yupMessage === 'Phone number is required' ||
+                      yupMessage.includes('required')
+                    ) {
                       errorMessage = t('auth.phone-number-is-required');
                     } else {
                       // Check if we have multiple error types
                       const errors: string[] = [];
-                      
+
                       // Check for prefix error first
-                      const hasPrefixError = value && (value.startsWith('0') || value.startsWith('92') || value.startsWith('+92'));
-                      
+                      const hasPrefixError =
+                        value &&
+                        (value.startsWith('0') ||
+                          value.startsWith('92') ||
+                          value.startsWith('+92'));
+
                       if (hasPrefixError) {
                         // When prefix error occurs, show both errors
                         errors.push(t('auth.invalid-mobile-number-format'));
@@ -333,17 +344,24 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                           errors.push(t('auth.invalid-mobile-number-format'));
                         }
                       }
-                      
+
                       // Combine errors with newline
                       if (errors.length > 0) {
                         errorMessage = errors.join('\n');
                       } else {
                         // Translate other Yup error messages
                         if (yupMessage === 'Mobile number must be 10 digits') {
-                          errorMessage = t('auth.phone-number-must-be-10-digits');
-                        } else if (yupMessage === 'Invalid Mobile Number Format') {
+                          errorMessage = t(
+                            'auth.phone-number-must-be-10-digits',
+                          );
+                        } else if (
+                          yupMessage === 'Invalid Mobile Number Format'
+                        ) {
                           errorMessage = t('auth.invalid-mobile-number-format');
-                        } else if (yupMessage === 'Do not add 0, +92, or 92 at the start of the number.') {
+                        } else if (
+                          yupMessage ===
+                          'Do not add 0, +92, or 92 at the start of the number.'
+                        ) {
                           errorMessage = t('auth.do-not-add-prefix');
                         } else {
                           errorMessage = yupMessage;
@@ -351,7 +369,7 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                       }
                     }
                   }
-                  
+
                   return (
                     <View>
                       <InputWithOtp
@@ -359,7 +377,7 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                         textStyle={styles.inputText}
                         placeholder={t('login-screen.placeholder.phone')}
                         value={value}
-                        onChangeText={(text) => handlePhoneChange(text, onChange)}
+                        onChangeText={text => handlePhoneChange(text, onChange)}
                         onBlur={onBlur}
                         keyboardType="number-pad"
                         maxLength={10}
@@ -381,7 +399,9 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                             <Text style={styles.inputPrefixText}>+92</Text>
                           </View>
                         )}
-                        status={smsForm.formState.errors.phone ? 'danger' : 'basic'}
+                        status={
+                          smsForm.formState.errors.phone ? 'danger' : 'basic'
+                        }
                       />
                       {errorMessage ? (
                         <View style={styles.errorContainer}>
@@ -415,19 +435,21 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                 render={({ field: { onChange, onBlur, value } }) => {
                   const usernameError = emailForm.formState.errors.username;
                   let errorMessage = '';
-                  
+
                   if (usernameError?.message) {
                     // Translate Yup error messages
                     const yupMessage = usernameError.message;
                     if (yupMessage === 'Username is required') {
                       errorMessage = t('auth.username-is-required');
-                    } else if (yupMessage === 'Username cannot contain spaces') {
+                    } else if (
+                      yupMessage === 'Username cannot contain spaces'
+                    ) {
                       errorMessage = t('auth.username-cannot-contain-spaces');
                     } else {
                       errorMessage = yupMessage;
                     }
                   }
-                  
+
                   return (
                     <View>
                       <Input
@@ -435,7 +457,10 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                         textStyle={styles.inputText}
                         placeholder={t('login-screen.placeholder.username')}
                         value={value}
-                        onChangeText={onChange}
+                        onChangeText={text => {
+                          const textWithoutSpaces = text.replace(/\s/g, '');
+                          onChange(textWithoutSpaces);
+                        }}
                         onBlur={onBlur}
                         accessoryLeft={() => (
                           <View style={styles.countryCodeContainer}>
@@ -443,14 +468,14 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                           </View>
                         )}
                         status={
-                          emailForm.formState.errors.username ? 'danger' : 'basic'
+                          emailForm.formState.errors.username
+                            ? 'danger'
+                            : 'basic'
                         }
                       />
                       {errorMessage ? (
                         <View style={styles.errorContainer}>
-                          <Text style={styles.errorText}>
-                            {errorMessage}
-                          </Text>
+                          <Text style={styles.errorText}>{errorMessage}</Text>
                         </View>
                       ) : null}
                     </View>
@@ -463,7 +488,7 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                 render={({ field: { onChange, onBlur, value } }) => {
                   const emailError = emailForm.formState.errors.email;
                   let errorMessage = '';
-                  
+
                   if (emailError?.message) {
                     // Translate Yup error messages
                     const yupMessage = emailError.message;
@@ -471,21 +496,27 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                       errorMessage = t('auth.email-is-required') || yupMessage;
                     } else if (yupMessage === 'Must be a valid email address') {
                       errorMessage = t('auth.email-invalid') || yupMessage;
-                    } else if (yupMessage === 'Email must include a proper domain') {
-                      errorMessage = t('auth.email-domain-invalid') || yupMessage;
+                    } else if (
+                      yupMessage === 'Email must include a proper domain'
+                    ) {
+                      errorMessage =
+                        t('auth.email-domain-invalid') || yupMessage;
                     } else if (yupMessage === 'Email cannot contain spaces') {
-                      errorMessage = t('auth.email-cannot-contain-spaces') || yupMessage;
+                      errorMessage =
+                        t('auth.email-cannot-contain-spaces') || yupMessage;
                     } else {
                       errorMessage = yupMessage;
                     }
                   }
-                  
+
                   return (
                     <View>
                       <InputWithOtp
                         style={styles.input}
                         textStyle={styles.inputText}
-                        placeholder={t('forgot-password-screen.placeholder.email')}
+                        placeholder={t(
+                          'forgot-password-screen.placeholder.email',
+                        )}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -503,7 +534,7 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                           label: t('forgot-password-screen.get-otp'),
                         }}
                         accessoryLeft={() => (
-                          <MailIcon size={16} color="gray"  />
+                          <MailIcon size={16} color="gray" />
                         )}
                         status={
                           emailForm.formState.errors.email ? 'danger' : 'basic'
@@ -511,9 +542,7 @@ function ForgotPassDialog({ open, setOpen }: ForgotDialogProps) {
                       />
                       {errorMessage ? (
                         <View style={styles.errorContainer}>
-                          <Text style={styles.errorText}>
-                            {errorMessage}
-                          </Text>
+                          <Text style={styles.errorText}>{errorMessage}</Text>
                         </View>
                       ) : null}
                     </View>
@@ -563,7 +592,7 @@ export const ResetPasswordFields = ({
   resetPasswordForm,
 }: ResetPasswordFieldsProps) => {
   const { t } = useTranslation();
-  
+
   return (
     <Fragment>
       <Controller
@@ -572,7 +601,7 @@ export const ResetPasswordFields = ({
         render={({ field: { onChange, onBlur, value } }) => {
           const otpError = resetPasswordForm.formState.errors.otp;
           let errorMessage = '';
-          
+
           if (otpError?.message) {
             const yupMessage = otpError.message;
             if (yupMessage === 'OTP is required') {
@@ -583,7 +612,7 @@ export const ResetPasswordFields = ({
               errorMessage = yupMessage;
             }
           }
-          
+
           return (
             <View>
               <Input
@@ -595,13 +624,13 @@ export const ResetPasswordFields = ({
                 onBlur={onBlur}
                 keyboardType="number-pad"
                 maxLength={6}
-                status={resetPasswordForm.formState.errors.otp ? 'danger' : 'basic'}
+                status={
+                  resetPasswordForm.formState.errors.otp ? 'danger' : 'basic'
+                }
               />
               {errorMessage ? (
                 <View style={styles.errorContainer}>
-                  <Text style={styles.errorText}>
-                    {errorMessage}
-                  </Text>
+                  <Text style={styles.errorText}>{errorMessage}</Text>
                 </View>
               ) : null}
             </View>
@@ -614,7 +643,7 @@ export const ResetPasswordFields = ({
         render={({ field: { onChange, onBlur, value } }) => {
           const passwordError = resetPasswordForm.formState.errors.newPassword;
           let errorMessage = '';
-          
+
           if (passwordError?.message) {
             const yupMessage = passwordError.message;
             if (yupMessage === 'New password is required') {
@@ -625,13 +654,15 @@ export const ResetPasswordFields = ({
               errorMessage = yupMessage;
             }
           }
-          
+
           return (
             <View>
               <Input
                 style={styles.input}
                 textStyle={styles.inputText}
-                placeholder={t('forgot-password-screen.placeholder.create-strong-password')}
+                placeholder={t(
+                  'forgot-password-screen.placeholder.create-strong-password',
+                )}
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
@@ -644,9 +675,7 @@ export const ResetPasswordFields = ({
               />
               {errorMessage ? (
                 <View style={styles.errorContainer}>
-                  <Text style={styles.errorText}>
-                    {errorMessage}
-                  </Text>
+                  <Text style={styles.errorText}>{errorMessage}</Text>
                 </View>
               ) : null}
             </View>
@@ -657,26 +686,33 @@ export const ResetPasswordFields = ({
         name="password_confirmation"
         control={resetPasswordForm.control}
         render={({ field: { onChange, onBlur, value } }) => {
-          const confirmPasswordError = resetPasswordForm.formState.errors.password_confirmation;
+          const confirmPasswordError =
+            resetPasswordForm.formState.errors.password_confirmation;
           let errorMessage = '';
-          
+
           if (confirmPasswordError?.message) {
             const yupMessage = confirmPasswordError.message;
-            if (yupMessage === 'Confirm password is required1' || yupMessage === 'Confirm password is required') {
-              errorMessage = t('auth.confirm-password-is-required') || yupMessage;
+            if (
+              yupMessage === 'Confirm password is required1' ||
+              yupMessage === 'Confirm password is required'
+            ) {
+              errorMessage =
+                t('auth.confirm-password-is-required') || yupMessage;
             } else if (yupMessage === 'Password cannot contain spaces') {
               errorMessage = t('auth.password-cannot-contain-spaces');
             } else {
               errorMessage = yupMessage;
             }
           }
-          
+
           return (
             <View>
               <Input
                 style={styles.input}
                 textStyle={styles.inputText}
-                placeholder={t('forgot-password-screen.placeholder.confirm-password')}
+                placeholder={t(
+                  'forgot-password-screen.placeholder.confirm-password',
+                )}
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}
@@ -689,9 +725,7 @@ export const ResetPasswordFields = ({
               />
               {errorMessage ? (
                 <View style={styles.errorContainer}>
-                  <Text style={styles.errorText}>
-                    {errorMessage}
-                  </Text>
+                  <Text style={styles.errorText}>{errorMessage}</Text>
                 </View>
               ) : null}
             </View>
@@ -743,7 +777,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     marginBottom: 15,
   },
-  errorContainer: { 
+  errorContainer: {
     marginTop: -20,
     marginBottom: 2,
     paddingTop: 20,
