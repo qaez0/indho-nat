@@ -1,14 +1,12 @@
 import { BASE_URL } from '@env';
 import { useUserStore } from '../store/useUser';
-import {
-  ENDPOINTS_REQUIRING_IP,
-  ENDPOINTS_TRIGGERING_LOGOUT_ON_401,
-} from '../constants/api';
+import { ENDPOINTS_REQUIRING_IP } from '../constants/api';
 import Toast from 'react-native-toast-message';
 import { getUserAgent } from 'react-native-device-info';
 import { navigateToLogin } from '../utils/navigation';
 import deviceInfo from 'react-native-device-info';
 import { useLastRequestPayload } from '../store/useUIStore';
+import { IBaseResponse } from '../types/api';
 
 type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
@@ -48,9 +46,10 @@ async function request<T = any>(
     }
   }
   const providedBase = baseUrlOverride ?? BASE_URL;
-  const normalizedBaseUrl = (typeof providedBase === 'string' && providedBase.endsWith('/'))
-    ? providedBase.slice(0, -1)
-    : providedBase;
+  const normalizedBaseUrl =
+    typeof providedBase === 'string' && providedBase.endsWith('/')
+      ? providedBase.slice(0, -1)
+      : providedBase;
   const url = `${normalizedBaseUrl}${path || ''}${query}`;
   const token = tokenOverride ?? useUserStore.getState().token?.auth_token;
   const userAgent = await getUserAgent();
@@ -99,7 +98,7 @@ async function request<T = any>(
     timestamp: new Date().toISOString(),
   };
   useLastRequestPayload.getState().savePayload(requestPayload);
-  
+
   const response = await fetch(url, {
     method,
     headers,
@@ -110,32 +109,46 @@ async function request<T = any>(
           : JSON.stringify(body)
         : undefined,
   });
-
-  console.log(response, 'response');
+  console.log(response.status, path);
   if (!response.ok) {
-    if (
-      response.status === 401 &&
-      path &&
-      (ENDPOINTS_TRIGGERING_LOGOUT_ON_401.some(endpoint =>
-        path.includes(endpoint),
-      ) ||
-        path.includes('GameLogin'))
-    ) {
-      Toast.show({
-        type: 'error',
-        text1: 'Session Expired',
-        text2: 'Please login again',
-        onShow: async () => {
-          await useUserStore
-            .getState()
-            .logout()
-            .finally(() => {
-              navigateToLogin();
-            });
-        },
-      });
-    }
     const errorMessage = await response.text();
+    if (response.status === 401) {
+      if (path === '/Login/CheckStatus') {
+        Toast.show({
+          type: 'error',
+          text1: 'Session Expired',
+          text2: 'Please login again',
+          onShow: async () => {
+            await useUserStore
+              .getState()
+              .logout()
+              .finally(() => {
+                navigateToLogin();
+              });
+          },
+        });
+      } else {
+        try {
+          await apiRequest.get<IBaseResponse<boolean>>({
+            path: '/Login/CheckStatus',
+          });
+        } catch (error) {
+          Toast.show({
+            type: 'error',
+            text1: 'Session Expired',
+            text2: 'Please login again',
+            onShow: async () => {
+              await useUserStore
+                .getState()
+                .logout()
+                .finally(() => {
+                  navigateToLogin();
+                });
+            },
+          });
+        }
+      }
+    }
     try {
       const errorJson = JSON.parse(errorMessage);
       throw new Error(errorJson.message || errorMessage);
