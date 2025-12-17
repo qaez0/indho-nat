@@ -5,7 +5,7 @@ import {
   Dimensions,
   useWindowDimensions,
 } from 'react-native';
-import WebView from 'react-native-webview';
+import WebView, { WebViewNavigation } from 'react-native-webview';
 import lottieJson from '../../assets/loader.json';
 import { useGameDisplay, useLandscapeMode } from '../../store/useUIStore';
 import { useTheme } from '@ui-kitten/components';
@@ -20,6 +20,7 @@ import Toast from 'react-native-toast-message';
 import { useUser } from '../../hooks/useUser';
 import { useTranslation } from 'react-i18next';
 import Orientation from 'react-native-orientation-locker';
+import { Linking } from 'react-native';
 
 // Safe wrapper for orientation methods
 const safeOrientationCall = (method: () => void) => {
@@ -35,6 +36,13 @@ const safeOrientationCall = (method: () => void) => {
     console.warn('Orientation module error:', error);
   }
 };
+
+// Loader component moved outside to avoid re-creation on every render
+const Loader = () => (
+  <View style={styles.loaderContainer}>
+    <LottieView source={lottieJson} autoPlay loop style={styles.lottie} />
+  </View>
+);
 
 const GameScreen = () => {
   const navigation = useNavigation<GameNav>();
@@ -138,15 +146,22 @@ const GameScreen = () => {
     }
   };
 
-  const Loader = () => (
-    <View style={styles.loaderContainer}>
-      <LottieView source={lottieJson} autoPlay loop style={styles.lottie} />
-    </View>
-  );
+  // Handle navigation events to intercept deep link redirects (return_url)
+  const handleNavigationStateChange = (navState: WebViewNavigation) => {
+    const url = navState.url;
+    // Check if the game is trying to redirect to our deep link (return_url)
+    if (url && url.startsWith('game11ic://')) {
+      // Handle the deep link redirect - navigate back or to home
+      navigation.goBack();
+      resetGameDisplay();
+      invalidate('balance');
+      invalidate('panel-info');
+    }
+  };
 
   return (
-    <View style={{ flex: 1, backgroundColor: theme['bg-secondary'] }}>
-      {!!gameUrl ? (
+    <View style={[styles.container, { backgroundColor: theme['bg-secondary'] }]}>
+      {gameUrl ? (
         <WebView
           source={{ uri: gameUrl }}
           startInLoadingState
@@ -156,7 +171,22 @@ const GameScreen = () => {
           domStorageEnabled
           allowsInlineMediaPlayback
           mediaPlaybackRequiresUserAction={false}
-          style={{ flex: 1, backgroundColor: 'transparent' }}
+          onNavigationStateChange={handleNavigationStateChange}
+          onShouldStartLoadWithRequest={(request) => {
+            // Intercept deep link redirects before they load
+            if (request.url && request.url.startsWith('game11ic://')) {
+              Linking.openURL(request.url).catch(() => {
+                // If opening fails, just navigate back
+                navigation.goBack();
+                resetGameDisplay();
+                invalidate('balance');
+                invalidate('panel-info');
+              });
+              return false; // Prevent WebView from loading the deep link
+            }
+            return true; // Allow normal navigation
+          }}
+          style={styles.webView}
         />
       ) : (
         <Loader />
@@ -175,6 +205,10 @@ const GameScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
   loaderContainer: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
@@ -184,6 +218,10 @@ const styles = StyleSheet.create({
   lottie: {
     width: 100,
     aspectRatio: 1,
+  },
+  webView: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
 });
 

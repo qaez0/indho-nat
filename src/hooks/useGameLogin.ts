@@ -87,8 +87,22 @@ export const useGameLogin = () => {
     try {
       openLoader(t('common-terms.game-loading'));
 
+      // For mobile app, append return_url (deep link) to GameLogin API paths
+      // API format: /Login/GameLogin/:gameid/:gamecode/:return_url
+      // For web, return_url is a domain (e.g., 11ic.pk)
+      // For app, return_url should be a deep link (e.g., game11ic://game)
+      let apiPath = data.url;
+      if (apiPath.includes('/Login/GameLogin/')) {
+        const pathParts = apiPath.split('/Login/GameLogin/')[1]?.split('/') || [];
+        // If path has only 2 segments (gameid and gamecode), add return_url
+        if (pathParts.length === 2) {
+          const returnUrl = 'game11ic://'; // Deep link for app return
+          apiPath = `${apiPath}/${encodeURIComponent(returnUrl)}`;
+        }
+      }
+
       const response = await apiRequest.get<IBaseResponse<string>>({
-        path: data.url,
+        path: apiPath,
         ...(data.game_id === 'PG' && {
           // baseUrlOverride: 'http://cap1.11ic.pk/capi',
         }),
