@@ -112,7 +112,7 @@ const FeatureBanners: React.FC = () => {
 
   const handleriseofseth = async () => {
     await initializeGame({
-      url: '/Login/GameLogin/efg/efgames-slot-3023',
+      url: '/Login/GameLogin/efg/rise-of-seth',
     } as ISlot);
   };
 
