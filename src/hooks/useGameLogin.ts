@@ -140,7 +140,7 @@ export const useGameLogin = () => {
 
       // Replace EFG failed message with customer service message
       if (errorMessage === "EFG failed, please try again") {
-        errorMessage = t("game.efg-multiple");
+        errorMessage = t("game.efg-locked");
       }
       if (errorMessage === "EFG failed, multiple device detected") {
         errorMessage = t("game.efg-multiple");
