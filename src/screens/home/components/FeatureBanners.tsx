@@ -12,12 +12,20 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { TabNav } from '../../../types/nav';
 import { useTranslation } from 'react-i18next';
+import { useGameLogin } from '../../../hooks/useGameLogin';
+import { ISlot } from '../../../types/slot';
+import LottieView from 'lottie-react-native';
+import lottieJson from '../../../assets/common/home/feature-banner/riseofseth.mp4.lottie.json';
 
 interface FeatureBannerProps {
   title: string;
   subtitle?: string;
   image: string;
   gradient: string[];
+  backgroundImage?: string;
+  lottieSource?: typeof lottieJson | string | { uri: string };
+  lottieStyle?: object;
+  showGradient?: boolean;
   onPress: () => void;
 }
 
@@ -26,49 +34,69 @@ const FeatureBanner: React.FC<FeatureBannerProps> = ({
   subtitle,
   image,
   gradient,
+  backgroundImage,
+  lottieSource,
+  lottieStyle,
+  showGradient = true,
   onPress,
 }) => {
   const pulseAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(pulseAnim, {
-          toValue: 1.1,
-          duration: 500,
-          useNativeDriver: true,
-        }),
-        Animated.timing(pulseAnim, {
-          toValue: 1,
-          duration: 500,
-          useNativeDriver: true,
-        }),
-      ]),
-    ).start();
-  }, [pulseAnim]);
+    if (showGradient) {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(pulseAnim, {
+            toValue: 1.1,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+          }),
+        ]),
+      ).start();
+    }
+  }, [pulseAnim, showGradient]);
 
   return (
     <TouchableOpacity style={styles.banner} onPress={onPress}>
-      <LinearGradient
-        colors={gradient}
-        style={styles.gradient}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-      >
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
-          {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-        </View>
-        <Animated.View
-          style={[styles.bannerImage, { transform: [{ scale: pulseAnim }] }]}
-        >
-          <Image
-            source={{ uri: image }}
-            style={styles.image}
-            resizeMode="contain"
+      {lottieSource ? (
+        <View style={styles.lottieWrapper}>
+          <LottieView
+            source={lottieSource}
+            autoPlay
+            loop
+            style={[styles.lottieContainer, lottieStyle]}
           />
-        </Animated.View>
-      </LinearGradient>
+        </View>
+      ) : null}
+      {showGradient && (
+        <LinearGradient
+          colors={gradient}
+          style={styles.gradient}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <View style={styles.textContainer}>
+            <Text style={styles.title}>{title}</Text>
+            {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+          </View>
+          {image && (
+            <Animated.View
+              style={[styles.bannerImage, { transform: [{ scale: pulseAnim }] }]}
+            >
+              <Image
+                source={{ uri: image }}
+                style={styles.image}
+                resizeMode="contain"
+              />
+            </Animated.View>
+          )}
+        </LinearGradient>
+      )}
     </TouchableOpacity>
   );
 };
@@ -76,13 +104,16 @@ const FeatureBanner: React.FC<FeatureBannerProps> = ({
 const FeatureBanners: React.FC = () => {
   const { t } = useTranslation();
   const navigation = useNavigation<TabNav>();
+  const { initializeGame } = useGameLogin();
 
   const handleInvitePress = () => {
     navigation.jumpTo('earn');
   };
 
-  const handleLuckySpinPress = () => {
-    navigation.getParent()?.navigate('lucky-spin');
+  const handleriseofseth = async () => {
+    await initializeGame({
+      url: '/Login/GameLogin/efg/efgames-slot-3023',
+    } as ISlot);
   };
 
   return (
@@ -96,10 +127,16 @@ const FeatureBanners: React.FC = () => {
       />
 
       <FeatureBanner
-        title={t('feature-banners.unlock-free-rs')}
-        image={imageHandler('/images/common/home/feature-banner/coinv3.png')}
+        title=""
+        image=""
         gradient={['#60b517', '#457918']}
-        onPress={handleLuckySpinPress}
+        lottieSource={lottieJson}
+        lottieStyle={{
+          width: '100%',
+          height: '100%',
+        }}
+        showGradient={false}
+        onPress={handleriseofseth}
       />
     </View>
   );
@@ -158,6 +195,23 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+ 
+  lottieWrapper: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+    overflow: 'hidden',
+  },
+  lottieContainer: {
+    width: '100%',
+    height: '100%',
+    transform: [{ scale: 1.2 }],
   },
 });
 
