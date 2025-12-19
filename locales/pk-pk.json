@@ -732,6 +732,15 @@
       "free-spin-plural": "‎مفت اسپن"
     }
   },
+  "game": {
+    "fetching-balance": "\u200Eآپ کا بیلنس حاصل کیا جا رہا ہے۔ براہ کرم انتظار کریں...",
+    "transferring": "\u200Eمنتقل کیا جا رہا ہے...",
+    "game-loading": "\u200Eکھیل لوڈ ہو رہا ہے...",
+    "loading-game": "\u200Eکھیل لوڈ ہو رہا ہے...",
+    "try-again-after-few-seconds": "\u200Eکچھ سیکنڈ بعد دوبارہ کوشش کریں",
+    "efg-locked": "\u200EEFG لاک ہے، براہ کرم کسٹمر سروس سے رابطہ کریں",
+    "efg-multiple": "\u200Eمعذرت، آپ کوالیفائی نہیں کرتے، متعدد اکاؤنٹس کا پتہ چلا"
+  },
   "deposit-withdraw": {
     "tutorial": {
       "fast-pay": {
@@ -794,15 +803,6 @@
       "suggested-image-size": "‎تجویز کردہ تصویر کا سائز 1 MB ہے؛ معاون فارمیٹ JPG اور PNG ہیں۔",
       "upload-image": "‎تصویر اپ لوڈ کریں"
     },
-    "game": {
-    "fetching-balance": "\u200Eآپ کا بیلنس حاصل کیا جا رہا ہے۔ براہ کرم انتظار کریں...",
-    "transferring": "\u200Eمنتقل کیا جا رہا ہے...",
-    "game-loading": "\u200Eکھیل لوڈ ہو رہا ہے...",
-    "loading-game": "\u200Eکھیل لوڈ ہو رہا ہے...",
-    "try-again-after-few-seconds": "\u200Eکچھ سیکنڈ بعد دوبارہ کوشش کریں",
-    "efg-locked": "\u200EEFG لاک ہے، براہ کرم کسٹمر سروس سے رابطہ کریں",
-    "efg-multiple": "\u200Eمعذرت، آپ کوالیفائی نہیں کرتے، متعدد اکاؤنٹس کا پتہ چلا"
-  },
     "withdrawal-amount": {
       "label": "‎نکالی رقم",
       "insufficient-balance": "‎ناکافی بیلنس",
