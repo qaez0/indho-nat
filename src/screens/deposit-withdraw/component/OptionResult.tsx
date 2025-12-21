@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import PartnerBtn from './PartnerBtn';
 import { channelIdentifier } from '../../../constants/deposit';
@@ -11,8 +11,25 @@ interface IOptionResultProps {
 
 const OptionResult = ({ data, reset }: IOptionResultProps) => {
   const { index, setSelectedOption } = useSelectedOption();
+  
+  const normalizeDisplayName = (displayName: string | undefined): string => {
+    if (!displayName) return '';
+    const normalized = displayName.trim();
+    if (
+      normalized.toLowerCase() === 'gamepayer easypaisa' ||
+      normalized.toLowerCase() === 'gamepayer jazzcash'
+    ) {
+      return 'GamePayer';
+    }
+    return displayName;
+  };
+  
   return (
-    <View style={styles.container}>
+    <ScrollView 
+      horizontal 
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={styles.container}
+    >
       {data.map((item, activeIndex) => {
         const IconComponent = channelIdentifier(item.channels);
         return (
@@ -27,7 +44,7 @@ const OptionResult = ({ data, reset }: IOptionResultProps) => {
             label={
               <View style={styles.labelContainer}>
                 <Text style={[styles.label, styles.baseLabel]}>
-                  {item?.display_name}
+                  {normalizeDisplayName(item?.display_name)}
                 </Text>
                 <Text style={[styles.range, styles.baseLabel]}>
                   {item?.amount_options[0]} -{' '}
@@ -38,7 +55,7 @@ const OptionResult = ({ data, reset }: IOptionResultProps) => {
           />
         );
       })}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -48,10 +65,9 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: 8,
     alignItems: 'center',
-    width: '100%',
+    paddingVertical: 4,
   },
   labelContainer: {
     display: 'flex',

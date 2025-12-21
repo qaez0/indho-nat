@@ -49,6 +49,8 @@ const DepositWithdrawScreen = () => {
     'DY_EASYPAISA',
     'TOPPAY_EASYPAISA',
     'TOPPAY_JAZZCASH',
+    'GAMEPAYER_EASYPAISA',
+    'GAMEPAYER_JAZZCASH',
   ]);
   const filteredOnlinePayMega = onlinePay.filter(channel => {
     const name = (channel.display_name || '').toLowerCase();
