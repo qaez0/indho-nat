@@ -299,7 +299,7 @@
         "providers": {
           "sports": "‎کھیل: SABA, LUCKY",
           "live-casino": "‎لائیو کیسینو: EVOLUTION, SEXY, EZUGI, ICONIC21",
-          "slots": "‎سلاٹس: PG, CQ9, JILI, SPRIBE"
+          "slots": "‎سلاٹس: JILI, PG, SPRIBE, CQ9, EFG"
         }
       },
       "events-access": {
@@ -500,7 +500,11 @@
     "description-4": "‎نئے ممبران کے لیے خصوصی بونس",
     "title-5": "‎الحاق پروگرام",
     "description-5": "‎دوستوں کو ریفر کر کے کمائیں",
-    "check-details": "‎تفصیلات دیکھیں"
+    "check-details": "‎تفصیلات دیکھیں",
+    "title-6": "‎11% نقصان واپس بونس",
+    "description-6": "‎اپنی نقصان پر 11% حاصل کریں، کسی بھی حد تک نہیں!",
+    "title-7": "‎100% ہولیڈی ڈپازٹ بونس",
+    "description-7": "‎اپنی ڈپازٹ رقم کو دگنا کریں"
   },
   "bonus": {
     "limited-bonus": "‎محدود بونس",

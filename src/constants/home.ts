@@ -14,17 +14,43 @@ export const getBannerData = (): ICarousel[] => {
     // },
     ...(isPk
       ? [
-          {
-            id: 0,
-            nav: "promotions",
-            image: imageHandler(
-              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/homepage_banner5/public"
-            ),
-          },
         ]
       : []),
+      {
+        id: 1,
+        nav: "promotions",
+        image: isPk
+          ? imageHandler(
+              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_11%25pk_banner/public"
+            )
+          : imageHandler(
+              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/11%25_promotion_page/public"
+            ),
+      },
+      {
+        id: 2,
+        nav: "promotions",
+        image: isPk
+          ? imageHandler(
+              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_holidaypk_banner/public"
+            )
+          : imageHandler(
+              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/holiday_promo_page/public"
+            ),
+      },
+      ...(isPk
+        ? [
+            {
+              id: 2,
+              nav: "promotions",
+              image: imageHandler(
+                "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/homepage_banner5/public"
+              ),
+            },
+          ]
+        : []),
     {
-      id: 1,
+      id: 3,
       nav: "promotions",
       image: isPk
         ? imageHandler(
@@ -35,7 +61,7 @@ export const getBannerData = (): ICarousel[] => {
           ),
     },
     {
-      id: 2,
+      id: 4,
       nav: "promotions",
       image: isPk
         ? imageHandler(
@@ -46,7 +72,7 @@ export const getBannerData = (): ICarousel[] => {
           ),
     },
     {
-      id: 3,
+      id: 5,
       nav: "promotions",
       image: isPk
         ? imageHandler(
@@ -57,7 +83,7 @@ export const getBannerData = (): ICarousel[] => {
           ),
     },
     {
-      id: 4,
+      id:6,
       nav: "promotions",
       image: isPk
         ? imageHandler(
@@ -68,7 +94,7 @@ export const getBannerData = (): ICarousel[] => {
           ),
     },
     {
-      id: 5,
+      id: 7,
       nav: "promotions",
       image: isPk
         ? imageHandler(
@@ -79,7 +105,7 @@ export const getBannerData = (): ICarousel[] => {
           ),
     },
     {
-      id: 6,
+      id: 8,
       nav: "promotions",
       image: isPk
         ? imageHandler(
@@ -92,7 +118,7 @@ export const getBannerData = (): ICarousel[] => {
     ...(isPk
       ? [
           {
-            id: 7,
+            id: 9,
             nav: "promotions",
             image: imageHandler(
               "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/homepage_banner1/public"
