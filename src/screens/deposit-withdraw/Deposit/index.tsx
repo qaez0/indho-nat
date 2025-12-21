@@ -318,16 +318,20 @@ const Deposit = ({
   ];
 
   const RenderContent = () => {
-    // Reorder UPI options: OSpay UPI in center, TYpay at last
+    // Reorder UPI options: Group EasyPaisa together, then JazzCash
     const reorderUpiOptions = (data: any[]) => {
       if (activeDepOption === 'fastPay') {
         const orderMap: Record<string, number> = {
+          // EasyPaisa options grouped together
           MEGA_EASYPAISA: 1,
-          DY_JAZZCASH: 2,
-          DY_EASYPAISA: 3,
-          MEGA_JAZZCASH: 4,
-          TOPPAY_JAZZCASH: 4,
+          DY_EASYPAISA: 2,
           TOPPAY_EASYPAISA: 3,
+          GAMEPAYER_EASYPAISA: 4,
+          // JazzCash options grouped together
+          DY_JAZZCASH: 5,
+          MEGA_JAZZCASH: 6,
+          TOPPAY_JAZZCASH: 7,
+          GAMEPAYER_JAZZCASH: 8,
         };
         const reorder = [...data].sort((a, b) => {
           const orderA = orderMap[a.channel_id] || 999; // Unknown gateways go to the end
