@@ -127,13 +127,24 @@ export const useGameLogin = () => {
         setGameUrl({
           ...data,
           game_url: game,
+      
         });
+      
       }
+      
       navigation.navigate('game');
       return 'success';
     } catch (e: any) {
-      const errorMessage =
+      let errorMessage =
         JSON.parse(e.message).message || t('common-terms.something-went-wrong');
+
+      // Replace EFG failed message with customer service message
+      if (errorMessage === "EFG failed, please try again") {
+        errorMessage = t("game.efg-locked");
+      }
+      if (errorMessage === "EFG failed, multiple device detected") {
+        errorMessage = t("game.efg-multiple");
+      }
 
       if (errorMessage === 'invalid_token') {
         Toast.show({

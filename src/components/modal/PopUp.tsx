@@ -20,8 +20,11 @@ import { data } from '../../constants/popup';
 import { RootStackNav } from '../../types/nav';
 import { useUser } from '../../hooks/useUser';
 import { useTranslation } from 'react-i18next';
+import {useGameLogin} from '../../hooks/useGameLogin';
+import { ISlot } from '../../types/slot';
 
 const PopUp = () => {
+  const {initializeGame} = useGameLogin();
   const { isOpen, closePopUp } = usePopUp();
   const navigation = useNavigation<RootStackNav>();
   const { isAuthenticated } = useUser();
@@ -39,6 +42,7 @@ const PopUp = () => {
       'wheel': t('common-terms.win-oppo'),
       'lucky-spin': t('common-terms.free-1000-bonus'),
       'invite': t('common-terms.refer-earn'),
+      'rise-of-seth': t('common-terms.free-spin-bonus'),
     };
     return translationMap[id] || '';
   };
@@ -85,6 +89,15 @@ const PopUp = () => {
           },
         });
         break;
+
+      case "rise-of-seth":
+        if (isAuthenticated) {
+          initializeGame({ url: "/Login/GameLogin/efg/rise-of-seth/" } as ISlot);
+          } else {
+            openDialog();
+          }
+        break;
+    
       case 'invite':
         navigation.navigate('main-tabs', {
           screen: 'tabs',

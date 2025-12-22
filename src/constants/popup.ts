@@ -10,11 +10,11 @@ export const data: IPopUpData[] = [
     id: "wheel",
   },
   {
-    title: "Free 1000 Bonus",
+    title: "Free Spin Bonus",
     image: imageHandler(
-     "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/testing/public"
+     "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/efg-free-spin-banner/public"
     ),
-    id: "lucky-spin",
+    id: "rise-of-seth",
   },
   {
     title: "Refer & Earn",

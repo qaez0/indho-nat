@@ -29,6 +29,7 @@
     "logging-in": "Logging you in...",
     "win-oppo": "Win Oppo",
     "free-1000-bonus": "Free 1000 Bonus",
+    "free-spin-bonus": "Free Spin Bonus",
     "refer-earn": "Refer & Earn",
     "something-went-wrong": "Something went wrong",
     "fetching-balance": "Fetching your balance. Please wait...",
@@ -740,6 +741,15 @@
       "free-spin": "FREE SPIN",
       "free-spin-plural": "FREE SPIN"
     }
+  },
+  "game": {
+      "fetching-balance": "Fetching your balance. Please wait...",
+      "transferring": "Transferring...",
+      "game-loading": "Game loading...",
+      "loading-game": "Loading game...",
+      "try-again-after-few-seconds": "Try again after a few seconds",
+      "efg-locked": "EFG Locked, Please Contact Customer Service",
+      "efg-multiple": "Sorry you are not qualified multiple accounts detected"
   },
   "deposit-withdraw": {
     "tutorial": {
