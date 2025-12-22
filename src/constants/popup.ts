@@ -12,7 +12,7 @@ export const data: IPopUpData[] = [
   {
     title: "Free Spin Bonus",
     image: imageHandler(
-     "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/testing/public"
+     "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/efg-free-spin-banner/public"
     ),
     id: "rise-of-seth",
   },
