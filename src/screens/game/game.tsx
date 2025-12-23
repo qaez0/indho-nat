@@ -7,10 +7,10 @@ import {
 } from 'react-native';
 import WebView, { WebViewNavigation } from 'react-native-webview';
 import lottieJson from '../../assets/loader.json';
-import { useGameDisplay, useLandscapeMode } from '../../store/useUIStore';
+import { useGameDisplay, useLandscapeMode, useGlobalLoader } from '../../store/useUIStore';
 import { useTheme } from '@ui-kitten/components';
 import QuitModal from './components/QuitModal';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import DraggableBubble from './components/GameBubble';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
@@ -44,6 +44,8 @@ const Loader = () => (
   </View>
 );
 
+const MAX_GAME_LOADER_MS = 5000;
+
 const GameScreen = () => {
   const navigation = useNavigation<GameNav>();
   const theme = useTheme();
@@ -55,6 +57,8 @@ const GameScreen = () => {
   const openDialog = useQuitGameDialog(s => s.openDialog);
   const { invalidate } = useUser();
   const resetGameDisplay = useGameDisplay(s => s.resetGameDisplay);
+  const closeLoader = useGlobalLoader(state => state.closeLoader);
+  const [hasClosedLoader, setHasClosedLoader] = useState(false);
 
   // Check if current game is CQ9
   const isCQ9Game = gameData?.game_id === 'CQ9';
@@ -62,14 +66,15 @@ const GameScreen = () => {
   useEffect(() => {
     // For CQ9 games, lock to landscape. For other games, unlock all orientations so user can rotate freely
     if (isCQ9Game) {
-      console.log('CQ9 game detected, locking to landscape');
+      // console.log('CQ9 game detected, locking to landscape');
       safeOrientationCall(() => {
         Orientation.unlockAllOrientations();
         Orientation.lockToLandscape();
       });
-    } else {
+    } 
+    else {
       // For other games, unlock all orientations so user can rotate to landscape if they want
-      console.log('Non-CQ9 game, unlocking all orientations');
+      // console.log('Non-CQ9 game, unlocking all orientations');
       safeOrientationCall(() => {
         Orientation.unlockAllOrientations();
       });
@@ -98,7 +103,8 @@ const GameScreen = () => {
           Orientation.unlockAllOrientations();
           Orientation.lockToLandscape();
         });
-      } else {
+      } 
+      else {
         safeOrientationCall(() => {
           Orientation.unlockAllOrientations();
         });
@@ -146,6 +152,41 @@ const GameScreen = () => {
     }
   };
 
+  // Close loader when WebView loads (game is ready) - fallback timeout
+  useEffect(() => {
+    if (!gameUrl || hasClosedLoader) {
+      return;
+    }
+
+    // Calculate remaining time from when loader started (max 5 seconds total)
+    const startTime = useGlobalLoader.getState().startTime;
+    let remainingTime = MAX_GAME_LOADER_MS;
+    if (startTime) {
+      const elapsed = Date.now() - startTime;
+      remainingTime = Math.max(0, MAX_GAME_LOADER_MS - elapsed);
+    }
+
+    // Set up a timeout as fallback (in case onLoadEnd doesn't fire)
+    const timeoutId = setTimeout(() => {
+      if (!hasClosedLoader) {
+        closeLoader();
+        setHasClosedLoader(true);
+      }
+    }, remainingTime);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [gameUrl, closeLoader, hasClosedLoader]);
+
+  // Reset hasClosedLoader when game_url changes (new game is loading)
+  useEffect(() => {
+    if (gameUrl) {
+      setHasClosedLoader(false);
+    }
+  }, [gameUrl]);
+
+
   // Handle navigation events to intercept deep link redirects (return_url)
   const handleNavigationStateChange = (navState: WebViewNavigation) => {
     const url = navState.url;
@@ -171,6 +212,13 @@ const GameScreen = () => {
           domStorageEnabled
           allowsInlineMediaPlayback
           mediaPlaybackRequiresUserAction={false}
+          onLoadEnd={() => {
+            // Close loader when WebView has loaded
+            if (!hasClosedLoader) {
+              closeLoader();
+              setHasClosedLoader(true);
+            }
+          }}
           onNavigationStateChange={handleNavigationStateChange}
           onShouldStartLoadWithRequest={(request) => {
             // Intercept deep link redirects before they load

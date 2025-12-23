@@ -28,8 +28,9 @@ export const useAuthModal = create<AuthModalState>(set => ({
 export const useGlobalLoader = create<IGlobalLoader>(set => ({
   isOpen: false,
   message: i18n.t('common-terms.please-wait'),
-  openLoader: message => set({ isOpen: true, message }),
-  closeLoader: () => set({ isOpen: false, message: i18n.t('common-terms.please-wait') }),
+  startTime: null,
+  openLoader: message => set({ isOpen: true, message, startTime: Date.now() }),
+  closeLoader: () => set({ isOpen: false, message: 'Please wait...', startTime: null }),
 }));
 
 export const useLiveChat = create<ILiveChat>(set => ({

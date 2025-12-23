@@ -116,6 +116,8 @@ export const useGameLogin = () => {
 
       if (data.url.includes('nw/lobby')) {
         Linking.openURL(game);
+        // Close loader after opening external game window
+        closeLoader();
         return 'success';
       }
       if (id) {

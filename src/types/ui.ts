@@ -114,6 +114,7 @@ export interface IPopUpData {
 export interface IGlobalLoader {
   isOpen: boolean;
   message: string;
+  startTime: number | null;
   openLoader: (message?: string) => void;
   closeLoader: () => void;
 }
