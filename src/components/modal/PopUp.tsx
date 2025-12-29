@@ -21,8 +21,10 @@ import { RootStackNav } from '../../types/nav';
 import { useUser } from '../../hooks/useUser';
 import { useTranslation } from 'react-i18next';
 import {useGameLogin} from '../../hooks/useGameLogin';
-import { ISlot } from '../../types/slot';
+import { useGlobalLoader } from "../../store/useUIStore";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { ISlot } from '../../types/slot';
 const PopUp = () => {
   const {initializeGame} = useGameLogin();
   const { isOpen, closePopUp } = usePopUp();
@@ -35,14 +37,15 @@ const PopUp = () => {
   const progress = useSharedValue<number>(0);
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
   const openDialog = useAuthModal((state: any) => state.openDialog);
+  const openLoader = useGlobalLoader((state) => state.openLoader);
 
   // Map popup IDs to translation keys
   const getTranslatedTitle = (id: string) => {
     const translationMap: Record<string, string> = {
       'wheel': t('common-terms.win-oppo'),
       'lucky-spin': t('common-terms.free-1000-bonus'),
-      'invite': t('common-terms.refer-earn'),
       'rise-of-seth': t('common-terms.free-spin-bonus'),
+      'invite': t('common-terms.refer-earn'),
     };
     return translationMap[id] || '';
   };
@@ -90,13 +93,21 @@ const PopUp = () => {
         });
         break;
 
-      case "rise-of-seth":
-        if (isAuthenticated) {
-          initializeGame({ url: "/Login/GameLogin/efg/rise-of-seth/" } as ISlot);
+     
+        case "rise-of-seth":
+          if (isAuthenticated) {
+            // Set flag to indicate user is navigating to game
+            AsyncStorage.setItem("navigated-to-game", "true");
+            // Show game loader immediately to block all interactions
+            openLoader("Game loading...");
+            // Close popup and initialize game
+            closePopUp();
+            initializeGame({ url: "/Login/GameLogin/efg/rise-of-seth/" } as ISlot);
+            return; // Return early to prevent closePopUp from being called again
           } else {
             openDialog();
           }
-        break;
+          break;
     
       case 'invite':
         navigation.navigate('main-tabs', {

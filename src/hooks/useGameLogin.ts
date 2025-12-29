@@ -64,13 +64,7 @@ export const useGameLogin = () => {
     openLoader(t('common-terms.please-wait'));
 
     if (queryClient.isFetching({ queryKey: ['balance'] })) {
-      Toast.show({
-        type: 'promise',
-        text1: t('common-terms.fetching-balance'),
-      });
-      await waitForBalanceFetching(queryClient).finally(() => {
-        Toast.hide();
-      });
+      await waitForBalanceFetching(queryClient);
     }
 
     if (lastUsedGame?.date) {

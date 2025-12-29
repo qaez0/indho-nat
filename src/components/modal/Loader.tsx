@@ -13,7 +13,10 @@ const Loader = () => {
     <Modal
       animationType="fade"
       visible={isOpen}
-      onBackdropPress={closeLoader}
+      onBackdropPress={() => {
+        // Prevent closing during game loading - only allow programmatic closing
+        // The loader will be closed by the game initialization function when done
+      }}
       backdropStyle={{
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
       }}

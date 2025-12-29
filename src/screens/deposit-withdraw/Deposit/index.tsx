@@ -1,6 +1,6 @@
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Button, Text } from '@ui-kitten/components';
-import { Fragment, useCallback, useEffect } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import {
   useDepOption,
   useDepWithCustomDialog,
@@ -40,6 +40,8 @@ import WALLET from '../../../assets/dep-with/e-wallet.svg';
 import USDT from '../../../assets/dep-with/t.svg';
 import { useDepositWithdrawApi } from '../store/useDepositWithdraw';
 import { usePopUp } from '../../../store/useUIStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 interface IDepositProps {
   details: {
     eWallet: IChannelGroup[];
@@ -79,6 +81,8 @@ const Deposit = ({
   const { selectedOption, setSelectedOption } = useSelectedOption();
   const { onlinePayRequest, depositRequestB2B } = useDepositWithdrawApi();
   const { openDialog } = useDepWithCustomDialog();
+  const [shouldShowKycModal, setShouldShowKycModal] = useState(false);
+  const { isOpen: isPopUpOpen } = usePopUp();
 
   const onlinePayForm = useForm<OnlinePayType>({
     resolver: yupResolver(onlinePaySchema),
@@ -140,17 +144,59 @@ const Deposit = ({
     }
   }, [cryptoAmount, selectedOption?.xrate, activeDepOption, cryptoForm]);
 
+  // Keep state false while popup is open
+  useEffect(() => {
+    if (isPopUpOpen) {
+      setShouldShowKycModal(false);
+    }
+  }, [isPopUpOpen]);
+
+  // Event listener: When popup modal closes, set state to true (unless user navigated to game)
+  useEffect(() => {
+    const handlePopupStateChange = async () => {
+      // Track if popup was open
+      const wasPopUpOpen = (await AsyncStorage.getItem("was-popup-open")) === "true";
+      
+      // If popup was just closed
+      if (!isPopUpOpen && wasPopUpOpen) {
+        // Check if user clicked free-spin-bonus (rise-of-seth) and navigated to game
+        const navigatedToGame = (await AsyncStorage.getItem("navigated-to-game")) === "true";
+        
+        if (!navigatedToGame) {
+          // User closed popup without navigating to game - set state to true to show KYC modal
+          setShouldShowKycModal(true);
+        } else {
+          // User navigated to game - keep state false, clear flag
+          await AsyncStorage.removeItem("navigated-to-game");
+          setShouldShowKycModal(false);
+        }
+        
+        // Clear the tracking flag
+        await AsyncStorage.removeItem("was-popup-open");
+      }
+      
+      // Track popup state when it opens
+      if (isPopUpOpen) {
+        await AsyncStorage.setItem("was-popup-open", "true");
+      }
+    };
+
+    handlePopupStateChange();
+  }, [isPopUpOpen]);
+
+
+
   const { isOpen } = usePopUp();
 
   useEffect(() => {
-    if (details?.playerInfo?.real_name === '' && !isOpen) {
+    if (details?.playerInfo?.real_name === '' && shouldShowKycModal) {
       openDialog({
         title: t('kyc.please-complete-kyc'),
         content: 'real_name',
         onSuccess: refetch,
       });
     }
-  }, [details?.playerInfo?.real_name, isOpen]);
+  }, [details?.playerInfo?.real_name, shouldShowKycModal]);
 
   const onSubmit = () => {
     if (
