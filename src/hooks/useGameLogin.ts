@@ -14,6 +14,11 @@ import { RootStackNav } from '../types/nav';
 import { ISlot } from '../types/slot';
 import { Linking } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import {
+  detectGameLoginDevice,
+  addDeviceParamToGameLogin,
+  appendReturnUrlIfNeeded,
+} from '../utils/game-login-url';
 
 type InitStatus = 'aborted' | 'success' | 'failed';
 
@@ -85,15 +90,12 @@ export const useGameLogin = () => {
       // API format: /Login/GameLogin/:gameid/:gamecode/:return_url
       // For web, return_url is a domain (e.g., 11ic.pk)
       // For app, return_url should be a deep link (e.g., game11ic://game)
+       // Apply device and return_url parameters to GameLogin URLs
       let apiPath = data.url;
-      if (apiPath.includes('/Login/GameLogin/')) {
-        const pathParts = apiPath.split('/Login/GameLogin/')[1]?.split('/') || [];
-        // If path has only 2 segments (gameid and gamecode), add return_url
-        if (pathParts.length === 2) {
-          const returnUrl = 'game11ic://'; // Deep link for app return
-          apiPath = `${apiPath}/${encodeURIComponent(returnUrl)}`;
-        }
-      }
+      const device = detectGameLoginDevice();
+      apiPath = addDeviceParamToGameLogin(apiPath, device);
+      apiPath = appendReturnUrlIfNeeded(apiPath);
+
 
       const response = await apiRequest.get<IBaseResponse<string>>({
         path: apiPath,
