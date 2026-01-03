@@ -62,38 +62,38 @@ export default function PromotionsScreen() {
   );
   const promotions: Promotion[] = [
 
-    {
-      id: 1,
-      titleKey: t("promotions.title-6"),
-      descriptionKey: t("promotions.description-6"),
-      cardImage: i18n.language === "en"
-        ? imageHandler(
-            "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/11%25_promotion_page/public"
-          )
-        : imageHandler(
-            "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_11%25pk_banner/public"
-          ),
-      detailImage: i18n.language === "pk"
-      ? require('../../assets/common/promotions/11lossback.jpg')
-      : require('../../assets/common/promotions/11lossback.jpg'),
-      endDate: "2025-01-01",
-    },
-    {
-      id: 2,
-      titleKey: t("promotions.title-7"),
-      descriptionKey: t("promotions.description-7"),
-      cardImage: i18n.language === "en"
-        ? imageHandler(
-            "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/holiday_promo_page/public"
-          )
-        : imageHandler(
-            "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_holidaypk_banner/public"
-          ),
-      detailImage: i18n.language === "pk"
-      ? require('../../assets/common/promotions/100holdep.jpg')
-      : require('../../assets/common/promotions/100holdep.jpg'),
-      endDate: "2025-01-01",
-    },
+    // {
+    //   id: 1,
+    //   titleKey: t("promotions.title-6"),
+    //   descriptionKey: t("promotions.description-6"),
+    //   cardImage: i18n.language === "en"
+    //     ? imageHandler(
+    //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/11%25_promotion_page/public"
+    //       )
+    //     : imageHandler(
+    //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_11%25pk_banner/public"
+    //       ),
+    //   detailImage: i18n.language === "pk"
+    //   ? require('../../assets/common/promotions/11lossback.jpg')
+    //   : require('../../assets/common/promotions/11lossback.jpg'),
+    //   endDate: "2025-01-01",
+    // },
+    // {
+    //   id: 2,
+    //   titleKey: t("promotions.title-7"),
+    //   descriptionKey: t("promotions.description-7"),
+    //   cardImage: i18n.language === "en"
+    //     ? imageHandler(
+    //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/holiday_promo_page/public"
+    //       )
+    //     : imageHandler(
+    //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_holidaypk_banner/public"
+    //       ),
+    //   detailImage: i18n.language === "pk"
+    //   ? require('../../assets/common/promotions/100holdep.jpg')
+    //   : require('../../assets/common/promotions/100holdep.jpg'),
+    //   endDate: "2025-01-01",
+    // },
     {
       id: 3,
       titleKey: t("promotions.title-2"),

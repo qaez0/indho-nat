@@ -16,28 +16,28 @@ export const getBannerData = (): ICarousel[] => {
       ? [
         ]
       : []),
-      {
-        id: 1,
-        nav: "promotions",
-        image: isPk
-          ? imageHandler(
-              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_11%25pk_banner/public"
-            )
-          : imageHandler(
-              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/11%25_promotion_page/public"
-            ),
-      },
-      {
-        id: 2,
-        nav: "promotions",
-        image: isPk
-          ? imageHandler(
-              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_holidaypk_banner/public"
-            )
-          : imageHandler(
-              "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/holiday_promo_page/public"
-            ),
-      },
+      // {
+      //   id: 1,
+      //   nav: "promotions",
+      //   image: isPk
+      //     ? imageHandler(
+      //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_11%25pk_banner/public"
+      //       )
+      //     : imageHandler(
+      //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/11%25_promotion_page/public"
+      //       ),
+      // },
+      // {
+      //   id: 2,
+      //   nav: "promotions",
+      //   image: isPk
+      //     ? imageHandler(
+      //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/home_holidaypk_banner/public"
+      //       )
+      //     : imageHandler(
+      //         "/cdn-cgi/imagedelivery/SViyH5iSEWrJ3_F3ZK6HYg/holiday_promo_page/public"
+      //       ),
+      // },
       ...(isPk
         ? [
             {
