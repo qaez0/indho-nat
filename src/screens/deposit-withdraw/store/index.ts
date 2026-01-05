@@ -84,3 +84,31 @@ export const useOtp = create<IOtpState>()(
     }
   )
 );
+// Upload files store for Bank/EasyPay image uploads
+interface UploadFilesState {
+  files: Record<string, any>; // key: uploadKey (e.g., 'bank-upload', 'easyPay-upload'), value: file object
+  version: number; // Increments on file changes for reliable subscriptions
+  setFile: (uploadKey: string, file: any) => void;
+  clearFile: (uploadKey: string) => void;
+  getFile: (uploadKey: string) => any;
+}
+
+export const useUploadFiles = create<UploadFilesState>((set, get) => ({
+  files: {},
+  version: 0,
+  setFile: (uploadKey: string, file: any) =>
+    set((state) => ({
+      files: { ...state.files, [uploadKey]: file },
+      version: state.version + 1,
+    })),
+  clearFile: (uploadKey: string) =>
+    set((state) => {
+      const newFiles = { ...state.files };
+      delete newFiles[uploadKey];
+      return {
+        files: newFiles,
+        version: state.version + 1,
+      };
+    }),
+  getFile: (uploadKey: string) => get().files[uploadKey] || null,
+}));

@@ -673,6 +673,15 @@
       "terms": "‎الحاق قواعد و ضوابط"
     }
   },
+  "game": {
+    "fetching-balance": "\u200Eآپ کا بیلنس حاصل کیا جا رہا ہے۔ براہ کرم انتظار کریں...",
+    "transferring": "\u200Eمنتقل کیا جا رہا ہے...",
+    "game-loading": "\u200Eکھیل لوڈ ہو رہا ہے...",
+    "loading-game": "\u200Eکھیل لوڈ ہو رہا ہے...",
+    "try-again-after-few-seconds": "\u200Eکچھ سیکنڈ بعد دوبارہ کوشش کریں",
+    "efg-locked": "\u200EEFG لاک ہے، براہ کرم کسٹمر سروس سے رابطہ کریں",
+    "efg-multiple": "\u200Eمعذرت، آپ کوالیفائی نہیں کرتے، متعدد اکاؤنٹس کا پتہ چلا"
+  },
   "wheel": {
     "title": "‎پہیہ",
     "description": "‎پہیہ",
@@ -736,15 +745,6 @@
       "free-spin": "‎مفت اسپن",
       "free-spin-plural": "‎مفت اسپن"
     }
-  },
-  "game": {
-    "fetching-balance": "\u200Eآپ کا بیلنس حاصل کیا جا رہا ہے۔ براہ کرم انتظار کریں...",
-    "transferring": "\u200Eمنتقل کیا جا رہا ہے...",
-    "game-loading": "\u200Eکھیل لوڈ ہو رہا ہے...",
-    "loading-game": "\u200Eکھیل لوڈ ہو رہا ہے...",
-    "try-again-after-few-seconds": "\u200Eکچھ سیکنڈ بعد دوبارہ کوشش کریں",
-    "efg-locked": "\u200EEFG لاک ہے، براہ کرم کسٹمر سروس سے رابطہ کریں",
-    "efg-multiple": "\u200Eمعذرت، آپ کوالیفائی نہیں کرتے، متعدد اکاؤنٹس کا پتہ چلا"
   },
   "deposit-withdraw": {
     "tutorial": {
@@ -1010,7 +1010,7 @@
     "privacy-policy": "‎پرائیویسی پالیسی",
     "terms-and-conditions": "‎شرائط و ضوابط",
     "affiliate-program": "‎الحاق پروگرام",
-    "copyright": "‎کاپی رائٹ © 2025 11ic۔ تمام حقوق محفوظ ہیں۔"
+    "copyright": "‎کاپی رائٹ © 2026 11ic۔ تمام حقوق محفوظ ہیں۔"
   },
   "information": {
     "tabs": {

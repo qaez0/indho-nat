@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Controller, type UseFormReturn } from 'react-hook-form';
+import { useUploadFiles } from '../store';
 import {
   launchImageLibrary,
   ImagePickerResponse,
@@ -23,7 +24,7 @@ interface UploadInputProps {
   form: UseFormReturn<any>;
 }
 
-const UploadInput = ({ form, name }: UploadInputProps) => {
+const UploadInput = ({ form, name, uploadKey }: UploadInputProps) => {
   const { t } = useTranslation();
   const {
     control,
@@ -33,14 +34,30 @@ const UploadInput = ({ form, name }: UploadInputProps) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const value = watch(name);
 
+// Subscribe to Zustand store for files and version
+  // Subscribe to files object and version to trigger re-renders when uploads change
+  const files = useUploadFiles(state => state.files);
+  const version = useUploadFiles(state => state.version);
+  const setFile = useUploadFiles(state => state.setFile);
+  const clearFile = useUploadFiles(state => state.clearFile);
+
+  // Get the stored file for this upload key
+  const storedFile = files[uploadKey] || null;
+
+  // Show preview only when both form value and stored file are present
+  const hasImage = value && value.uri && storedFile;
+
+  // Sync Zustand store with form value
   useEffect(() => {
     console.log(value);
     if (value && value.uri) {
-      setSelectedImage(value.uri);
+      // Form has a value - store it in Zustand
+      setFile(uploadKey, value);
     } else {
-      setSelectedImage(null);
+      // Form value cleared - clear from Zustand to keep UI/validation aligned
+      clearFile(uploadKey);
     }
-  }, [value]);
+  }, [value, uploadKey, setFile, clearFile]);
 
   const handleImagePicker = (onChange: (file: any) => void) => {
     const options: ImageLibraryOptions = {
@@ -65,6 +82,7 @@ const UploadInput = ({ form, name }: UploadInputProps) => {
           name: asset.fileName || `image_${Date.now()}.jpg`,
           size: asset.fileSize,
         };
+        // Update form value (which will trigger Zustand sync via useEffect)
         onChange(fileData);
       }
     });
@@ -86,7 +104,7 @@ const UploadInput = ({ form, name }: UploadInputProps) => {
               onPress={() => handleImagePicker(onChange)}
               activeOpacity={0.7}
             >
-              {selectedImage ? <AddeIcon style={styles.uploadIcon}/> : <AddIcon style={styles.uploadIcon}/>}
+              {hasImage ? <AddeIcon style={styles.uploadIcon}/> : <AddIcon style={styles.uploadIcon}/>}
             </TouchableOpacity>
             <Text style={styles.typography}>
               {t('deposit-withdraw.upload-input.suggested-image-size') ||

@@ -20,12 +20,14 @@ export const onlinePayReq = async (
 };
 
 export const depositReqB2B = async (
-  data: IDepositRequestB2BPayload,
+  data: FormData | IDepositRequestB2BPayload,
 ): Promise<IBaseResponse<OnlinePayResponse>> => {
   return apiRequest.post<IBaseResponse<OnlinePayResponse>>({
     path: '/Bank/DepositRequest/B2B',
     body: data,
-    customHeaders: {
+    // Note: Content-Type header is automatically set by fetch for FormData
+    // Only set custom headers if data is not FormData
+    customHeaders: data instanceof FormData ? {} : {
       'Content-Type': 'multipart/form-data',
     },
   });

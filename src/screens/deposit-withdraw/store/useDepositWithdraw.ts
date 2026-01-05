@@ -8,7 +8,7 @@ import type {
 } from '../../../types/player';
 import type { WithdrawRequest } from '../../../types/withdraw';
 import Toast from 'react-native-toast-message';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   depositReqB2B,
   onlinePayReq,
@@ -30,6 +30,7 @@ import { useTranslation } from 'react-i18next';
 import { useUser } from '../../../hooks/useUser';
 
 export const useDepositWithdrawApi = () => {
+  const queryClient = useQueryClient();
   const navigation = useNavigation<RootStackNav>();
   const { t } = useTranslation();
   const { invalidate } = useUser();
@@ -131,11 +132,52 @@ export const useDepositWithdrawApi = () => {
     });
 
     try {
-      const depPayload = {
-        ...payload,
-        device: 1,
-      };
-      const response = await depositReqB2B(depPayload);
+      // Create FormData for multipart/form-data request
+      const formData = new FormData();
+      
+      // Append all fields to FormData
+      formData.append('amount', String(payload.amount));
+      formData.append('group', payload.group);
+      formData.append('channel_id', payload.channel_id);
+      formData.append('device', '1');
+      
+      if (payload.ref_id) {
+        formData.append('ref_id', payload.ref_id);
+      }
+      
+      if (payload.bank_account_name) {
+        formData.append('bank_account_name', payload.bank_account_name);
+      }
+      
+      if (payload.bank_account_num) {
+        formData.append('bank_account_num', payload.bank_account_num);
+      }
+      
+      if (payload.bank_name) {
+        formData.append('bank_name', payload.bank_name);
+      }
+      
+      if (payload.min_deposit) {
+        formData.append('min_deposit', String(payload.min_deposit));
+      }
+      
+      if (payload.max_deposit) {
+        formData.append('max_deposit', String(payload.max_deposit));
+      }
+      
+      // Append image file - React Native FormData format
+      if (payload.image && payload.image.uri) {
+        formData.append('image', {
+          uri: payload.image.uri,
+          type: payload.image.type || 'image/jpeg',
+          name: payload.image.name || 'image.jpg',
+        } as any);
+      } else if (payload.image) {
+        // Fallback if image is already in correct format
+        formData.append('image', payload.image as any);
+      }
+      
+      const response = await depositReqB2B(formData as any);
       Toast.hide();
       if (typeof response.data === 'boolean' && response.data === false) {
         Toast.show({
@@ -147,15 +189,27 @@ export const useDepositWithdrawApi = () => {
         });
         return;
       }
-      Toast.show({
-        text1: 'Deposit successful',
-        type: 'success',
-      });
+       // Note: Toast and navigation are handled in Deposit component for better UX
+      // This function just handles the API call and error cases
       invalidate('panel-info');
+      // Invalidate deposit records queries so the new transaction appears in transaction record
+      queryClient.invalidateQueries({
+        queryKey: ['deposit-records'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['all-deposit-records'],
+      });
     } catch (error: any) {
       Toast.hide();
 
-      let message = 'An error occurred';
+      let message: string | null = null;
+      try {
+        message = JSON.parse(error?.message)?.message;
+      } catch (parseError) {
+        // If parsing fails, try to get message from error directly
+        message = error?.message || error?.data?.message || null;
+      }
+      
       try {
         const parsed = JSON.parse(error?.message || '{}');
         message = parsed?.message || error?.message || 'An error occurred';
@@ -173,17 +227,23 @@ export const useDepositWithdrawApi = () => {
         message ===
         'You have a pending deposit request. Please wait for the previous request to be processed.'
       ) {
-        Toast.show({
-          text1: t('deposit-withdraw.deposit.pending-deposit-request'),
-          type: 'error',
-        });
+        // Show pending request message toast when redirecting to transaction record
         navigation.navigate('transaction-record');
+        // Use setTimeout to ensure navigation happens first, then show toast
+        setTimeout(() => {
+          Toast.show({
+            text1: message,
+            type: 'error',
+          });
+        }, 100);
       } else {
         Toast.show({
           text1: message || 'An unexpected error occurred. Please try again.',
           type: 'error',
         });
       }
+      // Re-throw error so Deposit component knows not to show success toast
+      throw error;
     }
   };
 

@@ -743,14 +743,14 @@
     }
   },
   "game": {
-      "fetching-balance": "Fetching your balance. Please wait...",
-      "transferring": "Transferring...",
-      "game-loading": "Game loading...",
-      "loading-game": "Loading game...",
-      "try-again-after-few-seconds": "Try again after a few seconds",
-      "efg-locked": "EFG Locked, Please Contact Customer Service",
-      "efg-multiple": "Sorry you are not qualified multiple accounts detected"
-  },
+    "fetching-balance": "Fetching your balance. Please wait...",
+    "transferring": "Transferring...",
+    "game-loading": "Game loading...",
+    "loading-game": "Loading game...",
+    "try-again-after-few-seconds": "Try again after a few seconds",
+    "efg-locked": "EFG Locked, Please Contact Customer Service",
+    "efg-multiple": "Sorry you are not qualified multiple accounts detected"
+},
   "deposit-withdraw": {
     "tutorial": {
       "fast-pay": {
@@ -853,7 +853,7 @@
       "easy-pay": "EASY PAY",
       "fast-pay": "FAST PAY",
       "bank": "BANK",
-      "bank-transfer": "BANK TRANSFER",
+      "bank-transfer": "BANK",
       "deposit-amount": "Deposit Amount",
       "select-amount": "Select Amount",
       "deposit-limit": "Deposit Limit {{min}} - {{max}}",
@@ -1019,7 +1019,7 @@
     "privacy-policy": "Privacy Policy",
     "terms-and-conditions": "Terms & Conditions",
     "affiliate-program": "Affiliate Program",
-    "copyright": "Copyright © 2025 11ic. All rights reserved."
+    "copyright": "Copyright © 2026 11ic. All rights reserved."
   },
   "information": {
     "tabs": {

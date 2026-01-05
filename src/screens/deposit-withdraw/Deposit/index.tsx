@@ -1,6 +1,10 @@
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { Button, Text } from '@ui-kitten/components';
 import { Fragment, useCallback, useEffect, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNav } from '../../../types/nav';
+import Toast from 'react-native-toast-message';
 import {
   useDepOption,
   useDepWithCustomDialog,
@@ -38,6 +42,7 @@ import UPI from '../../../assets/dep-with/fast-pay.svg';
 import UPIACT from '../../../assets/dep-with/fast-pay-active.svg';
 import WALLET from '../../../assets/dep-with/e-wallet.svg';
 import USDT from '../../../assets/dep-with/t.svg';
+// import BANK from '../../../assets/dep-with/bank.svg';
 import { useDepositWithdrawApi } from '../store/useDepositWithdraw';
 import { usePopUp } from '../../../store/useUIStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -74,8 +79,9 @@ const Deposit = ({
   isAuthenticated,
   openInIframe,
 }: IDepositProps) => {
+  const navigation = useNavigation<RootStackNav>();
   const { t } = useTranslation();
-  const { crypto, eWallet, fastPay } = details;
+  const { crypto, eWallet, fastPay, bankTransfer } = details;
   const { activeDepOption, setActiveDepOption } = useDepOption();
   const { tutorial, title } = staticData(activeDepOption, t);
   const { selectedOption, setSelectedOption } = useSelectedOption();
@@ -118,8 +124,9 @@ const Deposit = ({
   const resetAllForms = useCallback(() => {
     onlinePayForm.reset();
     bankForm.reset();
+    bankFormUpi.reset();
     cryptoForm.reset();
-  }, [onlinePayForm, bankForm, cryptoForm]);
+  }, [onlinePayForm, bankForm, bankFormUpi, cryptoForm]);
 
   useEffect(() => {
     const options = details[activeDepOption];
@@ -131,6 +138,20 @@ const Deposit = ({
   useEffect(() => {
     resetAllForms();
   }, [activeDepOption, resetAllForms]);
+
+  // Reset to fastPay and reset all forms when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      // Reset to fastPay when screen comes into focus
+      setActiveDepOption('fastPay');
+      resetAllForms();
+      
+      // Cleanup function runs when screen loses focus (user navigates away)
+      return () => {
+        resetAllForms();
+      };
+    }, [resetAllForms, setActiveDepOption]),
+  );
 
   const cryptoAmount = cryptoForm.watch('amount');
 
@@ -280,8 +301,28 @@ const Deposit = ({
           console.log('Bank transfer payload:', payload);
           await depositRequestB2B(payload);
           resetAllForms();
-        } catch (error) {
-          console.error('Bank deposit request failed:', error);
+          // Show toast and navigate to transaction record after successful B2B deposit
+          Toast.show({
+            text1: 'Deposit request submitted for review',
+            type: 'success',
+          });
+          navigation.navigate('transaction-record');
+        } catch (error: any) {
+          // Error is already handled in depositRequestB2B (including pending request case)
+          // Only log if it's not a pending request error (which is already handled)
+          let message: string | null = null;
+          try {
+            message = error?.message ? JSON.parse(error?.message)?.message : null;
+          } catch (parseError) {
+            // If parsing fails, try to get message from error directly
+            message = error?.message || error?.data?.message || null;
+          }
+          if (
+            message !==
+            'You have a pending deposit request. Please wait for the previous request to be processed.'
+          ) {
+            console.error('Bank deposit request failed:', error);
+          }
           console.error('Error details:', {
             error,
             data,
@@ -361,6 +402,16 @@ const Deposit = ({
       isActive: activeDepOption === 'crypto',
       isDisabled: crypto.length === 0,
     },
+    // {
+    //   icon: <BANK width={40} height={40} />,
+    //   label: t('deposit-withdraw.deposit.bank-transfer'),
+    //   onClick: () => {
+    //     resetAllForms();
+    //     setActiveDepOption('bankTransfer');
+    //   },
+    //   isActive: activeDepOption === 'bankTransfer',
+    //   isDisabled: bankTransfer.length === 0,
+    // },
   ];
 
   const RenderContent = () => {
@@ -472,7 +523,7 @@ const Deposit = ({
             />
             <Content
               label="Proof of Transaction"
-              content={<UploadInput form={bankFormUpi} name="image" />}
+              content={<UploadInput form={bankFormUpi} name="image" uploadKey="easyPay-upload" />}
             />
           </Fragment>
         );
@@ -511,12 +562,21 @@ const Deposit = ({
                   placeholder={'Please Enter the UTR/Reference No.'}
                   name="reference_number"
                   form={bankForm}
+                  inputMode="numeric"
+                  keyboardType="numeric"
+                  onChangeText={(text: string) => {
+                    // Only allow numeric characters
+                    const numericText = text.replace(/[^0-9]/g, '');
+                    bankForm.setValue('reference_number', numericText, {
+                      shouldValidate: true,
+                    });
+                  }}
                 />
               }
             />
             <Content
               label={'Proof of Transaction'}
-              content={<UploadInput form={bankForm} name="image" />}
+              content={<UploadInput form={bankForm} name="image" uploadKey="bank-upload" />}
             />
           </Fragment>
         );

@@ -1,5 +1,5 @@
 import Clipboard from '@react-native-clipboard/clipboard';
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   ScrollView,
@@ -20,6 +20,7 @@ import {
 import Feather from '@react-native-vector-icons/feather';
 import Toast from 'react-native-toast-message';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   useDepositRecords,
   useWithdrawalRecords,
@@ -44,6 +45,7 @@ import { convertToPakistanTime } from '../../utils/pktime';
 const TransactionRecordScreen = () => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const navigation = useNavigation<RootStackNav>();
   const {
     activeTab,
@@ -68,7 +70,31 @@ const TransactionRecordScreen = () => {
   const bonusQuery = useBonusRecords(selectedDays, currentPage, pageSize);
   const cancelDepositMutation = useCancelDepositRequest();
   const allRecordsQuery = useAllTransactionRecords(activeTab, selectedDays);
-
+  
+// Invalidate and refetch transaction records when screen comes into focus
+useFocusEffect(
+  useCallback(() => {
+    // Invalidate all transaction record queries to trigger refetch
+    queryClient.invalidateQueries({
+      queryKey: ['deposit-records'],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['withdrawal-records'],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['bonus-records'],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['all-deposit-records'],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['all-withdrawal-records'],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ['all-promo-records'],
+    });
+  }, [queryClient]),
+);
   // Refetch all records when screen comes into focus
   useFocusEffect(
     React.useCallback(() => {
