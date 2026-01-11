@@ -838,6 +838,17 @@
       "label": "‎نکالی پاس ورڈ درج کریں",
       "placeholder": "‎اپنا نکالی پاس ورڈ درج کریں"
     },
+    "withdraw": {
+      "e-wallet": "‎E-WALLET",
+      "bank": "‎بینک",
+      "usdt": "‎USDT",
+      "set-withdraw-password": "‎نکالی پاس ورڈ سیٹ کریں!",
+      "set-withdraw-password-button": "‎نکالی پاس ورڈ سیٹ کریں",
+      "please-add-bank-account-first": "‎براہ کرم پہلے بینک اکاؤنٹ شامل کریں!",
+      "please-complete-remaining-turnover": "‎نکالنے کے لیے براہ کرم اپنا باقی ٹرن اوور مکمل کریں",
+      "invalid-bank-name": "‎غلط بینک نام۔ منتخب کردہ بینک درست نہیں ہے۔ براہ کرم کسٹمر سپورٹ سے رابطہ کریں۔",
+      "invalid-e-wallet-name": "‎غلط ای-والیٹ نام۔ منتخب کردہ ای-والیٹ درست نہیں ہے۔ براہ کرم کسٹمر سپورٹ سے رابطہ کریں۔"
+    },
     "usdt-address-card": {
       "usdt-address": "‎USDT ایڈریس"
     },

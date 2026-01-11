@@ -843,6 +843,17 @@
       "label": "Enter Withdrawal Password",
       "placeholder": "Enter your withdrawal password"
     },
+    "withdraw": {
+      "e-wallet": "E-WALLET",
+      "bank": "BANK",
+      "usdt": "USDT",
+      "set-withdraw-password": "Set Withdraw Password!",
+      "set-withdraw-password-button": "Set Withdraw Password",
+      "please-add-bank-account-first": "Please add bank account first!",
+      "please-complete-remaining-turnover": "Please complete your remaining turnover to withdraw",
+      "invalid-bank-name": "Invalid bank name. The selected bank is not valid. Please contact customer support for assistance.",
+      "invalid-e-wallet-name": "Invalid e-wallet name. The selected e-wallet is not valid. Please contact customer support for assistance."
+    },
     "usdt-address-card": {
       "usdt-address": "USDT Address"
     },

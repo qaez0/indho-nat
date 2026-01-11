@@ -61,31 +61,6 @@ export default function ProfileScreen() {
   const emailInputRef = useRef<View>(null);
   const containerRef = useRef<View>(null);
 
-  // Handle real name input validation
-  const handleRealNameChange = (text: string) => {
-    // Prevent processing if already processing to avoid loops
-    if (isProcessingRef.current) return;
-    
-    isProcessingRef.current = true;
-    
-    // Remove any invalid characters (only allow letters and spaces)
-    const filteredText = text.replace(/[^a-zA-Z\s]/g, '');
-    
-    // Ensure only single spaces (replace multiple spaces with single space)
-    const singleSpaceText = filteredText.replace(/\s+/g, ' ');
-    
-    // Prevent leading spaces - if user tries to start with space, remove it
-    const noLeadingSpace = singleSpaceText.startsWith(' ') ? singleSpaceText.trim() : singleSpaceText;
-    
-    // Update the form value
-    updateProfileForm.setValue('real_name', noLeadingSpace);
-    
-    // Reset processing flag
-    setTimeout(() => {
-      isProcessingRef.current = false;
-    }, 50);
-  };
-
   // Handle Android back button to dismiss keyboard
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -137,6 +112,31 @@ export default function ProfileScreen() {
       birthday: user?.player_info.birthday,
     },
   });
+
+  // Handle real name input validation - defined after updateProfileForm
+  const handleRealNameChange = (text: string) => {
+    // Prevent processing if already processing to avoid loops
+    if (isProcessingRef.current) return;
+    
+    isProcessingRef.current = true;
+    
+    // Remove any invalid characters (only allow letters and spaces)
+    const filteredText = text.replace(/[^a-zA-Z\s]/g, '');
+    
+    // Ensure only single spaces (replace multiple spaces with single space)
+    const singleSpaceText = filteredText.replace(/\s+/g, ' ');
+    
+    // Prevent leading spaces - if user tries to start with space, remove it
+    const noLeadingSpace = singleSpaceText.startsWith(' ') ? singleSpaceText.trim() : singleSpaceText;
+    
+    // Update the form value
+    updateProfileForm.setValue('real_name', noLeadingSpace);
+    
+    // Reset processing flag
+    setTimeout(() => {
+      isProcessingRef.current = false;
+    }, 50);
+  };
 
   const handlePhoneVerifyButton = (data: VerifyPhoneNumberType) => {
     const onSuccess = (phone: string) => {

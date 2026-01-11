@@ -24,12 +24,14 @@ import {
   useWithdrawOption,
 } from '../store';
 import { useEffect, useMemo } from 'react';
-import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import Toast from 'react-native-toast-message';
 import { useUser } from '../../../hooks/useUser';
 import { useNavigation } from '@react-navigation/native';
-import { 
-  // RootStackNav,
-  TabNav } from '../../../types/nav';
+import { TabNav } from '../../../types/nav';
+import { useQuery } from '@tanstack/react-query';
+import { getMenuLists } from '../../../services/user.service';
+import type { IBaseResponse } from '../../../types/api';
+import type { IWebInfoData } from '../../../types/ui';
 
 interface ITransactionInfo {
   overall_turnover_amount: number;
@@ -55,9 +57,6 @@ const Withdraw = ({
 }: IWithdrawProps) => {
   const { t } = useTranslation();
   const navigation = useNavigation<TabNav>();
-  const { selectedOption, setSelectedOption, selectedCard } = useWithdraw();
-  const { openDialog } = useDepWithCustomDialog();
-  const { balance, invalidate } = useUser();
   const { activeWithdrawOption, setActiveWithdrawOption } = useWithdrawOption();
 
   const EWallet = useMemo(
@@ -73,6 +72,24 @@ const Withdraw = ({
     [bankInfo],
   );
 
+  const { selectedOption, setSelectedOption, selectedCard } = useWithdraw();
+  const { openDialog } = useDepWithCustomDialog();
+  const { balance, invalidate } = useUser();
+
+  // Fetch valid banks list from API
+  const { data: webInfoData } = useQuery<IBaseResponse<IWebInfoData>>({
+    queryKey: ['web-info'],
+    queryFn: async () => {
+      const response = await getMenuLists();
+      return response;
+    },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+  });
+
+  const validBanks = webInfoData?.data?.banks || [];
+  const validEWallets = webInfoData?.data?.ewallet || [];
+
+  // Set selected option based on active withdraw option
   useEffect(() => {
     if (activeWithdrawOption === 'eWallet' && EWallet.length > 0) {
       setSelectedOption(EWallet);
@@ -110,28 +127,40 @@ const Withdraw = ({
 
   const { tutorial, title } = staticData('withdraw', t);
   
-  const form = useForm<WithdrawType>({
-    resolver: yupResolver(withdrawSchema),
-    context: {
+  const formContext = useMemo(
+    () => ({
       minAmount: 500,
       maxAmount: 500000,
-    },
+      balance: balance?.total ? Number(balance.total) : 0,
+    }),
+    [balance?.total],
+  );
+
+  const resolver = useMemo(() => yupResolver(withdrawSchema), []);
+
+  const form = useForm<WithdrawType>({
+    resolver: resolver,
+    context: formContext,
   });
 
   // Update balance and turnover in schema and re-validate when they change
   useEffect(() => {
     setCurrentBalance(balance?.total ?? 0);
     setCurrentTurnover(transactInfo?.overall_turnover_amount ?? 0);
+  }, [balance?.total, transactInfo?.overall_turnover_amount]);
+
+  // Re-validate amount when balance changes
+  useEffect(() => {
     if (form.formState.dirtyFields.amount) {
       form.trigger('amount');
     }
-  }, [balance?.total, transactInfo?.overall_turnover_amount, form]);
+  }, [formContext.balance, form]);
 
   const depositOptions: IPartnerBtnProps[] = [
     {
       isDisabled: EWallet.length === 0,
       icon: <WALLET width={40} height={40} />,
-      label: 'E-WALLET',
+      label: t('deposit-withdraw.withdraw.e-wallet') || 'E-WALLET',
       onClick: () => {
         if (EWallet.length > 0) {
           setActiveWithdrawOption('eWallet');
@@ -142,7 +171,7 @@ const Withdraw = ({
     {
       isDisabled: Bank.length === 0,
       icon: <BANK width={40} height={40} />,
-      label: 'BANK',
+      label: t('deposit-withdraw.withdraw.bank') || 'BANK',
       onClick: () => {
         if (Bank.length > 0) {
           setActiveWithdrawOption('bankTransfer');
@@ -153,7 +182,7 @@ const Withdraw = ({
     {
       isDisabled: Usdt.length === 0,
       icon: <USDT width={40} height={40} />,
-      label: 'USDT',
+      label: t('deposit-withdraw.withdraw.usdt') || 'USDT',
       onClick: () => {
         if (Usdt.length > 0) {
           setActiveWithdrawOption('crypto');
@@ -170,8 +199,12 @@ const Withdraw = ({
       await new Promise<void>(resolve => {
         openDialog({
           content: 'set_withdraw_pass',
-          title: 'Set Withdraw Password!',
-          submitText: 'Set Withdraw Password',
+          title:
+            t('deposit-withdraw.withdraw.set-withdraw-password') ||
+            'Set Withdraw Password!',
+          submitText:
+            t('deposit-withdraw.withdraw.set-withdraw-password-button') ||
+            'Set Withdraw Password',
           onSuccess: () => {
             setTimeout(() => {
               openDialog({
@@ -181,70 +214,114 @@ const Withdraw = ({
                 },
                 onSuccess: () => {
                   refetch();
-                  Toast.show({
-                    type: 'success',
-                    text1: 'Withdraw password set successfully',
-                  });
                   resolve();
                 },
               });
-            }, 200);
+            }, 500);
           },
         });
       });
     }
+
+    // Phone verification removed - no longer required for withdrawal
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (selectedOption.length === 0) {
       Toast.show({
         type: 'error',
-        text1: 'Please add bank account first!',
+        text1:
+          t('deposit-withdraw.withdraw.please-add-bank-account-first') ||
+          'Please add bank account first!',
       });
       return;
     }
-    // Turnover validation is now handled by Yup schema
-    systemCheck();
-    form.trigger().finally(() => {
+    if (transactInfo.overall_turnover_amount > 0) {
+      Toast.show({
+        type: 'error',
+        text1:
+          t('deposit-withdraw.withdraw.please-complete-remaining-turnover') ||
+          'Please complete your remaining turnover to withdraw',
+      });
+      return;
+    }
+
+    // Validate bank name if withdrawing to BANK account
+    if (activeWithdrawOption === 'bankTransfer' && selectedCard) {
       if (
-        form.formState.dirtyFields.amount &&
-        !form.formState.errors.amount &&
-        playerInfo.has_wallet_pass === true
+        validBanks.length > 0 &&
+        !validBanks.includes(selectedCard.bank_name)
       ) {
-        openDialog({
-          content: 'withdraw_req',
-          externalForm: form,
-          externalValue: {
-            card_id: selectedCard?.card_id || '',
-          },
-          onSuccess: () => {
-            Toast.show({
-              type: 'success',
-              text1: 'Withdrawal successful',
-            });
-            invalidate('balance');
-            navigation.navigate('home');
-            form.reset();
-          },
-          onClose: () => {
-            form.reset();
-          },
+        Toast.show({
+          type: 'error',
+          text1:
+            t('deposit-withdraw.withdraw.invalid-bank-name') ||
+            'Invalid bank name. The selected bank is not valid. Please contact customer support for assistance.',
         });
+        return;
       }
-    });
+    }
+
+    // Validate e-wallet name if withdrawing to E-WALLET account
+    if (activeWithdrawOption === 'eWallet' && selectedCard) {
+      if (
+        validEWallets.length > 0 &&
+        !validEWallets.includes(selectedCard.bank_name)
+      ) {
+        Toast.show({
+          type: 'error',
+          text1:
+            t('deposit-withdraw.withdraw.invalid-e-wallet-name') ||
+            'Invalid e-wallet name. The selected e-wallet is not valid. Please contact customer support for assistance.',
+        });
+        return;
+      }
+    }
+
+    // Validate form first before showing any modals
+    await form.trigger('amount');
+
+    // Show modal if there are no yup errors on the amount input
+    if (!form.formState.errors.amount) {
+      // Only check wallet password if validation passes
+      await systemCheck();
+
+      // Open withdraw request dialog which requires password verification
+      openDialog({
+        content: 'withdraw_req',
+        externalForm: form,
+        externalValue: {
+          card_id: selectedCard?.card_id || '',
+          device: 1,
+        },
+        onSuccess: () => {
+          invalidate('balance');
+          invalidate('panel-info');
+          navigation.navigate('home');
+          form.reset();
+        },
+        onClose: () => {
+          form.reset();
+        },
+      });
+    }
   };
 
   return (
     <View style={styles.container}>
       <BalanceWithdrawable
-        cashBalance={balance?.total.toString() || '0'}
+        cashBalance={
+          balance?.total !== null && balance?.total !== undefined
+            ? Number(balance.total).toFixed(2)
+            : '0.00'
+        }
         withdrawableBalance={
           transactInfo?.overall_turnover_amount > 0
-            ? '0'
+            ? '0.00'
             : (
                 (balance?.total ? balance.total : 0) -
                 transactInfo?.overall_turnover_amount
-              ).toString()
+              ).toFixed(2)
         }
       />
       <View style={styles.mobileOptions}>
@@ -257,7 +334,10 @@ const Withdraw = ({
         content={<ChooseAccount accounts={selectedOption} />}
       />
       <Content
-        label={t('deposit-withdraw.withdrawal-amount.label')}
+        label={
+          t('deposit-withdraw.withdrawal-amount.placeholder') ||
+          'Withdrawal Amount'
+        }
         content={
           <WithdrawalAmount
             customInputProps={{
